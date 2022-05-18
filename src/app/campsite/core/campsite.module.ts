@@ -4,6 +4,7 @@ import { CampsiteGuard } from './guards/campsite.guard';
 import { CampsiteConfig } from './definitions/CampsiteConfig';
 import { CampsiteAdminModule } from '../admin/campsite-admin.module';
 import { CampsiteDataProvider } from './definitions/CampsiteDataProvider';
+import { CampsiteSimpleGuard } from './guards/campsite-simple.guard';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ export class CampsiteModule {
 
       providers: [
         CampsiteGuard,
+        CampsiteSimpleGuard,
         CampsiteService,
         {
           provide: APP_INITIALIZER,

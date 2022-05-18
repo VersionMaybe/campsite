@@ -12,28 +12,40 @@ export class CampsiteDataService {
 
     dataProvider!: CampsiteDataProvider;
 
+    preloadedData?: any;
+
     constructor(
         private route: ActivatedRoute
-    ) {
-        this.dataProvider = CampsiteModule.dataProvider;
-    }
+    ) { this.dataProvider = CampsiteModule.dataProvider; }
 
     public async getCurrentRouteData(component?: CampsiteEntryComponent<any>) {
         const snapshot = this.route.firstChild?.snapshot;
         if (!snapshot) return null;
-        const data = await this.getRouteData(snapshot.data['campsiteData'], snapshot.params);
+        let data: CampsiteEntryBlockTypes<CampsiteEntry> | undefined = undefined;
+
+        if (this.preloadedData) {
+            data = this.preloadedData;
+            this.preloadedData = undefined;
+        } else {
+            data = await this.getRouteData(snapshot.data['campsiteData'], snapshot.params);
+        }
+
         if (component) this.hydrateRouteWithData(component, data);
         return data;
     }
 
     public async getRouteData(route: ICampsiteRoute, params?: any) {
         switch (route.type) {
-            case CampsiteRouteType.Single:
+            case CampsiteRouteType.Static:
                 return await this.getDataForSingle(route.path);
             default:
                 return undefined;
 
         }
+    }
+
+    public async putAsidePreloadedData(data: any) {
+        this.preloadedData = data;
     }
 
     public hydrateRouteWithData(component: CampsiteEntryComponent<any>, data: any) {

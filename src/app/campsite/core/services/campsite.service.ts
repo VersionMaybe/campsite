@@ -14,6 +14,7 @@ import { CampsiteDataService } from './campsite-data.service';
 import { first, ReplaySubject, Subject } from 'rxjs';
 import { CampsiteGuard } from '../guards/campsite.guard';
 import { CampsiteAdminComponent } from '../../admin/campsite-admin.component';
+import { CampsiteSimpleGuard } from '../guards/campsite-simple.guard';
 
 @Injectable({
   providedIn: 'root'
@@ -102,7 +103,8 @@ export class CampsiteService {
       component: component.component,
       data: {
         campsiteData: route
-      }
+      },
+      canActivate: [CampsiteSimpleGuard]
     });
   }
 }

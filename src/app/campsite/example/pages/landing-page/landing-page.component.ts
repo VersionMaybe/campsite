@@ -25,7 +25,5 @@ export class LandingPageComponent extends CampsiteEntryComponent<LandingPage> im
     super(campsiteData);
   }
 
-  ngOnInit(): void {
-    console.log('Loaded Landing Page!');
-  }
+  ngOnInit(): void { }
 }

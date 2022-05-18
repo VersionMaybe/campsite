@@ -11,7 +11,7 @@ export class LocalStorageDataProvider extends CampsiteDataProvider {
         return string.replace(new RegExp(find, 'g'), replace);
     }
 
-    public async getDataForSingle(path: string) {
+    public getDataForSingle(path: string) {
         path = this.satanisePath(path);
         const item = localStorage.getItem(`campsite/entries/singles/${path}`);
         return item ? JSON.parse(item) : undefined;
@@ -29,13 +29,13 @@ export class LocalStorageDataProvider extends CampsiteDataProvider {
                 {
                     path: 'landing',
                     entry: 'landingPage',
-                    type: CampsiteRouteType.Single
+                    type: CampsiteRouteType.Static
                 },
                 {
                     path: 'another-page/haydn',
                     entry: 'landingPage',
-                    type: CampsiteRouteType.Single,
-                    delayLoadForData: true
+                    type: CampsiteRouteType.Static,
+                    waitForData: true
                 }
             ]);
         })
