@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot, UrlTree } from "@angular/router";
 import { Observable } from "rxjs";
-import { CampsiteService } from "./campsite.service";
+import { CampsiteService } from "../services/campsite.service";
 
 @Injectable()
 export class CampsiteGuard implements CanActivate, CanActivateChild {

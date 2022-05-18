@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { QuoteBlock } from 'src/app/campsite/core/blocks/quote-block';
-import { CampsiteEntry, CampsiteEntryComponent } from 'src/app/campsite/core/definitions/campsite-entry';
+import { CampsiteEntry, CampsiteEntryComponent } from 'src/app/campsite/core/definitions/CampsiteEntry';
 import { CampsiteDataService } from 'src/app/campsite/core/services/campsite-data.service';
 
 export class LandingPage extends CampsiteEntry {
@@ -27,11 +27,5 @@ export class LandingPageComponent extends CampsiteEntryComponent<LandingPage> im
 
   ngOnInit(): void {
     console.log('Loaded Landing Page!');
-    // this.campsiteData.setDataForSingle<LandingPage>('landing', {
-    //   heroQuote: {
-    //     likes: 2,
-    //     text: 'This is the landing page!!'
-    //   }
-    // });
   }
 }

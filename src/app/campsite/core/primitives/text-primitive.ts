@@ -1,4 +1,4 @@
-import { CampsitePrimitive } from "../definitions/campsite-primitive";
+import { CampsitePrimitive } from "../definitions/CampsitePrimitive";
 import { NumberPrimitive } from "./number-primitive";
 import { StringPrimitive } from "./string-primitive";
 

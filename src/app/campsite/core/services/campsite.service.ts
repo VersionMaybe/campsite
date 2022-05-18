@@ -2,17 +2,17 @@ import { Injectable } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { LandingPage } from '../../example/pages/landing-page/landing-page.component';
 import { QuoteBlock } from '../blocks/quote-block';
-import { CampsiteBlock } from '../definitions/campsite-block';
-import { CampsiteEntry } from '../definitions/campsite-entry';
-import { CampsiteField } from '../definitions/campsite-field';
-import { CampsiteRouteType, ICampsiteRoute } from '../definitions/ICampsiteRouteData';
-import { ICampsiteLog } from '../definitions/ICampsiteLog';
+import { CampsiteBlock } from '../definitions/CampsiteBlock';
+import { CampsiteEntry } from '../definitions/CampsiteEntry';
+import { CampsiteField } from '../definitions/CampsiteFieldType';
+import { CampsiteRouteType, ICampsiteRoute } from '../definitions/CampsiteRoute';
+import { ICampsiteLog } from '../definitions/CampsiteLog';
 import { NumberField } from '../fields/number-fields';
 import { ParagraphField } from '../fields/paragraph-field';
 import { UrlField } from '../fields/url-field';
 import { CampsiteDataService } from './campsite-data.service';
 import { first, ReplaySubject, Subject } from 'rxjs';
-import { CampsiteGuard } from './campsite.guard';
+import { CampsiteGuard } from '../guards/campsite.guard';
 
 @Injectable({
   providedIn: 'root'

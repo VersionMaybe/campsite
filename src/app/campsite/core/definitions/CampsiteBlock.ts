@@ -1,4 +1,4 @@
-import { CampsiteField, CampsiteFieldType } from "./campsite-field";
+import { CampsiteField, CampsiteFieldType } from "./CampsiteFieldType";
 
 export type CampsiteBlockFieldsTypes<T extends CampsiteBlock['fields']> = { [P in keyof T]: CampsiteFieldType<T[P]> };
 

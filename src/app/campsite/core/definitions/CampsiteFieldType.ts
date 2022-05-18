@@ -1,5 +1,5 @@
 import { ParsedPropertyType } from "@angular/compiler";
-import { CampsitePrimitive, CampsitePrimitiveType } from "./campsite-primitive";
+import { CampsitePrimitive, CampsitePrimitiveType } from "./CampsitePrimitive";
 
 export type CampsiteFieldType<T extends CampsiteField> = CampsitePrimitiveType<T['data']>;
 

@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { LandingPage } from "../../example/pages/landing-page/landing-page.component";
-import { CampsiteEntry, CampsiteEntryBlockTypes, CampsiteEntryComponent } from "../definitions/campsite-entry";
-import { CampsiteRouteType, ICampsiteRoute } from "../definitions/ICampsiteRouteData";
+import { CampsiteEntry, CampsiteEntryBlockTypes, CampsiteEntryComponent } from "../definitions/CampsiteEntry";
+import { CampsiteRouteType, ICampsiteRoute } from "../definitions/CampsiteRoute";
 
 @Injectable({
     providedIn: 'root'
@@ -68,7 +68,7 @@ export class CampsiteDataService {
                         type: CampsiteRouteType.Single
                     }
                 ])
-            }, 500);
+            }, 0);
         })
     }
 }

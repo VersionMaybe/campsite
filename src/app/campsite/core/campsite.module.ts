@@ -1,29 +1,28 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
 import { CampsiteService } from './services/campsite.service';
-import { LandingPageModule } from '../example/pages/landing-page/landing-page.module';
-import { CampsiteGuard } from './services/campsite.guard';
+import { CampsiteGuard } from './guards/campsite.guard';
+import { CampsiteConfig } from './definitions/CampsiteConfig';
 
 
+@NgModule()
+export class CampsiteModule {
+  static initialise(options?: CampsiteConfig): ModuleWithProviders<CampsiteModule> {
+    return {
+      ngModule: CampsiteModule,
 
-@NgModule({
-  imports: [
-    CommonModule,
-    LandingPageModule
-  ],
-  exports: [],
-  providers: [
-    CampsiteGuard,
-    CampsiteService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initCampsite,
-      deps: [CampsiteService],
-      multi: true,
-    }
-  ]
-})
-export class CampsiteModule { }
+      providers: [
+        CampsiteGuard,
+        CampsiteService,
+        {
+          provide: APP_INITIALIZER,
+          useFactory: initCampsite,
+          deps: [CampsiteService],
+          multi: true,
+        }
+      ]
+    };
+  }
+}
 
 export function initCampsite(campsite: CampsiteService) {
   return () => campsite.initialise();

@@ -2,7 +2,7 @@ import { NodeWithI18n } from "@angular/compiler";
 import { Component } from "@angular/core";
 import { QuoteBlock } from "../blocks/quote-block";
 import { CampsiteDataService } from "../services/campsite-data.service";
-import { CampsiteBlock, CampsiteBlockFieldsTypes } from "./campsite-block";
+import { CampsiteBlock, CampsiteBlockFieldsTypes } from "./CampsiteBlock";
 
 export type CampsiteEntryBlocksData<T extends CampsiteEntry> = { [P in keyof T['blocks']]: string };
 export type CampsiteEntryBlockTypes<T extends CampsiteEntry> = { [P in keyof T['blocks']]: CampsiteBlockFieldsTypes<T['blocks'][P]['fields']> };

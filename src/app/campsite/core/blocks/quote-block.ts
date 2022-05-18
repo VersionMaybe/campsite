@@ -1,4 +1,4 @@
-import { CampsiteBlock, ICampsiteBlock } from "../definitions/campsite-block";
+import { CampsiteBlock, ICampsiteBlock } from "../definitions/CampsiteBlock";
 import { NumberField } from "../fields/number-fields";
 import { ParagraphField } from "../fields/paragraph-field";
 
@@ -11,13 +11,3 @@ export class QuoteBlock extends CampsiteBlock {
         likes: new NumberField().default(2),
     };
 }
-
-// export const QuoteBlockData: ICampsiteBlock<QuoteBlock> = {
-//     group: 'Core',
-//     name: 'Quote',
-//     id: 'quote',
-//     fields: {
-//         text: '',
-//         likes: 1
-//     },
-// }

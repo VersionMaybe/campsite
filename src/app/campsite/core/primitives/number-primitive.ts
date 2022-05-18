@@ -1,4 +1,4 @@
-import { CampsitePrimitive } from "../definitions/campsite-primitive";
+import { CampsitePrimitive } from "../definitions/CampsitePrimitive";
 
 export class NumberPrimitive extends CampsitePrimitive<number, {}> {
     validate(value: any) {
