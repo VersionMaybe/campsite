@@ -1,1 +1,19 @@
-<p>admin-nav works!</p>
+<nav class="c-admin-nav" [ngClass]="{ 'closed': closed }">
+    <div class="c-admin-nav__title">
+        <span class="c-admin-nav__title__name">
+            Campsite
+        </span>
+    </div>
+    <div class="c-admin-nav__body">
+        <a class="c-admin-nav-item" *ngFor="let item of items" [ngClass]="{ 'active': item == this.selectedItem}"
+            (click)="select(item)">
+            {{ item.label }}
+            <span class="c-admin-nav-item__initial" *ngIf="closed">{{ item.label[0] + item.label[1] }}</span>
+            <span class="c-admin-nav-item__alerts" *ngIf="item.alerts">{{ item.alerts }}</span>
+        </a>
+    </div>
+
+    <div class="c-admin-nav__footer">
+        Campsite 1.0
+    </div>
+</nav>

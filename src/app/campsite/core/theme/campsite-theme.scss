@@ -1,0 +1,13 @@
+@use "~easy-theme" as theme;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300:400;600;700&display=swap');
+
+$light-theme: (
+    'cs-background': (#FFFFFF, #1f1f1f),
+    'cs-background-alt': (#efefef, #1f1f1f),
+    'cs-primary': (#9023ed, #FFFFFF, true),
+);
+
+:host {
+    font-family: 'Poppins', sans-serif;
+    @include theme.GeneratePalette($light-theme, null);
+}

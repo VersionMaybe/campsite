@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { CampsiteAdminRoutingModule } from './campsite-admin-routing.module';
 import { CampsiteAdminComponent } from './campsite-admin.component';
 import { AdminNavModule } from './components/admin-nav/admin-nav.module';
+import { CampsiteEntriesAdminPageModule } from './pages/campsite-entries-admin-page/campsite-entries-admin-page.module';
 
 
 @NgModule({
@@ -11,7 +12,12 @@ import { AdminNavModule } from './components/admin-nav/admin-nav.module';
   imports: [
     CommonModule,
     CampsiteAdminRoutingModule,
-    AdminNavModule
+
+    // Components
+    AdminNavModule,
+
+    // Pages
+    CampsiteEntriesAdminPageModule
   ],
   exports: [CampsiteAdminComponent],
 })

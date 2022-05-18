@@ -1,0 +1,120 @@
+@use "~easy-theme" as theme;
+
+$nav-width: 15rem;
+$nav-spacing: .75rem;
+$offset: .75rem;
+
+.c-admin-nav {
+    width: $nav-width;
+    background: theme.Color('cs-background-alt');
+    color: theme.Text('cs-background-alt');
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    user-select: none;
+
+    &__title {
+        display: block;
+        background: theme.Color('cs-primary');
+        color: theme.Text('cs-primary');
+        padding: $nav-spacing;
+
+        &__name {
+            font-weight: 400;
+            font-size: 1.2rem;
+        }
+    }
+
+    &__body {
+        flex: 1;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    &__footer {
+        position: absolute;
+        bottom: $nav-spacing;
+        text-align: center;
+        left: 50%;
+        transform: translateX(-50%);
+        text-transform: uppercase;
+        font-weight: 600;
+        opacity: .3;
+        font-size: .8rem;
+        pointer-events: none;
+    }
+}
+
+.c-admin-nav-item {
+    outline: none;
+    border: none;
+    border-radius: 0;
+    padding: $nav-spacing;
+    text-align: left;
+    background: transparent;
+    color: theme.Text('cs-background-alt');
+    display: flex;
+    align-items: center;
+    transition: .1s ease;
+    position: relative;
+    font-size: 1rem;
+
+    .closed & {
+        color: transparent;
+    }
+
+    &__alerts {
+        position: absolute;
+        right: $nav-spacing + $offset;
+        font-size: .8rem;
+        color: theme.Color('cs-primary', 1);
+        font-weight: 600;
+    }
+
+    &__initial {
+        position: absolute;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.75rem;
+        right: calc(100% - 4rem);
+        color: theme.Text('cs-background-alt');
+        font-weight: 400;
+        font-size: 1rem;
+    }
+
+    &::before {
+        content: '>';
+        font-weight: 600;
+        display: block;
+        position: absolute;
+        left: $nav-spacing;
+        transition: .2s ease;
+        transform: translateX(-200%);
+        pointer-events: none;
+        opacity: 0;
+        color: theme.Color('cs-primary');
+    }
+
+    &:hover {
+        cursor: pointer;
+        background: theme.Color('cs-primary', .1);
+    }
+
+    &.active {
+        background: theme.Color('cs-primary', .3);
+        color: theme.Color('cs-primary');
+        padding-left: $nav-spacing * 2;
+
+        &::before {
+            transform: translateX(-50%);
+            opacity: 1;
+        }
+
+        .c-admin-nav-item__initial {
+            color: theme.Color('cs-primary');
+        }
+    }
+}

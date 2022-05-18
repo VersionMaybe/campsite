@@ -44,7 +44,7 @@ export class CampsiteService {
 
   public async initialise() {
     this.router.config.push({
-      path: '**', canActivate: [CampsiteGuard], canActivateChild: [CampsiteGuard], children: []
+      path: '**', data: { campsiteHijacker: true }, canActivate: [CampsiteGuard], canActivateChild: [CampsiteGuard], children: []
     });
 
     this.registerFields([
@@ -62,9 +62,9 @@ export class CampsiteService {
     ]);
 
     await this.syncRoutes();
-    this.router.config.shift();
-    // If we don't have the page then try 404. and if no 4040 then back to the homepage.
+    this.router.config.splice(this.router.config.findIndex((x) => x.data?.['campsiteHijacker']), 1);
     this.router.config.push({ path: 'admin', component: CampsiteAdminComponent });
+    // If we don't have the page then try 404. and if no 4040 then back to the homepage.
     this.router.config.push({ path: '**', redirectTo: '404' });
     this.router.config.push({ path: '**', redirectTo: '' });
     this.initialised.next(true);

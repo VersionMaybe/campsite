@@ -5,6 +5,7 @@ import { CampsiteConfig } from './definitions/CampsiteConfig';
 import { CampsiteAdminModule } from '../admin/campsite-admin.module';
 import { CampsiteDataProvider } from './definitions/CampsiteDataProvider';
 import { CampsiteSimpleGuard } from './guards/campsite-simple.guard';
+import { IAdminItem } from '../admin/definitions/IAdminItem';
 
 
 @NgModule({
@@ -14,9 +15,11 @@ import { CampsiteSimpleGuard } from './guards/campsite-simple.guard';
 })
 export class CampsiteModule {
   public static dataProvider: CampsiteDataProvider;
+  public static adminExtensions: IAdminItem[];
 
   static initialise(options?: CampsiteConfig): ModuleWithProviders<CampsiteModule> {
     CampsiteModule.dataProvider = options?.dataProvider as any;
+    CampsiteModule.adminExtensions = options?.adminExtensions as any;
 
     return {
       ngModule: CampsiteModule,
