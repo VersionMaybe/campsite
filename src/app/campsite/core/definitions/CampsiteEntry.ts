@@ -20,14 +20,7 @@ export abstract class CampsiteEntryComponent<T extends CampsiteEntry> {
     constructor(
         private campsiteDataService: CampsiteDataService
     ) {
-        this.campsiteDataService.getCurrentRouteData().then((e) => {
-            if (!e) {
-                console.log('Failed to load data...');
-            } else {
-                console.log('Data', e);
-                this.campsiteDataService.hydrateRouteWithData(this, e);
-            }
-        });
+        this.campsiteDataService.getCurrentRouteData(this);
     }
 }
 

@@ -2,9 +2,14 @@ import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
 import { CampsiteService } from './services/campsite.service';
 import { CampsiteGuard } from './guards/campsite.guard';
 import { CampsiteConfig } from './definitions/CampsiteConfig';
+import { CampsiteAdminModule } from '../admin/campsite-admin.module';
 
 
-@NgModule()
+@NgModule({
+  imports: [
+    CampsiteAdminModule
+  ]
+})
 export class CampsiteModule {
   static initialise(options?: CampsiteConfig): ModuleWithProviders<CampsiteModule> {
     return {

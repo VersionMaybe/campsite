@@ -1,5 +1,5 @@
 export enum CampsiteRouteType {
-    Single = 'single'
+    Single = 'single',
 }
 
 export interface ICampsiteRoute {

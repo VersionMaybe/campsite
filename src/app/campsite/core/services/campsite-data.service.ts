@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { LandingPage } from "../../example/pages/landing-page/landing-page.component";
 import { CampsiteEntry, CampsiteEntryBlockTypes, CampsiteEntryComponent } from "../definitions/CampsiteEntry";
 import { CampsiteRouteType, ICampsiteRoute } from "../definitions/CampsiteRoute";
 
@@ -13,18 +12,22 @@ export class CampsiteDataService {
         private route: ActivatedRoute
     ) { }
 
-    public async getCurrentRouteData() {
+    public async getCurrentRouteData(component?: CampsiteEntryComponent<any>) {
         const snapshot = this.route.firstChild?.snapshot;
         if (!snapshot) return null;
-        return await this.getRouteData(snapshot.data['campsiteData'], snapshot.params);
+        const data = await this.getRouteData(snapshot.data['campsiteData'], snapshot.params);
+        if (component) this.hydrateRouteWithData(component, data);
+        return data;
     }
 
     public async getRouteData(route: ICampsiteRoute, params?: any) {
-        if (route.type === CampsiteRouteType.Single) {
-            return await this.getDataForSingle(route.path);
-        }
+        switch (route.type) {
+            case CampsiteRouteType.Single:
+                return await this.getDataForSingle(route.path);
+            default:
+                return undefined;
 
-        return null;
+        }
     }
 
     public hydrateRouteWithData(component: CampsiteEntryComponent<any>, data: any) {

@@ -13,6 +13,7 @@ import { UrlField } from '../fields/url-field';
 import { CampsiteDataService } from './campsite-data.service';
 import { first, ReplaySubject, Subject } from 'rxjs';
 import { CampsiteGuard } from '../guards/campsite.guard';
+import { CampsiteAdminComponent } from '../../admin/campsite-admin.component';
 
 @Injectable({
   providedIn: 'root'
@@ -62,6 +63,7 @@ export class CampsiteService {
     await this.syncRoutes();
     this.router.config.shift();
     // If we don't have the page then try 404. and if no 4040 then back to the homepage.
+    this.router.config.push({ path: 'admin', component: CampsiteAdminComponent });
     this.router.config.push({ path: '**', redirectTo: '404' });
     this.router.config.push({ path: '**', redirectTo: '' });
     this.initialised.next(true);
