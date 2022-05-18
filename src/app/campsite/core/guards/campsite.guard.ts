@@ -21,7 +21,7 @@ export class CampsiteGuard implements CanActivate, CanActivateChild {
 
     async isLoadedAndValid(route: string) {
         const initialised = await this.campsiteService.waitForInitialisation();
-        this.router.navigate([route])
+        this.router.navigate([route]);
         return initialised === true;
     }
 }

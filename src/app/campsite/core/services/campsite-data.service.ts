@@ -1,5 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { CampsiteModule } from "../campsite.module";
+import { CampsiteDataProvider } from "../definitions/CampsiteDataProvider";
 import { CampsiteEntry, CampsiteEntryBlockTypes, CampsiteEntryComponent } from "../definitions/CampsiteEntry";
 import { CampsiteRouteType, ICampsiteRoute } from "../definitions/CampsiteRoute";
 
@@ -8,9 +10,13 @@ import { CampsiteRouteType, ICampsiteRoute } from "../definitions/CampsiteRoute"
 })
 export class CampsiteDataService {
 
+    dataProvider!: CampsiteDataProvider;
+
     constructor(
         private route: ActivatedRoute
-    ) { }
+    ) {
+        this.dataProvider = CampsiteModule.dataProvider;
+    }
 
     public async getCurrentRouteData(component?: CampsiteEntryComponent<any>) {
         const snapshot = this.route.firstChild?.snapshot;
@@ -43,35 +49,14 @@ export class CampsiteDataService {
     }
 
     public async getDataForSingle<T extends CampsiteEntry>(path: string): Promise<CampsiteEntryBlockTypes<T> | undefined> {
-        path = this.satanisePath(path);
-        // TODO: Make this pull from firebase
-        const item = localStorage.getItem(`campsite/entries/singles/${path}`);
-        return item ? JSON.parse(item) : undefined;
+        return await this.dataProvider.getDataForSingle(path);
     }
 
     public async setDataForSingle<T extends CampsiteEntry>(path: string, data: CampsiteEntryBlockTypes<T>) {
-        path = this.satanisePath(path);
-        // TODO: Make this pull from firebase
-        localStorage.setItem(`campsite/entries/singles/${path}`, JSON.stringify(data));
+        return await this.dataProvider.setDataForSingle(path, data);
     }
 
     public getAllRoutes(): Promise<ICampsiteRoute[]> {
-        return new Promise((res) => {
-            // TODO: Make this pull from firebase
-            setTimeout(() => {
-                res([
-                    {
-                        path: 'landing',
-                        entry: 'landingPage',
-                        type: CampsiteRouteType.Single
-                    },
-                    {
-                        path: 'another-page/haydn',
-                        entry: 'landingPage',
-                        type: CampsiteRouteType.Single
-                    }
-                ])
-            }, 0);
-        })
+        return this.dataProvider.getAllRoutes();
     }
 }

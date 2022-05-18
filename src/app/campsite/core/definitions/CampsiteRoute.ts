@@ -6,4 +6,5 @@ export interface ICampsiteRoute {
     path: string;
     entry: string;
     type: CampsiteRouteType;
+    delayLoadForData?: boolean;
 }

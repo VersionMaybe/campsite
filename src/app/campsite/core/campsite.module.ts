@@ -3,6 +3,7 @@ import { CampsiteService } from './services/campsite.service';
 import { CampsiteGuard } from './guards/campsite.guard';
 import { CampsiteConfig } from './definitions/CampsiteConfig';
 import { CampsiteAdminModule } from '../admin/campsite-admin.module';
+import { CampsiteDataProvider } from './definitions/CampsiteDataProvider';
 
 
 @NgModule({
@@ -11,7 +12,11 @@ import { CampsiteAdminModule } from '../admin/campsite-admin.module';
   ]
 })
 export class CampsiteModule {
+  public static dataProvider: CampsiteDataProvider;
+
   static initialise(options?: CampsiteConfig): ModuleWithProviders<CampsiteModule> {
+    CampsiteModule.dataProvider = options?.dataProvider as any;
+
     return {
       ngModule: CampsiteModule,
 
