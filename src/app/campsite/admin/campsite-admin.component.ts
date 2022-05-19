@@ -23,8 +23,7 @@ export class CampsiteAdminComponent implements OnInit, OnDestroy, AfterViewInit 
   loadPageSub!: Subscription;
 
   constructor(
-    private campsiteAdminService: CampsiteAdminService,
-    // private compFac: ComponentFactoryR
+    private campsiteAdminService: CampsiteAdminService
   ) { }
 
   ngOnInit(): void {

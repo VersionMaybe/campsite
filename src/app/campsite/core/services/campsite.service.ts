@@ -5,13 +5,13 @@ import { QuoteBlock } from '../blocks/quote-block';
 import { CampsiteBlock } from '../definitions/CampsiteBlock';
 import { CampsiteEntry } from '../definitions/CampsiteEntry';
 import { CampsiteField } from '../definitions/CampsiteFieldType';
-import { CampsiteRouteType, ICampsiteRoute } from '../definitions/CampsiteRoute';
+import { ICampsiteRoute } from '../definitions/CampsiteRoute';
 import { ICampsiteLog } from '../definitions/CampsiteLog';
 import { NumberField } from '../fields/number-fields';
 import { ParagraphField } from '../fields/paragraph-field';
 import { UrlField } from '../fields/url-field';
 import { CampsiteDataService } from './campsite-data.service';
-import { first, ReplaySubject, Subject } from 'rxjs';
+import { first, ReplaySubject } from 'rxjs';
 import { CampsiteGuard } from '../guards/campsite.guard';
 import { CampsiteAdminComponent } from '../../admin/campsite-admin.component';
 import { CampsiteSimpleGuard } from '../guards/campsite-simple.guard';
@@ -24,6 +24,7 @@ export class CampsiteService {
   fields: CampsiteField[] = [];
   blocks: CampsiteBlock[] = [];
   entries: CampsiteEntry[] = [];
+  routes: ICampsiteRoute[] = [];
 
   private initialised = new ReplaySubject<boolean>(1);
 
@@ -76,6 +77,7 @@ export class CampsiteService {
 
   public async syncRoutes() {
     const routes = await this.campsiteDataService.getAllRoutes();
+    this.routes = routes;
     routes.forEach((e) => this.registerRoute(e));
   }
 

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { BehaviorSubject, filter } from 'rxjs';
 import { CampsiteModule } from '../../core/campsite.module';
+import { CampsiteService } from '../../core/services/campsite.service';
 import { IAdminItem } from '../definitions/IAdminItem';
 
 @Injectable({
@@ -14,6 +15,7 @@ export class CampsiteAdminService {
 
   constructor(
     private router: Router,
+    private campsiteService: CampsiteService
   ) { this.listenForNavigation(); }
 
   listenForNavigation() {
@@ -41,6 +43,10 @@ export class CampsiteAdminService {
 
   navigate(item: IAdminItem) {
     this.router.navigate([`admin/${item.id}`]);
+  }
+
+  public waitForInitialisation() {
+    return this.campsiteService.waitForInitialisation();
   }
 
 }

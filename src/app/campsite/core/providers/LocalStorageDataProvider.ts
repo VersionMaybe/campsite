@@ -25,19 +25,34 @@ export class LocalStorageDataProvider extends CampsiteDataProvider {
 
     public getAllRoutes(): Promise<ICampsiteRoute[]> {
         return new Promise((res) => {
-            res([
-                {
-                    path: 'landing',
-                    entry: 'landingPage',
-                    type: CampsiteRouteType.Static
-                },
-                {
-                    path: 'another-page/haydn',
-                    entry: 'landingPage',
-                    type: CampsiteRouteType.Static,
-                    waitForData: true
-                }
-            ]);
+            const item = localStorage.getItem(`campsite/routes`);
+            const routes = item ? JSON.parse(item) : [];
+            res(routes);
+
+            // {
+            //     path: 'landing',
+            //     entry: 'landingPage',
+            //     type: CampsiteRouteType.Static
+            // },
+            // {
+            //     path: 'another-page/haydn',
+            //     entry: 'landingPage',
+            //     type: CampsiteRouteType.Static,
+            //     waitForData: true
+            // }
         })
+    }
+
+    public async getAllEntries() {
+        let localKeys: any = {};
+
+        for (var key in localStorage) {
+            if (key.startsWith('campsite/entries')) {
+                const data = localStorage.getItem(key);
+                if (data) localKeys[key] = JSON.parse(data);
+            }
+        }
+
+        return localKeys;
     }
 }

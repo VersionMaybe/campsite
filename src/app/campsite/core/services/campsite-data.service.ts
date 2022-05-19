@@ -71,4 +71,8 @@ export class CampsiteDataService {
     public getAllRoutes(): Promise<ICampsiteRoute[]> {
         return this.dataProvider.getAllRoutes();
     }
+
+    public getAllEntries(): Promise<{ [key: string]: CampsiteEntry }> {
+        return this.dataProvider.getAllEntries();
+    }
 }

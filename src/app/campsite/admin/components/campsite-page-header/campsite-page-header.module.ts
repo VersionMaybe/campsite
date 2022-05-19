@@ -9,6 +9,6 @@ import { CampsitePageHeaderComponent } from './campsite-page-header.component';
   imports: [
     CommonModule
   ],
-  exports: [CampsitePageHeaderComponent],
+  exports: [CampsitePageHeaderComponent]
 })
 export class CampsitePageHeaderModule { }

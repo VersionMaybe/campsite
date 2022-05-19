@@ -9,9 +9,14 @@ $radius: .75rem;
     display: flex;
     height: 100vh;
     overflow: hidden;
+    background: theme.Color('cs-background-alt');
+    color: theme.Text('cs-background-alt');
 
-
-    &__menu {}
+    &__menu {
+        padding: .5rem;
+        z-index: 1;
+        position: relative;
+    }
 
     &__content {
         flex: 1;
@@ -19,18 +24,7 @@ $radius: .75rem;
         flex-direction: column;
         overflow: hidden;
         width: 100%;
-        margin-left: -$radius;
-        z-index: 1;
-        background: theme.Color('cs-background');
-        color: theme.Text('cs-background');
-        border-radius: $radius 0 0 $radius;
-        box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .1);
         position: relative;
-        transition: .5s cubic-bezier(0.4, 0.0, 0.2, 1);
-
-        &.closed {
-            margin-left: -$nav-width + $nav-width-space;
-        }
 
         &__idle {
             width: 100%;

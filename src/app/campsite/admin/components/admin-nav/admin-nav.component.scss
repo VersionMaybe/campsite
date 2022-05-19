@@ -1,28 +1,68 @@
 @use "~easy-theme" as theme;
 
 $nav-width: 15rem;
-$nav-spacing: .75rem;
+$nav-spacing: 1rem;
 $offset: .75rem;
+$transition: .5s cubic-bezier(0.4, 0.0, 0.2, 1);
 
 .c-admin-nav {
     width: $nav-width;
-    background: theme.Color('cs-background-alt');
-    color: theme.Text('cs-background-alt');
+    background: linear-gradient(to bottom right, theme.Color('cs-primary'), theme.Color('cs-primary', 'light'));
+    box-shadow: 0 0 .75rem 0rem theme.Color('cs-primary', 'light');
+    color: theme.Text('cs-primary');
     height: 100%;
     display: flex;
     flex-direction: column;
     position: relative;
     user-select: none;
+    border-radius: .75rem;
+    overflow: hidden;
+    z-index: 1;
+    transition: $transition;
+
+    &.closed {
+        width: 3.5rem;
+    }
 
     &__title {
         display: block;
-        background: theme.Color('cs-primary');
-        color: theme.Text('cs-primary');
+        color: theme.Text('cs-primary', .9);
         padding: $nav-spacing;
+        text-align: center;
+        height: 1rem;
+        transition: $transition;
+
+        .closed & {
+            height: 0;
+            padding: 0.25rem;
+            opacity: 0;
+        }
 
         &__name {
             font-weight: 400;
             font-size: 1.2rem;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+            transition: $transition;
+
+            .closed & {
+                color: transparent;
+            }
+
+            span {
+                position: absolute;
+                pointer-events: none;
+                opacity: 0;
+                transition: $transition;
+
+                .closed & {
+                    opacity: 1;
+                    color: theme.Text('cs-primary', 1);
+                }
+            }
         }
     }
 
@@ -39,10 +79,15 @@ $offset: .75rem;
         left: 50%;
         transform: translateX(-50%);
         text-transform: uppercase;
-        font-weight: 600;
+        font-weight: 500;
         opacity: .3;
+        letter-spacing: .025rem;
         font-size: .8rem;
         pointer-events: none;
+        padding: .25rem;
+        border: 1px solid;
+        white-space: nowrap;
+        border-radius: .5rem;
     }
 }
 
@@ -50,43 +95,59 @@ $offset: .75rem;
     outline: none;
     border: none;
     border-radius: 0;
-    padding: $nav-spacing;
+    padding: $nav-spacing / 2;
+    margin: 0 $nav-spacing / 2;
     text-align: left;
     background: transparent;
-    color: theme.Text('cs-background-alt');
+    color: theme.Text('cs-primary', .6);
+    font-weight: 300;
     display: flex;
     align-items: center;
     transition: .1s ease;
     position: relative;
-    font-size: 1rem;
+    font-size: .9rem;
+    border: 1px solid transparent;
+    border-radius: .5rem;
 
     .closed & {
         color: transparent;
     }
 
-    &__alerts {
-        position: absolute;
-        right: $nav-spacing + $offset;
-        font-size: .8rem;
-        color: theme.Color('cs-primary', 1);
-        font-weight: 600;
+    &__icon {
+        font-size: 1.2rem;
+        margin-right: .75rem;
+        margin-left: 0.05rem;
+
+        .closed & {
+            color: theme.Text('cs-primary', .5);
+        }
+
+        .active & {
+            color: theme.Color('cs-primary', 1);
+        }
     }
 
-    &__initial {
+    &__alerts {
         position: absolute;
-        left: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0.75rem;
-        right: calc(100% - 4rem);
-        color: theme.Text('cs-background-alt');
+        right: $nav-spacing;
+        font-size: .8rem;
+        color: theme.Text('cs-primary', 1);
         font-weight: 400;
-        font-size: 1rem;
+        opacity: .75;
+        pointer-events: none;
+        transition: $transition;
+
+        .active & {
+            color: theme.Color('cs-primary', 1);
+        }
+
+        .closed & {
+            opacity: 0;
+        }
     }
 
     &::before {
-        content: '>';
+        content: '•';
         font-weight: 600;
         display: block;
         position: absolute;
@@ -100,21 +161,14 @@ $offset: .75rem;
 
     &:hover {
         cursor: pointer;
-        background: theme.Color('cs-primary', .1);
+        color: theme.Text('cs-primary', 1);
     }
 
     &.active {
-        background: theme.Color('cs-primary', .3);
-        color: theme.Color('cs-primary');
-        padding-left: $nav-spacing * 2;
-
-        &::before {
-            transform: translateX(-50%);
-            opacity: 1;
-        }
-
-        .c-admin-nav-item__initial {
-            color: theme.Color('cs-primary');
-        }
+        font-weight: 500;
+        color: theme.Color('cs-primary', 1);
+        background: theme.Text('cs-primary');
+        box-shadow: 0 .1rem .5rem 0 theme.Text('cs-primary', .3);
+        border: 1px solid theme.Text('cs-primary', .5);
     }
 }

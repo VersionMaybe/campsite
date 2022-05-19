@@ -2,7 +2,7 @@
     <div class="p-admin__menu">
         <app-admin-nav [closed]="closed"></app-admin-nav>
     </div>
-    <div class="p-admin__content" [ngClass]="{ 'closed': closed }">
+    <div class="p-admin__content" [ngClass]="{ 'closed': closed }" (click)="closed = !closed">
         <ng-template #vc></ng-template>
         <div class="p-admin__content__idle" *ngIf="!selectedItem?.component">
             <span>- Campsite -</span>
