@@ -1,9 +1,10 @@
 export enum CampsiteRouteType {
-    Static = 'single',
-    Dynamic = 'multiple',
+    Static = 'Static',
+    Dynamic = 'Dynamic',
 }
 
 export interface ICampsiteRoute {
+    id: string;
     path: string;
     entry: string;
     type: CampsiteRouteType;

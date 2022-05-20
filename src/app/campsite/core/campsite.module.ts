@@ -2,24 +2,33 @@ import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
 import { CampsiteService } from './services/campsite.service';
 import { CampsiteGuard } from './guards/campsite.guard';
 import { CampsiteConfig } from './definitions/CampsiteConfig';
-import { CampsiteAdminModule } from '../admin/campsite-admin.module';
 import { CampsiteDataProvider } from './definitions/CampsiteDataProvider';
 import { CampsiteSimpleGuard } from './guards/campsite-simple.guard';
 import { IAdminItem } from '../admin/definitions/IAdminItem';
 import { CampsiteEntriesAdminPageComponent } from '../admin/pages/campsite-entries-admin-page/campsite-entries-admin-page.component';
+import { CampsiteField } from './definitions/CampsiteFieldType';
+import { CampsiteBlock } from './definitions/CampsiteBlock';
+import { CampsiteEntry } from './definitions/CampsiteEntry';
 
 
 @NgModule({
-  imports: [
-    CampsiteAdminModule
-  ]
+  imports: []
 })
 export class CampsiteModule {
+  public static version = '0.1';
+
   public static dataProvider: CampsiteDataProvider;
   public static adminExtensions: IAdminItem[];
 
+  public static fields?: CampsiteField[];
+  public static blocks?: CampsiteBlock[];
+  public static entryTypes?: CampsiteEntry[];
+
   static initialise(options?: CampsiteConfig): ModuleWithProviders<CampsiteModule> {
     CampsiteModule.dataProvider = options?.dataProvider as any;
+    CampsiteModule.fields = options?.register?.fields as any;
+    CampsiteModule.blocks = options?.register?.blocks as any;
+    CampsiteModule.entryTypes = options?.register?.entryTypes as any;
     CampsiteModule.adminExtensions = [
       {
         id: 'entries',

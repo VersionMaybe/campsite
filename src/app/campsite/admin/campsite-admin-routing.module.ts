@@ -4,7 +4,11 @@ import { CampsiteAdminComponent } from './campsite-admin.component';
 
 const routes: Routes = [
   {
-    path: 'admin/:item',
+    path: '',
+    component: CampsiteAdminComponent
+  },
+  {
+    path: ':item',
     component: CampsiteAdminComponent
   }
 ];

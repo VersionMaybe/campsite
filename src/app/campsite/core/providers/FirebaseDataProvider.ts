@@ -1,7 +1,13 @@
 import { CampsiteDataProvider } from "../definitions/CampsiteDataProvider";
-import { ICampsiteRoute, CampsiteRouteType } from "../definitions/CampsiteRoute";
+import { ICampsiteRoute } from "../definitions/CampsiteRoute";
+import { FirebaseOptions } from '@angular/fire/app';
 
-export class LocalStorageDataProvider extends CampsiteDataProvider {
+
+export class FirebaseDataProvider extends CampsiteDataProvider {
+
+    constructor(options: FirebaseOptions) {
+        super();
+    }
 
     private satanisePath(path: string) {
         return this.replaceAll(path, '/', '\\');

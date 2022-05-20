@@ -1,5 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { CampsiteModule } from 'src/app/campsite/core/campsite.module';
 import { IAdminItem } from '../../definitions/IAdminItem';
 import { CampsiteAdminService } from '../../services/campsite-admin.service';
 
@@ -11,6 +12,7 @@ import { CampsiteAdminService } from '../../services/campsite-admin.service';
 export class AdminNavComponent implements OnInit, OnDestroy {
 
   @Input() closed = false;
+  version = CampsiteModule.version;
 
   items: IAdminItem[] = [];
   selectedItem: IAdminItem | undefined;

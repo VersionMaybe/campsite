@@ -1,9 +1,11 @@
-@use "~easy-theme" as theme;
+@use "~easy-theme"as theme;
 @import '../core/theme/campsite-theme.scss';
 
 $nav-width: 15rem;
 $nav-width-space: 4rem;
 $radius: .75rem;
+
+$transition: .5s cubic-bezier(0.4, 0.0, 0.2, 1);
 
 .p-admin {
     display: flex;
@@ -14,17 +16,49 @@ $radius: .75rem;
 
     &__menu {
         padding: .5rem;
-        z-index: 1;
         position: relative;
+
+        &__blip {
+            position: absolute;
+            height: 1.25rem;
+            width: 1.25rem;
+            font-size: .8rem;
+            border-radius: 50%;
+            bottom: 1.6rem;
+            right: 1.6rem;
+            background: theme.Text('cs-primary');
+            color: theme.Color('cs-primary');
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: .2s ease;
+            transform: scale(1) rotateZ(180deg);
+
+            &:hover {
+                cursor: pointer;
+                transform: scale(1.1) rotateZ(180deg);
+            }
+
+            &.closed {
+                transform: rotateZ(0deg);
+
+                &:hover {
+                    transform: scale(1.1) rotateZ(0deg);
+                }
+            }
+        }
     }
 
     &__content {
         flex: 1;
         display: flex;
         flex-direction: column;
-        overflow: hidden;
         width: 100%;
         position: relative;
+        margin-left: .25rem;
+        margin-right: .75rem;
+        z-index: 1;
 
         &__idle {
             width: 100%;

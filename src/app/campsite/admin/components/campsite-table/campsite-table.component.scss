@@ -1,0 +1,27 @@
+@use "~easy-theme"as theme;
+
+$radius: .5rem;
+$transition: .25s cubic-bezier(0.4, 0.0, 0.2, 1);
+$border-color: theme.Text('cs-background', .05);
+
+.c-grid {
+    display: flex;
+    flex-direction: column;
+    border-collapse: collapse;
+    font-size: .9rem;
+
+    &__header {
+        color: theme.Text('cs-background-alt');
+    }
+
+    &__content {
+        filter: drop-shadow(0 .1rem .2rem rgba(0, 0, 0, 0.05));
+        border-radius: $radius $radius;
+        border-collapse: collapse;
+    }
+
+    &__footer {
+        display: flex;
+        align-items: center;
+    }
+}

@@ -1,0 +1,21 @@
+@use "~easy-theme"as theme;
+
+@at-root.c-grid__header :host {
+    padding: 1rem;
+    padding-bottom: 0.5rem;
+    font-weight: 600;
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+@at-root.c-grid__content :host {
+    padding: 1rem;
+    flex: 1;
+    display: flex;
+    align-items: center;
+
+    &:not(:last-child) {
+        border-right: 1px dotted theme.Text('cs-background', .1);
+    }
+}

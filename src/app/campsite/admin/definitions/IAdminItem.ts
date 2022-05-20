@@ -4,4 +4,11 @@ export interface IAdminItem {
     icon: string;
     alerts?: number;
     component?: any;
+    children?: IAdminItemChild[];
+}
+
+export interface IAdminItemChild {
+    id: string;
+    label: string;
+    component?: any;
 }

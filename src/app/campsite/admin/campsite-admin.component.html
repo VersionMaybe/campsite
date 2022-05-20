@@ -1,8 +1,10 @@
 <div class="p-admin">
     <div class="p-admin__menu">
         <app-admin-nav [closed]="closed"></app-admin-nav>
+        <span class="p-admin__menu__blip material-icons-outlined" [ngClass]="{ 'closed': closed }"
+            (click)="closed = !closed">arrow_forward</span>
     </div>
-    <div class="p-admin__content" [ngClass]="{ 'closed': closed }" (click)="closed = !closed">
+    <div class="p-admin__content" [ngClass]="{ 'closed': closed }">
         <ng-template #vc></ng-template>
         <div class="p-admin__content__idle" *ngIf="!selectedItem?.component">
             <span>- Campsite -</span>

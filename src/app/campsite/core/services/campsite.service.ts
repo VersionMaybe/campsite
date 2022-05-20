@@ -15,6 +15,7 @@ import { first, ReplaySubject } from 'rxjs';
 import { CampsiteGuard } from '../guards/campsite.guard';
 import { CampsiteAdminComponent } from '../../admin/campsite-admin.component';
 import { CampsiteSimpleGuard } from '../guards/campsite-simple.guard';
+import { CampsiteModule } from '../campsite.module';
 
 @Injectable({
   providedIn: 'root'
@@ -51,20 +52,20 @@ export class CampsiteService {
     this.registerFields([
       new NumberField(),
       new ParagraphField(),
-      new UrlField()
+      new UrlField(),
+      ...(CampsiteModule.fields || [])
     ]);
 
     this.registerBlocks([
-      new QuoteBlock()
+      new QuoteBlock(),
+      ...(CampsiteModule.blocks || [])
     ]);
 
-    this.registerEntryTypes([
-      new LandingPage()
-    ]);
+    this.registerEntryTypes([...(CampsiteModule.entryTypes || [])]);
 
     await this.syncRoutes();
     this.router.config.splice(this.router.config.findIndex((x) => x.data?.['campsiteHijacker']), 1);
-    this.router.config.push({ path: 'admin', component: CampsiteAdminComponent });
+    this.router.config.push({ path: 'admin', loadChildren: () => import('../../admin/campsite-admin.module').then(m => m.CampsiteAdminModule) });
     // If we don't have the page then try 404. and if no 4040 then back to the homepage.
     this.router.config.push({ path: '**', redirectTo: '404' });
     this.router.config.push({ path: '**', redirectTo: '' });

@@ -9,12 +9,12 @@
         <a class="c-admin-nav-item" *ngFor="let item of items" [ngClass]="{ 'active': item == this.selectedItem}"
             (click)="select(item)">
             <span *ngIf="item.icon" class="c-admin-nav-item__icon material-icons-outlined">{{ item.icon }}</span>
-            {{ item.label }}
+            <span class="c-admin-nav-item__name">{{ item.label }}</span>
             <span class="c-admin-nav-item__alerts" *ngIf="item.alerts">{{ item.alerts }}</span>
         </a>
     </div>
 
     <div class="c-admin-nav__footer">
-        {{ closed ? '1.0' : 'Campsite 1.0' }}
+        <span class="c-admin-version" [ngClass]="{ 'show': !closed }">Campsite {{ version }}</span>
     </div>
 </nav>

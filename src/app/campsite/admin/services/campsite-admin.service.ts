@@ -22,7 +22,11 @@ export class CampsiteAdminService {
     this.router.events.pipe(filter(x => x instanceof NavigationEnd)).subscribe((e) => {
       const data = e as NavigationEnd;
       const page = this.navigationItems.value.find((x) => data.url.replace('/admin/', '').startsWith(x.id));
-      this.currentNavItem.next(page);
+      if (!page && this.navigationItems.value.length > 0) {
+        this.navigate(this.navigationItems.value[0]);
+      } else {
+        this.currentNavItem.next(page);
+      }
     });
   }
 
@@ -44,9 +48,4 @@ export class CampsiteAdminService {
   navigate(item: IAdminItem) {
     this.router.navigate([`admin/${item.id}`]);
   }
-
-  public waitForInitialisation() {
-    return this.campsiteService.waitForInitialisation();
-  }
-
 }

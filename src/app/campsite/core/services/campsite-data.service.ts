@@ -60,6 +60,10 @@ export class CampsiteDataService {
         return string.replace(new RegExp(find, 'g'), replace);
     }
 
+    public getAllEntries(): Promise<{ [key: string]: CampsiteEntry }> {
+        return this.dataProvider.getAllEntries();
+    }
+
     public async getDataForSingle<T extends CampsiteEntry>(path: string): Promise<CampsiteEntryBlockTypes<T> | undefined> {
         return await this.dataProvider.getDataForSingle(path);
     }
@@ -72,7 +76,11 @@ export class CampsiteDataService {
         return this.dataProvider.getAllRoutes();
     }
 
-    public getAllEntries(): Promise<{ [key: string]: CampsiteEntry }> {
-        return this.dataProvider.getAllEntries();
+    public async setRoute(details: ICampsiteRoute) {
+        return await this.dataProvider.setRoute(details);
+    }
+
+    public async removeRoute(details: ICampsiteRoute) {
+        return await this.dataProvider.removeRoute(details);
     }
 }

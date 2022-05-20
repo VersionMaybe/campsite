@@ -1,0 +1,61 @@
+@use "~easy-theme"as theme;
+
+$radius: .5rem;
+$transition: .25s cubic-bezier(0.4, 0.0, 0.2, 1);
+$border-color: theme.Text('cs-background', .05);
+
+@at-root.c-grid__header :host {
+    display: flex;
+    position: relative;
+    background: theme.Color('cs-background-alt');
+    color: theme.Text('cs-background');
+    font-weight: 600;
+}
+
+@at-root.c-grid__content :host {
+    display: flex;
+    position: relative;
+    background: theme.Color('cs-background');
+    color: theme.Text('cs-background');
+    transition: $transition;
+    border: 1px solid $border-color;
+
+    &:first-of-type {
+        border-top-left-radius: $radius;
+        border-top-right-radius: $radius;
+    }
+
+    &:last-of-type {
+        border-bottom-left-radius: $radius;
+        border-bottom-right-radius: $radius;
+    }
+
+    &:not(:last-child) {
+        border-bottom-color: transparent;
+    }
+
+    &:not(:first-child) {
+        border-top-color: theme.Text('cs-background', .1);
+    }
+
+    &:nth-child(2n) {
+        background: theme.Text('cs-background', .085);
+    }
+
+    &:hover {
+        transform: scale(1.01);
+        background: theme.Text('cs-background', .15);
+        cursor: pointer;
+        filter: drop-shadow(0 0rem .2rem rgba(0, 0, 0, 0.05));
+        z-index: 1;
+        border-radius: $radius;
+
+        &:not(:last-child) {
+            border-bottom-color: $border-color;
+        }
+
+        &:not(:first-child) {
+            border-top-color: $border-color;
+        }
+    }
+}

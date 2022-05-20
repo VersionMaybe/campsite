@@ -1,9 +1,9 @@
-@use "~easy-theme" as theme;
+@use "~easy-theme"as theme;
 
 .c-admin-header {
-    padding: .75rem;
+    padding: 0.75rem .5rem;
     color: theme.Color('cs-primary');
-    border-bottom: 1px solid theme.Text('cs-background', .2);
+    margin-top: 0.75rem;
 
     &__title {
         margin: 0;

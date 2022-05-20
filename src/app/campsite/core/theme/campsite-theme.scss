@@ -1,13 +1,21 @@
-@use "~easy-theme" as theme;
+@use "~easy-theme"as theme;
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300:400;600;700&display=swap');
 
-$light-theme: (
-    'cs-background': (#FFFFFF, #1f1f1f),
+$light-theme: ('cs-background': (#FFFFFF, #1f1f1f),
     'cs-background-alt': (#efefef, #1f1f1f),
-    'cs-primary': (#ed334c, #FFFFFF, true),
+    // 'cs-primary': (#ed334c, #FFFFFF, true),
+    'cs-primary': (#7e4fff, #FFFFFF, true),
+);
+
+$dark-theme: ('cs-background': (#2a2a2a, #efefef),
+    'cs-background-alt': (#1f1f1f, #efefef),
 );
 
 :host {
     font-family: 'Poppins', sans-serif;
     @include theme.GeneratePalette($light-theme, null);
+
+    @include theme.DarkMode {
+        @include theme.GeneratePalette($dark-theme, null);
+    }
 }
