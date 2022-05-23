@@ -1,0 +1,15 @@
+@use "~easy-theme"as theme;
+
+$size: 2.25rem;
+$font-size: .9rem;
+$spacing: .3rem .5rem;
+$radius: .2rem;
+
+.ci-base {}
+
+.ci-label {
+    font-size: .6rem;
+    font-weight: 600;
+    padding: $spacing;
+    display: block;
+}

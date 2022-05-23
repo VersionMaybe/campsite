@@ -1,15 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 
 @Component({
   selector: 'app-campsite-table-col',
   templateUrl: './campsite-table-col.component.html',
   styleUrls: ['./campsite-table-col.component.scss']
 })
-export class CampsiteTableColComponent implements OnInit {
+export class CampsiteTableColComponent implements AfterViewInit {
 
-  constructor() { }
+  type: 'normal' | 'expand' | 'collapse' = 'normal';
 
-  ngOnInit(): void {
+  constructor(
+    private element: ElementRef<HTMLElement>,
+    private renderer: Renderer2
+  ) { }
+
+  ngAfterViewInit(): void {
+    this.renderer.addClass(this.element.nativeElement, 'type-' + this.type);
   }
 
 }

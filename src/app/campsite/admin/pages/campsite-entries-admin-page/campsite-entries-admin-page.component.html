@@ -2,29 +2,35 @@
 <app-campsite-table>
     <app-campsite-table-row header>
         <app-campsite-table-col>Path</app-campsite-table-col>
-        <app-campsite-table-col>Page</app-campsite-table-col>
+        <app-campsite-table-col>Template</app-campsite-table-col>
         <app-campsite-table-col>Type</app-campsite-table-col>
-        <app-campsite-table-col>Actions</app-campsite-table-col>
+        <app-campsite-table-col>Load Style</app-campsite-table-col>
+        <app-campsite-table-col></app-campsite-table-col>
     </app-campsite-table-row>
 
     <!-- Existing Routes -->
     <app-campsite-table-row *ngFor="let route of routes; let i = index">
         <app-campsite-table-col>
-            <input type="text" [(ngModel)]="route.path" (ngModelChange)="changeMade(route.id)" [disabled]="i === 0" />
+            <app-ci-text prefix="/" type="text" [(value)]="route.path" (valueChange)="changeMade(route.id)"
+                [disabled]="i === 0">
+            </app-ci-text>
         </app-campsite-table-col>
         <app-campsite-table-col>
-            <select [(ngModel)]="route.entry" (ngModelChange)="changeMade(route.id)">
-                <option *ngFor="let type of entryTypes" [value]="type.id">{{ type.name }}</option>
-            </select>
+            <app-ci-select [options]="templateOptions" [(value)]="route.entry" (valueChange)="changeMade(route.id)">
+            </app-ci-select>
         </app-campsite-table-col>
         <app-campsite-table-col class="c-route-item">
-            <select [(ngModel)]="route.type" (ngModelChange)="changeMade(route.id)" disabled>
-                <option *ngFor="let type of routeTypes" [value]="type">{{ type }}</option>
-            </select>
+            <app-ci-select [disabled]="true" [options]="typeOptions" [(value)]="route.type"
+                (valueChange)="changeMade(route.id)">
+            </app-ci-select>
         </app-campsite-table-col>
         <app-campsite-table-col>
-            <button class="c-icon-button" (click)="removeRoute(route)" *ngIf="i !== 0">
-                <span class="material-icons-outlined">clear</span>
+            <app-ci-select [options]="loadOptions" [(value)]="route.waitForData" (valueChange)="changeMade(route.id)">
+            </app-ci-select>
+        </app-campsite-table-col>
+        <app-campsite-table-col>
+            <button class="c-icon-button transparent" (click)="test(route)">
+                <span class="material-icons-outlined">more_vert</span>
             </button>
         </app-campsite-table-col>
     </app-campsite-table-row>

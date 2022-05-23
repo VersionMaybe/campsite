@@ -1,0 +1,7 @@
+<span class="ci-label" *ngIf="label">{{ label }}</span>
+<span class="ci-base ci-text style-{{look}}" [ngClass]="{ 'disabled': disabled }">
+    <span class="ci-text__prefix" *ngIf="prefix">{{ prefix }}</span>
+    <input [placeholder]="placeholder" [type]="type" [(ngModel)]="value" (ngModelChange)="valueChange.emit($event)"
+        [disabled]="disabled" />
+    <span class="ci-text__suffix" *ngIf="suffix">{{ suffix }}</span>
+</span>

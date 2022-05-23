@@ -18,12 +18,5 @@ export class LandingPage extends CampsiteEntry {
   styleUrls: ['./landing-page.component.scss']
 })
 export class LandingPageComponent extends CampsiteEntryComponent<LandingPage> implements OnInit {
-
-  constructor(
-    private campsiteData: CampsiteDataService
-  ) {
-    super(campsiteData);
-  }
-
   ngOnInit(): void { }
 }

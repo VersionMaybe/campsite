@@ -4,6 +4,7 @@ import { CampsiteEntriesAdminPageComponent } from './campsite-entries-admin-page
 import { CampsitePageHeaderModule } from '../../components/campsite-page-header/campsite-page-header.module';
 import { CampsiteTableModule } from '../../components/campsite-table/campsite-table.module';
 import { FormsModule } from '@angular/forms';
+import { CampsiteInputModule } from '../../components/campsite-input/campsite-input.module';
 
 
 
@@ -16,6 +17,7 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     CampsitePageHeaderModule,
 
+    CampsiteInputModule,
     CampsiteTableModule
   ],
   exports: [

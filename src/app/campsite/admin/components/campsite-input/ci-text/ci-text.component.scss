@@ -1,0 +1,97 @@
+@use "~easy-theme"as theme;
+@import '../campsite-input.scss';
+
+.ci-text {
+    height: $size;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    border: 0.1rem solid theme.Text('cs-background', .1);
+    background: theme.Color('cs-background', 1);
+    color: theme.Text('cs-background', 1);
+    border-radius: $radius;
+    width: 100%;
+    transition: .15s ease;
+    position: relative;
+
+    &__prefix {
+        padding: $spacing;
+        opacity: .25;
+        border-right: 0.1rem solid theme.Text('cs-background', .3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        box-sizing: border-box;
+        user-select: none;
+    }
+
+    &__suffix {
+        padding: $spacing;
+        opacity: .25;
+        border-left: 0.1rem solid theme.Text('cs-background', .3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        box-sizing: border-box;
+        user-select: none;
+    }
+
+
+    input {
+        padding: $spacing;
+        font-size: $font-size;
+        outline: none;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        border: none;
+        background: transparent;
+        color: inherit;
+        box-sizing: border-box;
+    }
+
+    &:hover {
+        border: 0.1rem solid theme.Color('cs-primary', .3);
+    }
+
+    &:focus-within {
+        border: 0.1rem solid theme.Color('cs-primary');
+    }
+
+    &.disabled {
+        border: 0.1rem solid theme.Text('cs-background', .1);
+        background-color: theme.Text('cs-background', .1);
+        color: theme.Text('cs-background', .8);
+        cursor: not-allowed;
+    }
+
+    &.style-transparent {
+        border: none;
+        background: transparent;
+        color: inherit;
+
+        input {
+            opacity: .8;
+        }
+
+        &:hover,
+        &:focus-within {
+            border: none;
+
+            input {
+                opacity: 1;
+            }
+        }
+
+        &.disabled {
+            border: none;
+            background-color: transparent;
+            opacity: .5;
+            cursor: not-allowed;
+        }
+    }
+}

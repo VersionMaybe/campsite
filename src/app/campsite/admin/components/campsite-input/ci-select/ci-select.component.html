@@ -1,0 +1,17 @@
+<span class="ci-label" *ngIf="label">{{ label }}</span>
+<span class="ci-base ci-select style-{{look}}" [ngClass]="{ 'disabled': disabled }">
+    <button class="ci-select__label" [disabled]="disabled" (mousedown)="toggle()" (touchstart)="toggle()">{{
+        selected?.label }}
+    </button>
+
+    <span class="ci-select__icon material-icons-round">unfold_more</span>
+
+    <span class="ci-select__list">
+        <span *ngIf="searchable">
+            <input placeholder="Search" type="text" [(ngModel)]="search" />
+            <span class="material-icons-round">search</span>
+        </span>
+        <button *ngFor="let item of options" class="ci-select__list__item" [disabled]="disabled"
+            [ngClass]="{ 'active': selected == item }" (click)="select(item)">{{ item.label }}</button>
+    </span>
+</span>

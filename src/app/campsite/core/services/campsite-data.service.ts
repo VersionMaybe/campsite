@@ -36,8 +36,8 @@ export class CampsiteDataService {
 
     public async getRouteData(route: ICampsiteRoute, params?: any) {
         switch (route.type) {
-            case CampsiteRouteType.Static:
-                return await this.getDataForSingle(route.path);
+            case CampsiteRouteType.Single:
+                return await this.getDataForSingle(route.id);
             default:
                 return undefined;
 
@@ -64,12 +64,12 @@ export class CampsiteDataService {
         return this.dataProvider.getAllEntries();
     }
 
-    public async getDataForSingle<T extends CampsiteEntry>(path: string): Promise<CampsiteEntryBlockTypes<T> | undefined> {
-        return await this.dataProvider.getDataForSingle(path);
+    public async getDataForSingle<T extends CampsiteEntry>(singleID: string): Promise<CampsiteEntryBlockTypes<T> | undefined> {
+        return await this.dataProvider.getDataForSingle(singleID);
     }
 
-    public async setDataForSingle<T extends CampsiteEntry>(path: string, data: CampsiteEntryBlockTypes<T>) {
-        return await this.dataProvider.setDataForSingle(path, data);
+    public async setDataForSingle<T extends CampsiteEntry>(singleID: string, data: CampsiteEntryBlockTypes<T>) {
+        return await this.dataProvider.setDataForSingle(singleID, data);
     }
 
     public getAllRoutes(): Promise<ICampsiteRoute[]> {

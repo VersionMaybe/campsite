@@ -1,21 +1,33 @@
 @use "~easy-theme"as theme;
 
 @at-root.c-grid__header :host {
-    padding: 1rem;
-    padding-bottom: 0.5rem;
-    font-weight: 600;
+    padding: .5rem .6rem;
+    font-size: .7rem;
+    font-weight: 500;
     flex: 1;
     display: flex;
     align-items: center;
+
+    &[type="collapse"] {
+        flex: 0;
+    }
+
+    &[type="expand"] {
+        flex-basis: 100%;
+    }
 }
 
 @at-root.c-grid__content :host {
-    padding: 1rem;
+    padding: .4rem;
     flex: 1;
     display: flex;
     align-items: center;
 
-    &:not(:last-child) {
-        border-right: 1px dotted theme.Text('cs-background', .1);
+    &[type="collapse"] {
+        flex: 0;
+    }
+
+    &[type="expand"] {
+        flex-basis: 100%;
     }
 }

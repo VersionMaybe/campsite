@@ -9,15 +9,9 @@ import { LocalStorageDataProvider } from './campsite/core/providers/LocalStorage
 import { GeneralPage } from './campsite/example/pages/general-page/general-page.component';
 import { GeneralPageModule } from './campsite/example/pages/general-page/general-page.module';
 import { LandingPage } from './campsite/example/pages/landing-page/landing-page.component';
-// import { LandingPageComponent } from './campsite/example/pages/landing-page/landing-page.component';
 import { LandingPageModule } from './campsite/example/pages/landing-page/landing-page.module';
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
-import { provideAuth,getAuth } from '@angular/fire/auth';
-import { provideFirestore,getFirestore } from '@angular/fire/firestore';
-import { provideMessaging,getMessaging } from '@angular/fire/messaging';
-import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config';
-import { provideStorage,getStorage } from '@angular/fire/storage';
+import { FirebaseDataProvider } from './campsite/core/providers/FirebaseDataProvider';
 
 @NgModule({
   declarations: [
@@ -27,11 +21,7 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     CampsiteModule.initialise({
-      dataProvider: new LocalStorageDataProvider(),
-      pageModules: [
-        LandingPageModule,
-        GeneralPageModule
-      ],
+      dataProvider: new FirebaseDataProvider(environment.firebase),
       register: {
         entryTypes: [
           new GeneralPage(),
@@ -40,12 +30,9 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
       },
       adminExtensions: []
     }),
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore()),
-    provideMessaging(() => getMessaging()),
-    provideRemoteConfig(() => getRemoteConfig()),
-    provideStorage(() => getStorage()),
+
+    LandingPageModule,
+    GeneralPageModule
   ],
   providers: [],
   bootstrap: [AppComponent]

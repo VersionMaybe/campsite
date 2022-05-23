@@ -9,13 +9,16 @@ $border-color: theme.Text('cs-background', .05);
     flex-direction: column;
     border-collapse: collapse;
     font-size: .9rem;
+    background-color: theme.Color('cs-background');
+    color: theme.Text('cs-background');
+    filter: drop-shadow(0 .1rem .15rem rgba(0, 0, 0, 0.1));
+    border-radius: .25rem;
 
     &__header {
-        color: theme.Text('cs-background-alt');
+        // color: theme.Text('cs-background-alt');
     }
 
     &__content {
-        filter: drop-shadow(0 .1rem .2rem rgba(0, 0, 0, 0.05));
         border-radius: $radius $radius;
         border-collapse: collapse;
     }

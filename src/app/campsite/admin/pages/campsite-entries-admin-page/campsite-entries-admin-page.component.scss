@@ -1,5 +1,11 @@
 @use "~easy-theme"as theme;
 
+
+app-ci-text,
+app-ci-select {
+    width: 100%;
+}
+
 $radius: .5rem;
 $transition: .25s cubic-bezier(0.4, 0.0, 0.2, 1);
 $border-color: theme.Text('cs-background', .05);
@@ -84,6 +90,7 @@ select {
     height: 2.25rem;
     box-sizing: border-box;
     padding: 0.3rem;
+    font-size: .85rem;
     border: 0.1rem solid theme.Text('cs-background', .1);
     background: theme.Color('cs-background', 1);
     color: theme.Text('cs-background', 1);
@@ -93,6 +100,7 @@ select {
     align-items: center;
     outline: none;
     transition: .15s ease;
+    appearance: none;
 
     &:hover {
         border: 0.1rem solid theme.Color('cs-primary', .3);
@@ -107,5 +115,12 @@ select {
         background-color: theme.Text('cs-background', .1);
         color: theme.Text('cs-background', .8);
         cursor: not-allowed;
+    }
+}
+
+select {
+    span {
+        margin-left: auto;
+        pointer-events: none;
     }
 }

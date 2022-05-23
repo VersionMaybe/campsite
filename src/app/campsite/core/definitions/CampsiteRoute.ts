@@ -1,5 +1,5 @@
 export enum CampsiteRouteType {
-    Static = 'Static',
+    Single = 'Single',
     Dynamic = 'Dynamic',
 }
 
