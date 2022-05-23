@@ -6,7 +6,7 @@ export enum CampsiteRouteType {
 export interface ICampsiteRoute {
     id: string;
     path: string;
-    entry: string;
+    template: string;
     type: CampsiteRouteType;
     waitForData?: boolean;
 }

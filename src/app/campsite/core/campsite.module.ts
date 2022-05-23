@@ -2,34 +2,19 @@ import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
 import { CampsiteService } from './services/campsite.service';
 import { CampsiteGuard } from './guards/campsite.guard';
 import { CampsiteConfig } from './definitions/CampsiteConfig';
-import { CampsiteDataProvider } from './definitions/CampsiteDataProvider';
 import { CampsiteSimpleGuard } from './guards/campsite-simple.guard';
-import { IAdminItem } from '../admin/definitions/IAdminItem';
+import { CampsiteRoutingAdminPageComponent } from '../admin/pages/campsite-routing-admin-page/campsite-routing-admin-page.component';
 import { CampsiteEntriesAdminPageComponent } from '../admin/pages/campsite-entries-admin-page/campsite-entries-admin-page.component';
-import { CampsiteField } from './definitions/CampsiteFieldType';
-import { CampsiteBlock } from './definitions/CampsiteBlock';
-import { CampsiteEntry } from './definitions/CampsiteEntry';
-
 
 @NgModule({
   imports: []
 })
 export class CampsiteModule {
   public static version = '0.1';
+  public static config: CampsiteConfig;
 
-  public static dataProvider: CampsiteDataProvider;
-  public static adminExtensions: IAdminItem[];
-
-  public static fields?: CampsiteField[];
-  public static blocks?: CampsiteBlock[];
-  public static entryTypes?: CampsiteEntry[];
-
-  static initialise(options?: CampsiteConfig): ModuleWithProviders<CampsiteModule> {
-    CampsiteModule.dataProvider = options?.dataProvider as any;
-    CampsiteModule.fields = options?.register?.fields as any;
-    CampsiteModule.blocks = options?.register?.blocks as any;
-    CampsiteModule.entryTypes = options?.register?.entryTypes as any;
-    CampsiteModule.adminExtensions = [
+  static initialise(options: CampsiteConfig): ModuleWithProviders<CampsiteModule> {
+    options.adminExtensions?.unshift(
       {
         id: 'entries',
         label: 'Entries',
@@ -40,7 +25,7 @@ export class CampsiteModule {
         id: 'routing',
         label: 'Routing',
         icon: 'route',
-        component: CampsiteEntriesAdminPageComponent
+        component: CampsiteRoutingAdminPageComponent
       },
       {
         id: 'globals',
@@ -57,9 +42,9 @@ export class CampsiteModule {
         id: 'settings',
         icon: 'settings',
         label: 'Settings'
-      },
-      ...(options?.adminExtensions as any || [])
-    ]
+      }
+    );
+    this.config = options;
 
     return {
       ngModule: CampsiteModule,

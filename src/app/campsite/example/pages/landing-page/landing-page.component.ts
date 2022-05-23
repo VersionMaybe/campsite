@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { QuoteBlock } from 'src/app/campsite/core/blocks/quote-block';
-import { CampsiteEntry, CampsiteEntryComponent } from 'src/app/campsite/core/definitions/CampsiteEntry';
+import { CampsiteTemplate, CampsiteTemplateComponent } from 'src/app/campsite/core/definitions/CampsiteEntry';
 import { CampsiteDataService } from 'src/app/campsite/core/services/campsite-data.service';
 
-export class LandingPage extends CampsiteEntry {
+export class LandingPage extends CampsiteTemplate {
   name = 'Landing Page';
   id = 'landingPage';
   blocks = {
@@ -17,6 +17,6 @@ export class LandingPage extends CampsiteEntry {
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.scss']
 })
-export class LandingPageComponent extends CampsiteEntryComponent<LandingPage> implements OnInit {
+export class LandingPageComponent extends CampsiteTemplateComponent<LandingPage> implements OnInit {
   ngOnInit(): void { }
 }

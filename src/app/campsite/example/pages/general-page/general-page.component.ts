@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { QuoteBlock } from 'src/app/campsite/core/blocks/quote-block';
-import { CampsiteEntry } from 'src/app/campsite/core/definitions/CampsiteEntry';
+import { CampsiteTemplate } from 'src/app/campsite/core/definitions/CampsiteEntry';
 
-export class GeneralPage extends CampsiteEntry {
+export class GeneralPage extends CampsiteTemplate {
   name = 'General Page';
   id = 'generalPage';
   blocks = {

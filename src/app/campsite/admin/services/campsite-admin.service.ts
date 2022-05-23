@@ -10,7 +10,7 @@ import { IAdminItem } from '../definitions/IAdminItem';
 })
 export class CampsiteAdminService {
 
-  private navigationItems = new BehaviorSubject<IAdminItem[]>((CampsiteModule.adminExtensions || []));
+  private navigationItems = new BehaviorSubject<IAdminItem[]>((CampsiteModule.config.adminExtensions || []));
   private currentNavItem = new BehaviorSubject<IAdminItem | undefined>(undefined);
 
   constructor(

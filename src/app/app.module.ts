@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-// import { CampsiteEntriesAdminPageComponent } from './campsite/admin/pages/campsite-entries-admin-page/campsite-entries-admin-page.component';
 import { CampsiteModule } from './campsite/core/campsite.module';
 import { LocalStorageDataProvider } from './campsite/core/providers/LocalStorageDataProvider';
 import { GeneralPage } from './campsite/example/pages/general-page/general-page.component';
@@ -23,7 +22,7 @@ import { FirebaseDataProvider } from './campsite/core/providers/FirebaseDataProv
     CampsiteModule.initialise({
       dataProvider: new FirebaseDataProvider(environment.firebase),
       register: {
-        entryTypes: [
+        templates: [
           new GeneralPage(),
           new LandingPage(),
         ]

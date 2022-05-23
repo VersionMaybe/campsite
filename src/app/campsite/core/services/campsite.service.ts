@@ -3,7 +3,7 @@ import { NavigationStart, Router } from '@angular/router';
 import { LandingPage } from '../../example/pages/landing-page/landing-page.component';
 import { QuoteBlock } from '../blocks/quote-block';
 import { CampsiteBlock } from '../definitions/CampsiteBlock';
-import { CampsiteEntry } from '../definitions/CampsiteEntry';
+import { CampsiteTemplate } from '../definitions/CampsiteEntry';
 import { CampsiteField } from '../definitions/CampsiteFieldType';
 import { ICampsiteRoute } from '../definitions/CampsiteRoute';
 import { ICampsiteLog } from '../definitions/CampsiteLog';
@@ -24,7 +24,7 @@ export class CampsiteService {
 
   fields: CampsiteField[] = [];
   blocks: CampsiteBlock[] = [];
-  entries: CampsiteEntry[] = [];
+  templates: CampsiteTemplate[] = [];
   routes: ICampsiteRoute[] = [];
 
   private initialised = new ReplaySubject<boolean>(1);
@@ -53,15 +53,15 @@ export class CampsiteService {
       new NumberField(),
       new ParagraphField(),
       new UrlField(),
-      ...(CampsiteModule.fields || [])
+      ...(CampsiteModule.config.register?.fields || [])
     ]);
 
     this.registerBlocks([
       new QuoteBlock(),
-      ...(CampsiteModule.blocks || [])
+      ...(CampsiteModule.config.register?.blocks || [])
     ]);
 
-    this.registerEntryTypes([...(CampsiteModule.entryTypes || [])]);
+    this.registerTemplates([...(CampsiteModule.config.register?.templates || [])]);
 
     await this.syncRoutes();
     this.router.config.splice(this.router.config.findIndex((x) => x.data?.['campsiteHijacker']), 1);
@@ -90,14 +90,14 @@ export class CampsiteService {
     this.blocks = this.blocks.concat(blocks);
   }
 
-  public registerEntryTypes(entries: CampsiteEntry[]) {
-    this.entries = this.entries.concat(entries);
+  public registerTemplates(templates: CampsiteTemplate[]) {
+    this.templates = this.templates.concat(templates);
   }
 
   public registerRoute(route: ICampsiteRoute) {
-    const component = this.entries.find((x) => x.id === route.entry);
+    const component = this.templates.find((x) => x.id === route.template);
     if (!component) {
-      this.log({ message: `Route '${route.path}' cannot find entry component with id: '${route.entry}'`, type: 'error' })
+      this.log({ message: `Route '${route.path}' cannot find entry component with id: '${route.template}'`, type: 'error' })
       return;
     }
 

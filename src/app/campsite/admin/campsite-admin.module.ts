@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { CampsiteAdminRoutingModule } from './campsite-admin-routing.module';
 import { CampsiteAdminComponent } from './campsite-admin.component';
 import { AdminNavModule } from './components/admin-nav/admin-nav.module';
+import { CampsiteRoutingAdminPageModule } from './pages/campsite-routing-admin-page/campsite-routing-admin-page.module';
 import { CampsiteEntriesAdminPageModule } from './pages/campsite-entries-admin-page/campsite-entries-admin-page.module';
 
 
@@ -17,7 +18,8 @@ import { CampsiteEntriesAdminPageModule } from './pages/campsite-entries-admin-p
     AdminNavModule,
 
     // Pages
-    CampsiteEntriesAdminPageModule
+    CampsiteEntriesAdminPageModule,
+    CampsiteRoutingAdminPageModule,
   ],
   exports: [CampsiteAdminComponent],
 })

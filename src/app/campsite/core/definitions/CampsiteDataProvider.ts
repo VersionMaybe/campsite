@@ -1,4 +1,4 @@
-import { CampsiteEntry, CampsiteEntryBlockTypes } from "./CampsiteEntry";
+import { CampsiteTemplate, CampsiteEntryBlockTypes } from "./CampsiteEntry";
 import { CampsiteRouteType, ICampsiteRoute } from "./CampsiteRoute";
 
 export abstract class CampsiteDataProvider {
@@ -19,8 +19,8 @@ export abstract class CampsiteDataProvider {
     public abstract removeRoute(details: ICampsiteRoute): Promise<boolean>;
 
     // Entries
-    public abstract getAllEntries(): Promise<{ [key: string]: CampsiteEntry }>;
+    public abstract getAllEntries(): Promise<{ [key: string]: CampsiteTemplate }>;
 
-    public abstract getDataForSingle<T extends CampsiteEntry>(path: string): Promise<CampsiteEntryBlockTypes<T> | undefined>;
-    public abstract setDataForSingle<T extends CampsiteEntry>(path: string, data: CampsiteEntryBlockTypes<T>): Promise<boolean>;
+    public abstract getDataForSingle<T extends CampsiteTemplate>(path: string): Promise<CampsiteEntryBlockTypes<T> | undefined>;
+    public abstract setDataForSingle<T extends CampsiteTemplate>(path: string, data: CampsiteEntryBlockTypes<T>): Promise<boolean>;
 }

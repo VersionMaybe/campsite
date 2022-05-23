@@ -4,17 +4,17 @@ import { QuoteBlock } from "../blocks/quote-block";
 import { CampsiteDataService } from "../services/campsite-data.service";
 import { CampsiteBlock, CampsiteBlockFieldsTypes } from "./CampsiteBlock";
 
-export type CampsiteEntryBlocksData<T extends CampsiteEntry> = { [P in keyof T['blocks']]: string };
-export type CampsiteEntryBlockTypes<T extends CampsiteEntry> = { [P in keyof T['blocks']]: CampsiteBlockFieldsTypes<T['blocks'][P]['fields']> };
+export type CampsiteEntryBlocksData<T extends CampsiteTemplate> = { [P in keyof T['blocks']]: string };
+export type CampsiteEntryBlockTypes<T extends CampsiteTemplate> = { [P in keyof T['blocks']]: CampsiteBlockFieldsTypes<T['blocks'][P]['fields']> };
 
-export interface ICampsiteEntry<T extends CampsiteEntry> {
+export interface ICampsiteTemplate<T extends CampsiteTemplate> {
     name: T['name'];
     id: T['id'];
     blocks: CampsiteEntryBlocksData<T>;
 }
 
 @Component({ template: '' })
-export abstract class CampsiteEntryComponent<T extends CampsiteEntry> {
+export abstract class CampsiteTemplateComponent<T extends CampsiteTemplate> {
     blocks!: CampsiteEntryBlockTypes<T>;
 
     constructor(
@@ -24,7 +24,7 @@ export abstract class CampsiteEntryComponent<T extends CampsiteEntry> {
     }
 }
 
-export abstract class CampsiteEntry {
+export abstract class CampsiteTemplate {
     abstract name: string;
     abstract id: string;
     abstract blocks: { [key: string]: CampsiteBlock };
