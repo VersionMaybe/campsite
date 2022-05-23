@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { LandingPage } from '../../example/pages/landing-page/landing-page.component';
-import { QuoteBlock } from '../blocks/quote-block';
 import { CampsiteBlock } from '../definitions/CampsiteBlock';
 import { CampsiteTemplate } from '../definitions/CampsiteTemplate';
 import { CampsiteField } from '../definitions/CampsiteFieldType';
@@ -16,6 +15,7 @@ import { CampsiteGuard } from '../guards/campsite.guard';
 import { CampsiteAdminComponent } from '../../admin/campsite-admin.component';
 import { CampsiteSimpleGuard } from '../guards/campsite-simple.guard';
 import { CampsiteModule } from '../campsite.module';
+import { QuoteBlock } from '../blocks/quote-block/quote-block.component';
 
 @Injectable({
   providedIn: 'root'

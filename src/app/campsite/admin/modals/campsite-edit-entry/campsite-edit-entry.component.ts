@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { CampsiteBlock } from 'src/app/campsite/core/definitions/CampsiteBlock';
 import { ICampsiteEntry } from 'src/app/campsite/core/definitions/CampsiteEntry';
 import { ICampsiteRoute } from 'src/app/campsite/core/definitions/CampsiteRoute';
 import { CampsiteDataService } from 'src/app/campsite/core/services/campsite-data.service';
@@ -29,7 +30,7 @@ export class CampsiteEditEntryComponent implements OnInit {
       value: false
     }
   ];
-  blocks: any[] = [];
+  blocks: CampsiteBlock[] = [];
 
   constructor(
     private campsiteDataService: CampsiteDataService,
@@ -49,16 +50,21 @@ export class CampsiteEditEntryComponent implements OnInit {
     const template = this.campsiteService.templates.find((x) => x.id === this.route.template);
     if (!template) return;
     Object.keys(template.blocks).forEach((e) => {
-      const block = template.blocks[e];
+      const block: CampsiteBlock = new (Object.getPrototypeOf(template.blocks[e]).constructor);
       block.set(this.entry.data[e]);
       this.blocks.push(block);
+
     });
 
     console.log(this.blocks);
   }
 
   save() {
-    this.campsiteDataService.setDataForSingle(this.route.id, this.entry);
+    Object.keys(this.entry.data).forEach((e, i) => {
+      this.entry.data[e] = this.blocks[i].export()
+    });
+
+    this.campsiteDataService.setDataForSingle(this.entry.meta.id, this.entry);
     this.campsiteAdminService.closeModal();
   }
 

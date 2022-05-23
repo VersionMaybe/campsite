@@ -4,13 +4,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CampsiteModule } from './campsite/core/campsite.module';
-import { LocalStorageDataProvider } from './campsite/core/providers/LocalStorageDataProvider';
 import { GeneralPage } from './campsite/example/pages/general-page/general-page.component';
 import { GeneralPageModule } from './campsite/example/pages/general-page/general-page.module';
 import { LandingPage } from './campsite/example/pages/landing-page/landing-page.component';
 import { LandingPageModule } from './campsite/example/pages/landing-page/landing-page.module';
 import { environment } from '../environments/environment';
 import { FirebaseDataProvider } from './campsite/core/providers/FirebaseDataProvider';
+import { QuoteBlockModule } from './campsite/core/blocks/quote-block/quote-block.module';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,8 @@ import { FirebaseDataProvider } from './campsite/core/providers/FirebaseDataProv
     }),
 
     LandingPageModule,
-    GeneralPageModule
+    GeneralPageModule,
+    QuoteBlockModule
   ],
   providers: [],
   bootstrap: [AppComponent]

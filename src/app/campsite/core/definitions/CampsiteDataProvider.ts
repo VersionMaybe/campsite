@@ -18,6 +18,7 @@ export abstract class CampsiteDataProvider {
     public abstract getAllRoutes(): Promise<ICampsiteRoute[]>;
     public abstract setRoute(details: ICampsiteRoute): Promise<boolean>;
     public abstract removeRoute(details: ICampsiteRoute): Promise<boolean>;
+    public abstract getDataForRoute<T extends CampsiteTemplate>(routeID: string): Promise<ICampsiteEntry<T> | undefined>;
 
     // Entries
     public abstract getAllEntries(): Promise<ICampsiteEntry<any>[]>;

@@ -8,6 +8,7 @@ export interface ICampsiteEntry<T extends CampsiteTemplate> {
 
 export interface ICampsiteEntryMeta {
     title: string;
+    id: string;
     date_created: number;
     date_last_updated: number;
     enabled: boolean;

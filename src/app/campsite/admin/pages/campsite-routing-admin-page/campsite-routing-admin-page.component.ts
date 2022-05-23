@@ -85,7 +85,6 @@ export class CampsiteRoutingAdminPageComponent implements OnInit {
       await this.campsiteDataService.setRoute(this.routes.find((x) => x.id === id) as any);
       delete this.changes[id];
     }
-    console.log('Done', this.changes);
   }
 
   changeMade(route: string) {

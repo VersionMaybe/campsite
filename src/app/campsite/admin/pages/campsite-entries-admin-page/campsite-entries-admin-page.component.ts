@@ -57,7 +57,6 @@ export class CampsiteEntriesAdminPageComponent implements OnInit {
   }
 
   editEntry(entry: ICampsiteEntry<any>) {
-    console.log('Edit me please!', entry)
     this.campsiteAdminService.openModal(CampsiteEditEntryComponent, {
       entry,
       route: this.routeLinks[this.entries.findIndex((x) => x === entry)]

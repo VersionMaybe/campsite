@@ -38,7 +38,7 @@ export class CampsiteDataService {
     public async getRouteData(route: ICampsiteRoute, params?: any) {
         switch (route.type) {
             case CampsiteRouteType.Single:
-                return await this.getDataForSingle(route.id);
+                return await this.getDataForRoute(route.id);
             default:
                 return undefined;
 
@@ -64,6 +64,10 @@ export class CampsiteDataService {
 
     public getAllEntries(): Promise<ICampsiteEntry<any>[]> {
         return this.dataProvider.getAllEntries();
+    }
+
+    public async getDataForRoute<T extends CampsiteTemplate>(singleID: string): Promise<ICampsiteEntry<T> | undefined> {
+        return await this.dataProvider.getDataForRoute(singleID);
     }
 
     public async getDataForSingle<T extends CampsiteTemplate>(singleID: string): Promise<ICampsiteEntry<T> | undefined> {

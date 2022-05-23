@@ -22,7 +22,7 @@ export abstract class CampsitePrimitive<T, Settings extends { [key: string]: Cam
             if (!!error) return error;
             this.value = JSON.parse(JSON.stringify(this.transform(value)));
             return null;
-        } catch {
+        } catch (e) {
             return null;
         }
     }

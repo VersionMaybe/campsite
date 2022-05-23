@@ -1,3 +1,4 @@
+import { Component, Input } from "@angular/core";
 import { CampsiteField, CampsiteFieldType } from "./CampsiteFieldType";
 
 export type CampsiteBlockFieldsTypes<T extends CampsiteBlock['fields']> = { [P in keyof T]: CampsiteFieldType<T[P]> };
@@ -14,11 +15,26 @@ export interface ICampsiteBlockField {
     value: any;
 }
 
+@Component({ template: '' })
+export abstract class CampsiteBlockComponent<T extends CampsiteBlock> {
+    @Input() block!: T;
+}
+
 export abstract class CampsiteBlock {
     abstract group: string;
     abstract name: string;
     abstract id: string;
+    abstract component: any;
     abstract fields: { [key: string]: CampsiteField };
+
+    constructor(name?: string) {
+        console.log(name);
+        if (name) this.setName(name)
+    }
+
+    private setName(name: string) {
+        this.name = name;
+    }
 
     export() {
         const data: any = {};
@@ -26,7 +42,7 @@ export abstract class CampsiteBlock {
             data[key] = this.fields[key].data.get();
         });
 
-        return JSON.stringify(data);
+        return data;
     }
 
     set(data: CampsiteBlockFieldsTypes<this['fields']>) {

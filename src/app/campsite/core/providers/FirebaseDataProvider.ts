@@ -2,7 +2,7 @@ import { CampsiteDataProvider } from "../definitions/CampsiteDataProvider";
 import { ICampsiteRoute } from "../definitions/CampsiteRoute";
 
 import { initializeApp, FirebaseOptions, FirebaseApp } from "firebase/app";
-import { getFirestore, Firestore, getDoc, doc, setDoc, collection, getDocs, deleteDoc, } from "firebase/firestore";
+import { getFirestore, Firestore, getDoc, doc, setDoc, collection, getDocs, deleteDoc, query, where } from "firebase/firestore";
 import { ICampsiteEntry } from "../definitions/CampsiteEntry";
 
 // import { FirebaseOptions } from '@angular/fire/app';
@@ -27,6 +27,13 @@ export class FirebaseDataProvider extends CampsiteDataProvider {
 
     private replaceAll(string: string, find: string, replace: string) {
         return string.replace(new RegExp(find, 'g'), replace);
+    }
+
+    public async getDataForRoute(singleID: string) {
+        const col = collection(this.firestore, `campsite/entries/singles`);
+        const q = query(col, where('meta.linked_route', '==', singleID));
+        const data = await getDocs(q);
+        return data.empty ? undefined : data.docs[0].data() as any
     }
 
     public async getDataForSingle(singleID: string) {
