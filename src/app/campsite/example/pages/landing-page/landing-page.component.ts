@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { QuoteBlock } from 'src/app/campsite/core/blocks/quote-block';
-import { CampsiteTemplate, CampsiteTemplateComponent } from 'src/app/campsite/core/definitions/CampsiteEntry';
+import { CampsiteTemplate, CampsiteTemplateComponent } from 'src/app/campsite/core/definitions/CampsiteTemplate';
 import { CampsiteDataService } from 'src/app/campsite/core/services/campsite-data.service';
 
 export class LandingPage extends CampsiteTemplate {

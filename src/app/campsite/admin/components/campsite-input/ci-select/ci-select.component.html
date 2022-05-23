@@ -1,5 +1,7 @@
 <span class="ci-label" *ngIf="label">{{ label }}</span>
 <span class="ci-base ci-select style-{{look}}" [ngClass]="{ 'disabled': disabled }">
+    <span class="ci-select__prefix" *ngIf="prefix">{{ prefix }}</span>
+
     <button class="ci-select__label" [disabled]="disabled" (mousedown)="toggle()" (touchstart)="toggle()">{{
         selected?.label }}
     </button>

@@ -18,6 +18,8 @@ export class CiSelectComponent extends CiBaseComponent {
   @Input() options: CampsiteSelectOption[] = [];
   @Input() selected!: CampsiteSelectOption;
   @Output() selectedChange = new EventEmitter<CampsiteSelectOption>();
+  @Input() prefix: string = '';
+  @Input() suffix: string = '';
 
   search = '';
 

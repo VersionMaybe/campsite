@@ -15,6 +15,18 @@
     position: relative;
     text-align: left;
 
+    &__prefix {
+        padding: $spacing;
+        opacity: .25;
+        border-right: 0.1rem solid theme.Text('cs-background', .3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        box-sizing: border-box;
+        user-select: none;
+    }
+
     &__label {
         padding: $spacing;
         font-size: $font-size;

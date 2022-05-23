@@ -1,0 +1,32 @@
+<app-campsite-page-header title="Edit Entry" [showCloseModal]="true"></app-campsite-page-header>
+<app-campsite-table>
+    <app-campsite-table-row header>
+        <app-campsite-table-col>Title</app-campsite-table-col>
+        <app-campsite-table-col>Route</app-campsite-table-col>
+        <app-campsite-table-col>Status</app-campsite-table-col>
+        <app-campsite-table-col>Last Update</app-campsite-table-col>
+    </app-campsite-table-row>
+
+    <app-campsite-table-row>
+        <app-campsite-table-col>
+            <app-ci-text [(value)]="entry.meta.title"></app-ci-text>
+        </app-campsite-table-col>
+        <app-campsite-table-col>
+            <app-ci-text *ngIf="routeOptions.length === 0" prefix="/" [readonly]="true"
+                [value]="entry.meta.linked_route"></app-ci-text>
+            <app-ci-select *ngIf="routeOptions.length > 0" prefix="/" [options]="routeOptions"
+                [(value)]="entry.meta.linked_route">
+            </app-ci-select>
+        </app-campsite-table-col>
+        <app-campsite-table-col>
+            <app-ci-select [disabled]="!route.path" [options]="statusOptions" [(value)]="entry.meta.enabled">
+            </app-ci-select>
+        </app-campsite-table-col>
+        <app-campsite-table-col>
+            {{ entry.meta.date_last_updated | date: 'dd/MM/yy h:mm a' }}
+        </app-campsite-table-col>
+    </app-campsite-table-row>
+</app-campsite-table>
+
+
+<button (click)="save()">Save</button>

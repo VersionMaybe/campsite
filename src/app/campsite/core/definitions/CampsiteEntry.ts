@@ -1,46 +1,15 @@
-import { NodeWithI18n } from "@angular/compiler";
-import { Component } from "@angular/core";
-import { QuoteBlock } from "../blocks/quote-block";
-import { CampsiteDataService } from "../services/campsite-data.service";
-import { CampsiteBlock, CampsiteBlockFieldsTypes } from "./CampsiteBlock";
+import { CampsiteTemplate } from "./CampsiteTemplate";
 
-export type CampsiteEntryBlocksData<T extends CampsiteTemplate> = { [P in keyof T['blocks']]: string };
-export type CampsiteEntryBlockTypes<T extends CampsiteTemplate> = { [P in keyof T['blocks']]: CampsiteBlockFieldsTypes<T['blocks'][P]['fields']> };
-
-export interface ICampsiteTemplate<T extends CampsiteTemplate> {
-    name: T['name'];
-    id: T['id'];
-    blocks: CampsiteEntryBlocksData<T>;
+export interface ICampsiteEntry<T extends CampsiteTemplate> {
+    meta: ICampsiteEntryMeta
+    template: T['id'];
+    data: ReturnType<T['export']>
 }
 
-@Component({ template: '' })
-export abstract class CampsiteTemplateComponent<T extends CampsiteTemplate> {
-    blocks!: CampsiteEntryBlockTypes<T>;
-
-    constructor(
-        private campsiteDataService: CampsiteDataService
-    ) {
-        this.campsiteDataService.getCurrentRouteData(this);
-    }
-}
-
-export abstract class CampsiteTemplate {
-    abstract name: string;
-    abstract id: string;
-    abstract blocks: { [key: string]: CampsiteBlock };
-    abstract component?: any;
-
-    export() {
-        const data: any = {};
-        Object.keys(this.blocks).forEach(key => {
-            data[key] = this.blocks[key].export();
-        });
-        return data;
-    }
-
-    set(data: CampsiteEntryBlocksData<this>) {
-        Object.keys(data).forEach(key => {
-            this.blocks[key].set(JSON.parse(data[key]));
-        });
-    }
+export interface ICampsiteEntryMeta {
+    title: string;
+    date_created: number;
+    date_last_updated: number;
+    enabled: boolean;
+    linked_route: string;
 }

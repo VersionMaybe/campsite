@@ -1,3 +1,5 @@
+import { CampsiteTemplate } from "./CampsiteTemplate";
+
 export enum CampsiteRouteType {
     Single = 'Single',
     Dynamic = 'Dynamic',

@@ -2,4 +2,8 @@
     <h3 class="c-admin-header__title">
         {{ title }}
     </h3>
+
+    <span class="c-admin-header__actions">
+        <span class="material-icons-round" *ngIf="showCloseModal" (click)="closeModal()">close</span>
+    </span>
 </div>

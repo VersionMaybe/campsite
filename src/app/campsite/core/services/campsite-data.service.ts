@@ -2,8 +2,9 @@ import { Injectable } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { CampsiteModule } from "../campsite.module";
 import { CampsiteDataProvider } from "../definitions/CampsiteDataProvider";
-import { CampsiteTemplate, CampsiteEntryBlockTypes, CampsiteTemplateComponent } from "../definitions/CampsiteEntry";
+import { CampsiteTemplate, CampsiteEntryBlockTypes, CampsiteTemplateComponent } from "../definitions/CampsiteTemplate";
 import { CampsiteRouteType, ICampsiteRoute } from "../definitions/CampsiteRoute";
+import { ICampsiteEntry } from "../definitions/CampsiteEntry";
 
 @Injectable({
     providedIn: 'root'
@@ -21,7 +22,7 @@ export class CampsiteDataService {
     public async getCurrentRouteData(component?: CampsiteTemplateComponent<any>) {
         const snapshot = this.route.firstChild?.snapshot;
         if (!snapshot) return null;
-        let data: CampsiteEntryBlockTypes<CampsiteTemplate> | undefined = undefined;
+        let data: ICampsiteEntry<CampsiteTemplate> | undefined = undefined;
 
         if (this.preloadedData) {
             data = this.preloadedData;
@@ -30,7 +31,7 @@ export class CampsiteDataService {
             data = await this.getRouteData(snapshot.data['campsiteData'], snapshot.params);
         }
 
-        if (component) this.hydrateRouteWithData(component, data);
+        if (component && data) this.hydrateRouteWithData(component, data);
         return data;
     }
 
@@ -48,8 +49,9 @@ export class CampsiteDataService {
         this.preloadedData = data;
     }
 
-    public hydrateRouteWithData(component: CampsiteTemplateComponent<any>, data: any) {
-        component.blocks = data;
+    public hydrateRouteWithData(component: CampsiteTemplateComponent<any>, data: ICampsiteEntry<any>) {
+        component.blocks = data.data;
+        component.meta = data.meta;
     }
 
     public satanisePath(path: string) {
@@ -60,15 +62,15 @@ export class CampsiteDataService {
         return string.replace(new RegExp(find, 'g'), replace);
     }
 
-    public getAllEntries(): Promise<{ [key: string]: CampsiteTemplate }> {
+    public getAllEntries(): Promise<ICampsiteEntry<any>[]> {
         return this.dataProvider.getAllEntries();
     }
 
-    public async getDataForSingle<T extends CampsiteTemplate>(singleID: string): Promise<CampsiteEntryBlockTypes<T> | undefined> {
+    public async getDataForSingle<T extends CampsiteTemplate>(singleID: string): Promise<ICampsiteEntry<T> | undefined> {
         return await this.dataProvider.getDataForSingle(singleID);
     }
 
-    public async setDataForSingle<T extends CampsiteTemplate>(singleID: string, data: CampsiteEntryBlockTypes<T>) {
+    public async setDataForSingle<T extends CampsiteTemplate>(singleID: string, data: ICampsiteEntry<T>) {
         return await this.dataProvider.setDataForSingle(singleID, data);
     }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CampsiteTemplate } from 'src/app/campsite/core/definitions/CampsiteEntry';
+import { CampsiteTemplate } from 'src/app/campsite/core/definitions/CampsiteTemplate';
 import { CampsiteRouteType, ICampsiteRoute } from 'src/app/campsite/core/definitions/CampsiteRoute';
 import { CampsiteDataService } from 'src/app/campsite/core/services/campsite-data.service';
 import { CampsiteService } from 'src/app/campsite/core/services/campsite.service';
@@ -44,11 +44,11 @@ export class CampsiteRoutingAdminPageComponent implements OnInit {
     })
     this.loadOptions = [
       {
-        label: 'Combined',
+        label: 'Normal',
         value: true
       },
       {
-        label: 'Progressive',
+        label: 'Eager',
         value: false
       }
     ];

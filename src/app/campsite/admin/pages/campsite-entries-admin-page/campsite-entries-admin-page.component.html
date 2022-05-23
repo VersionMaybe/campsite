@@ -1,2 +1,39 @@
 <app-campsite-page-header></app-campsite-page-header>
-<p>campsite-entries-admin-page works!</p>
+<app-campsite-table>
+    <app-campsite-table-row header>
+        <app-campsite-table-col>Title</app-campsite-table-col>
+        <app-campsite-table-col>Route</app-campsite-table-col>
+        <app-campsite-table-col>Status</app-campsite-table-col>
+        <app-campsite-table-col>Last Update</app-campsite-table-col>
+        <app-campsite-table-col></app-campsite-table-col>
+    </app-campsite-table-row>
+
+    <!-- Existing Routes -->
+    <app-campsite-table-row *ngFor="let entry of entries; let i = index">
+        <app-campsite-table-col>
+            <app-ci-text [readonly]="true" look="transparent" [value]="entry.meta.title">
+            </app-ci-text>
+        </app-campsite-table-col>
+        <app-campsite-table-col>
+            <app-ci-text [disabled]="true" prefix="/" [value]="routeLinks[i].path">
+            </app-ci-text>
+        </app-campsite-table-col>
+        <app-campsite-table-col class="c-route-item">
+            <app-ci-select [disabled]="true" [options]="entryStatus" [(value)]="entry.meta.enabled">
+            </app-ci-select>
+        </app-campsite-table-col>
+        <app-campsite-table-col>
+            <app-ci-text [readonly]="true" look="transparent"
+                [value]="entry.meta.date_last_updated | date: 'dd/MM/yy h:mm a'">
+            </app-ci-text>
+        </app-campsite-table-col>
+        <app-campsite-table-col>
+            <button class="c-icon-button transparent" (click)="editEntry(entry)">
+                <span class="material-icons-round">edit</span>
+            </button>
+            <button class="c-icon-button transparent" *ngIf="i !== 0" (click)="removeEntry(entry)">
+                <span class="material-icons-round">delete</span>
+            </button>
+        </app-campsite-table-col>
+    </app-campsite-table-row>
+</app-campsite-table>

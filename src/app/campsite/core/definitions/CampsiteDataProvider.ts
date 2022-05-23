@@ -1,5 +1,6 @@
-import { CampsiteTemplate, CampsiteEntryBlockTypes } from "./CampsiteEntry";
+import { CampsiteTemplate, CampsiteEntryBlockTypes } from "./CampsiteTemplate";
 import { CampsiteRouteType, ICampsiteRoute } from "./CampsiteRoute";
+import { ICampsiteEntry } from "./CampsiteEntry";
 
 export abstract class CampsiteDataProvider {
     public generateID(): string {
@@ -19,8 +20,8 @@ export abstract class CampsiteDataProvider {
     public abstract removeRoute(details: ICampsiteRoute): Promise<boolean>;
 
     // Entries
-    public abstract getAllEntries(): Promise<{ [key: string]: CampsiteTemplate }>;
+    public abstract getAllEntries(): Promise<ICampsiteEntry<any>[]>;
 
-    public abstract getDataForSingle<T extends CampsiteTemplate>(path: string): Promise<CampsiteEntryBlockTypes<T> | undefined>;
-    public abstract setDataForSingle<T extends CampsiteTemplate>(path: string, data: CampsiteEntryBlockTypes<T>): Promise<boolean>;
+    public abstract getDataForSingle<T extends CampsiteTemplate>(path: string): Promise<ICampsiteEntry<T> | undefined>;
+    public abstract setDataForSingle<T extends CampsiteTemplate>(path: string, data: ICampsiteEntry<T>): Promise<boolean>;
 }

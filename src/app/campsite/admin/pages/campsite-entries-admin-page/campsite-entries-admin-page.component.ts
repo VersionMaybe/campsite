@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { ICampsiteEntry } from 'src/app/campsite/core/definitions/CampsiteEntry';
+import { CampsiteRouteType, ICampsiteRoute } from 'src/app/campsite/core/definitions/CampsiteRoute';
+import { CampsiteDataService } from 'src/app/campsite/core/services/campsite-data.service';
+import { CampsiteService } from 'src/app/campsite/core/services/campsite.service';
+import { CampsiteSelectOption } from '../../components/campsite-input/ci-select/ci-select.component';
+import { CampsiteEditEntryComponent } from '../../modals/campsite-edit-entry/campsite-edit-entry.component';
+import { CampsiteAdminService } from '../../services/campsite-admin.service';
 
 @Component({
   selector: 'app-campsite-entries-admin-page',
@@ -7,9 +14,54 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CampsiteEntriesAdminPageComponent implements OnInit {
 
-  constructor() { }
+  entries: ICampsiteEntry<any>[] = [];
+  entryStatus: CampsiteSelectOption[] = [
+    {
+      label: 'Enabled',
+      value: true
+    },
+    {
+      label: 'Disabled',
+      value: false
+    }
+  ];
+  routeLinks: { [key: string]: ICampsiteRoute } = {};
+
+  constructor(
+    private campsiteAdminService: CampsiteAdminService,
+    private campsiteDataService: CampsiteDataService,
+  ) { }
 
   ngOnInit(): void {
+    this.refresh();
+  }
+
+  async refresh() {
+    this.routeLinks = {};
+    const routes = await this.campsiteDataService.getAllRoutes();
+    this.entries = await this.campsiteDataService.getAllEntries();
+
+    this.entries.forEach((entry, i) => {
+      const route = routes.find((x) => x.id === entry.meta.linked_route);
+      this.routeLinks[i] = route || {
+        id: '',
+        path: 'Unset',
+        template: '',
+        type: CampsiteRouteType.Single
+      };
+    });
+  }
+
+  removeEntry(entry: ICampsiteEntry<any>) {
+    console.log('Delete me please!', entry)
+  }
+
+  editEntry(entry: ICampsiteEntry<any>) {
+    console.log('Edit me please!', entry)
+    this.campsiteAdminService.openModal(CampsiteEditEntryComponent, {
+      entry,
+      route: this.routeLinks[this.entries.findIndex((x) => x === entry)]
+    });
   }
 
 }

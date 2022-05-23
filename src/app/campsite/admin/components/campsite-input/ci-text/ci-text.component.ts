@@ -8,7 +8,7 @@ import { CiBaseComponent } from '../ci-base.component';
 })
 export class CiTextComponent extends CiBaseComponent implements OnInit {
 
-  @Input() value: string = '';
+  @Input() value: any = '';
   @Input() type: string = '';
   @Input() placeholder: string = '';
   @Input() prefix: string = '';

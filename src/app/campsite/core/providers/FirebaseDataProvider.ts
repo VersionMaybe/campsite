@@ -3,6 +3,7 @@ import { ICampsiteRoute } from "../definitions/CampsiteRoute";
 
 import { initializeApp, FirebaseOptions, FirebaseApp } from "firebase/app";
 import { getFirestore, Firestore, getDoc, doc, setDoc, collection, getDocs, deleteDoc, } from "firebase/firestore";
+import { ICampsiteEntry } from "../definitions/CampsiteEntry";
 
 // import { FirebaseOptions } from '@angular/fire/app';
 // import { getFirestore } from '@angular/fire/firestore';
@@ -70,17 +71,15 @@ export class FirebaseDataProvider extends CampsiteDataProvider {
         return docs.docs.map((x) => x.data()) as ICampsiteRoute[];
     }
 
+    public async getAllSingles() {
+        const ref = collection(this.firestore, `campsite/entries/singles`);
+        const docs = await getDocs(ref);
+        return docs.docs.map((x) => x.data()) as ICampsiteEntry<any>[];
+    }
+
     public async getAllEntries() {
-        let localKeys: any = {};
-
-        for (var key in localStorage) {
-            if (key.startsWith('campsite/entries')) {
-                const data = localStorage.getItem(key);
-                if (data) localKeys[key] = JSON.parse(data);
-            }
-        }
-
-        return localKeys;
+        const singles = await this.getAllSingles();
+        return [...singles];
     }
 
     // public override generateID() {

@@ -10,6 +10,7 @@ import { IAdminItem } from '../definitions/IAdminItem';
 })
 export class CampsiteAdminService {
 
+  private currentModal = new BehaviorSubject<{ component: any, data: any }>(null as any);
   private navigationItems = new BehaviorSubject<IAdminItem[]>((CampsiteModule.config.adminExtensions || []));
   private currentNavItem = new BehaviorSubject<IAdminItem | undefined>(undefined);
 
@@ -47,5 +48,19 @@ export class CampsiteAdminService {
 
   navigate(item: IAdminItem) {
     this.router.navigate([`admin/${item.id}`]);
+  }
+
+  listenForModals() {
+    return this.currentModal.asObservable();
+  }
+
+  openModal(component: any, data: any) {
+    this.currentModal.next({
+      component, data
+    });
+  }
+
+  closeModal() {
+    this.currentModal.next(null as any);
   }
 }

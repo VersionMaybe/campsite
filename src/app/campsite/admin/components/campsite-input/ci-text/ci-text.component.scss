@@ -67,6 +67,25 @@
         background-color: theme.Text('cs-background', .1);
         color: theme.Text('cs-background', .8);
         cursor: not-allowed;
+
+        input {
+            cursor: not-allowed;
+        }
+    }
+
+    &.readonly {
+        cursor: text;
+
+        input {
+            cursor: text;
+            text-overflow: unset;
+            overflow: auto;
+        }
+
+        &:hover,
+        &:focus-within {
+            border: 0.1rem solid theme.Text('cs-background', .1);
+        }
     }
 
     &.style-transparent {
@@ -92,6 +111,14 @@
             background-color: transparent;
             opacity: .5;
             cursor: not-allowed;
+        }
+
+        &.readonly {
+            cursor: text;
+
+            input {
+                opacity: 1;
+            }
         }
     }
 }

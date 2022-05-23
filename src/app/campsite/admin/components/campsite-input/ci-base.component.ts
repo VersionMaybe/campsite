@@ -6,6 +6,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export abstract class CiBaseComponent {
 
+    @Input() readonly = false;
     @Input() disabled = false;
     @Input() abstract value: any;
     @Output() valueChange = new EventEmitter<this['value']>();

@@ -3,7 +3,7 @@ import { NavigationStart, Router } from '@angular/router';
 import { LandingPage } from '../../example/pages/landing-page/landing-page.component';
 import { QuoteBlock } from '../blocks/quote-block';
 import { CampsiteBlock } from '../definitions/CampsiteBlock';
-import { CampsiteTemplate } from '../definitions/CampsiteEntry';
+import { CampsiteTemplate } from '../definitions/CampsiteTemplate';
 import { CampsiteField } from '../definitions/CampsiteFieldType';
 import { ICampsiteRoute } from '../definitions/CampsiteRoute';
 import { ICampsiteLog } from '../definitions/CampsiteLog';

@@ -1,7 +1,7 @@
 import { IAdminItem } from "../../admin/definitions/IAdminItem";
 import { CampsiteBlock } from "./CampsiteBlock";
 import { CampsiteDataProvider } from "./CampsiteDataProvider";
-import { CampsiteTemplate } from "./CampsiteEntry";
+import { CampsiteTemplate } from "./CampsiteTemplate";
 import { CampsiteField } from "./CampsiteFieldType";
 
 export interface CampsiteConfig {

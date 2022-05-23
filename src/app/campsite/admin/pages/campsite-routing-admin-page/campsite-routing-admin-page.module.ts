@@ -15,8 +15,8 @@ import { CampsiteInputModule } from '../../components/campsite-input/campsite-in
   imports: [
     CommonModule,
     FormsModule,
-    CampsitePageHeaderModule,
 
+    CampsitePageHeaderModule,
     CampsiteInputModule,
     CampsiteTableModule
   ],

@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CampsiteEntriesAdminPageComponent } from './campsite-entries-admin-page.component';
+import { CampsiteEditEntryComponent } from './campsite-edit-entry.component';
 import { CampsitePageHeaderModule } from '../../components/campsite-page-header/campsite-page-header.module';
-import { CampsiteInputModule } from '../../components/campsite-input/campsite-input.module';
 import { CampsiteTableModule } from '../../components/campsite-table/campsite-table.module';
+import { CampsiteInputModule } from '../../components/campsite-input/campsite-input.module';
 
 
 
 @NgModule({
-  declarations: [CampsiteEntriesAdminPageComponent],
+  declarations: [CampsiteEditEntryComponent],
   imports: [
     CommonModule,
 
@@ -16,6 +16,6 @@ import { CampsiteTableModule } from '../../components/campsite-table/campsite-ta
     CampsiteInputModule,
     CampsiteTableModule
   ],
-  exports: [CampsiteEntriesAdminPageComponent],
+  exports: [CampsiteEditEntryComponent],
 })
-export class CampsiteEntriesAdminPageModule { }
+export class CampsiteEditEntryModule { }
