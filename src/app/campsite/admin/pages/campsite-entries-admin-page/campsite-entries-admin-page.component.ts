@@ -63,4 +63,11 @@ export class CampsiteEntriesAdminPageComponent implements OnInit {
     });
   }
 
+  async test() {
+    this.campsiteDataService.download(
+      'export.campsite',
+      await this.campsiteDataService.exportAll()
+    );
+  }
+
 }

@@ -34,6 +34,9 @@
             <button class="c-icon-button transparent" *ngIf="i !== 0" (click)="removeEntry(entry)">
                 <span class="material-icons-round">delete</span>
             </button>
+            <button class="c-icon-button transparent" *ngIf="i === 0" (click)="test()">
+                <span class="material-icons-round">save</span>
+            </button>
         </app-campsite-table-col>
     </app-campsite-table-row>
 </app-campsite-table>

@@ -5,6 +5,7 @@ import { CampsiteDataProvider } from "../definitions/CampsiteDataProvider";
 import { CampsiteTemplate, CampsiteEntryBlockTypes, CampsiteTemplateComponent } from "../definitions/CampsiteTemplate";
 import { CampsiteRouteType, ICampsiteRoute } from "../definitions/CampsiteRoute";
 import { ICampsiteEntry } from "../definitions/CampsiteEntry";
+import { ICampsiteExport } from "../definitions/CampsiteExport";
 
 @Injectable({
     providedIn: 'root'
@@ -88,5 +89,31 @@ export class CampsiteDataService {
 
     public async removeRoute(details: ICampsiteRoute) {
         return await this.dataProvider.removeRoute(details);
+    }
+
+    public async exportAll() {
+        const routes = await this.getAllRoutes();
+        const entries = await this.getAllEntries();
+        const campsiteObject: ICampsiteExport = {
+            meta: {
+                routes
+            },
+            data: {
+                entries
+            }
+        };
+
+
+        return new Blob([JSON.stringify(campsiteObject, null, '\t')]);
+    }
+
+    public async download(name: string, item: any) {
+        const blob = window.URL.createObjectURL(item);
+        const element = window.document.createElement('a');
+        element.href = blob;
+        element.download = name;
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
     }
 }
