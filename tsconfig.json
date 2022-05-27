@@ -3,6 +3,12 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "paths": {
+      "campsite-cms": [
+        "dist/campsite-cms/campsite-cms",
+        "dist/campsite-cms"
+      ],
+    },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -21,7 +27,8 @@
     "lib": [
       "es2020",
       "dom"
-    ]
+    ],
+    "resolveJsonModule": true,
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

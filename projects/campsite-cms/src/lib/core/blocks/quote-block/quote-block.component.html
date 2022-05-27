@@ -1,0 +1,5 @@
+<app-ci-text class="c-block-text" prefix="Text" [value]="block.fields.text.data.get()"
+    (valueChange)="setData($event, block.fields.text.data)" [multiline]="true">
+</app-ci-text>
+<app-ci-text prefix="Likes" type="number" [disabled]="true" [value]="block.fields.likes.data.get()"
+    (valueChange)="setData($event, block.fields.likes.data)"></app-ci-text>

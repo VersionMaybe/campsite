@@ -1,0 +1,42 @@
+<app-campsite-page-header></app-campsite-page-header>
+<app-campsite-table>
+    <app-campsite-table-row header>
+        <app-campsite-table-col>Path</app-campsite-table-col>
+        <app-campsite-table-col>Template</app-campsite-table-col>
+        <app-campsite-table-col>Type</app-campsite-table-col>
+        <app-campsite-table-col>Load Style</app-campsite-table-col>
+    </app-campsite-table-row>
+
+    <!-- Existing Routes -->
+    <app-campsite-table-row *ngFor="let route of routes; let i = index">
+        <app-campsite-table-col>
+            <app-ci-text prefix="/" type="text" [(value)]="route.path" (valueChange)="changeMade(route.id)"
+                [disabled]="i === 0">
+            </app-ci-text>
+        </app-campsite-table-col>
+        <app-campsite-table-col>
+            <app-ci-select [options]="templateOptions" [(value)]="route.template"
+                (valueChange)="changeMadeToTemplate(route.id)">
+            </app-ci-select>
+        </app-campsite-table-col>
+        <app-campsite-table-col class="c-route-item">
+            <app-ci-select [disabled]="true" [options]="typeOptions" [(value)]="route.type"
+                (valueChange)="changeMade(route.id)">
+            </app-ci-select>
+        </app-campsite-table-col>
+        <app-campsite-table-col>
+            <app-ci-select [options]="loadOptions" [(value)]="route.waitForData" (valueChange)="changeMade(route.id)">
+            </app-ci-select>
+
+            <app-ci-icon-button value="delete" [disabled]="i === 0" (action)="removeRoute(route)"></app-ci-icon-button>
+        </app-campsite-table-col>
+    </app-campsite-table-row>
+
+    <ng-container footer>
+        <span class="p-routing-actions">
+            <app-ci-icon-button value="add" (action)="addRoute()"></app-ci-icon-button>
+
+            <app-ci-icon-button value="save" [disabled]="!hasChanges()" (action)="save()"></app-ci-icon-button>
+        </span>
+    </ng-container>
+</app-campsite-table>

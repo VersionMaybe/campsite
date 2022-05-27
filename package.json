@@ -10,7 +10,8 @@
     "dev:ssr": "ng run campsite:serve-ssr",
     "serve:ssr": "node dist/campsite/server/main.js",
     "build:ssr": "ng build && ng run campsite:server",
-    "prerender": "ng run campsite:prerender"
+    "build:package": "ng build campsite-cms",
+    "deploy:package": "ng build campsite-cms && cd ./dist/campsite-cms && npm publish"
   },
   "private": true,
   "dependencies": {
@@ -25,6 +26,7 @@
     "@angular/platform-server": "~13.3.0",
     "@angular/router": "~13.3.0",
     "@nguniversal/express-engine": "^13.1.0",
+    "campsite-cms": "file:dist/campsite-cms",
     "easy-theme": "^1.0.1",
     "express": "^4.15.2",
     "firebase": "^9.8.1",
@@ -47,6 +49,7 @@
     "karma-coverage": "~2.1.0",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
+    "ng-packagr": "^13.0.0",
     "typescript": "~4.6.2"
   }
 }

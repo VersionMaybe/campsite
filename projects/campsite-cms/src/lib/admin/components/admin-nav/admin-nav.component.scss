@@ -1,0 +1,200 @@
+@use "~easy-theme" as theme;
+
+$nav-width: 15rem;
+$nav-spacing: 1rem;
+$offset: .75rem;
+$transition: .5s cubic-bezier(0.4, 0.0, 0.2, 1);
+
+.c-admin-nav {
+    width: $nav-width;
+    background: linear-gradient(to bottom right, theme.Color('cs-primary'), theme.Color('cs-primary', 'light'));
+    color: theme.Text('cs-primary');
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    user-select: none;
+    border-radius: .75rem;
+    overflow: hidden;
+    z-index: 1;
+    transition: $transition;
+
+    &.closed {
+        width: 3.5rem;
+    }
+
+    &__title {
+        display: block;
+        color: theme.Text('cs-primary', .9);
+        padding: $nav-spacing;
+        text-align: center;
+        height: 1.25rem;
+        transition: $transition;
+
+        .closed & {
+            height: 0;
+            padding: 0.25rem;
+            opacity: 0;
+        }
+
+        &__name {
+            font-weight: 400;
+            font-size: 1.2rem;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+            transition: $transition;
+
+            .closed & {
+                color: transparent;
+            }
+
+            span {
+                position: absolute;
+                pointer-events: none;
+                opacity: 0;
+                transition: $transition;
+
+                .closed & {
+                    opacity: 1;
+                    color: theme.Text('cs-primary', 1);
+                }
+            }
+        }
+    }
+
+    &__body {
+        flex: 1;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    &__footer {
+        position: absolute;
+        bottom: $nav-spacing;
+        left: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.c-admin-version {
+    text-transform: uppercase;
+    font-weight: 500;
+    opacity: .3;
+    letter-spacing: .025rem;
+    font-size: .8rem;
+    pointer-events: none;
+    padding: .25rem;
+    border: 1px solid;
+    white-space: nowrap;
+    border-radius: .5rem;
+    position: absolute;
+    transition: $transition;
+
+    &:first-child {
+        position: relative;
+    }
+
+    &:not(.show) {
+        opacity: 0;
+    }
+}
+
+.c-admin-nav-item {
+    outline: none;
+    border: none;
+    border-radius: 0;
+    padding: calc($nav-spacing / 2);
+    margin: 0 calc($nav-spacing / 2);
+    text-align: left;
+    background: transparent;
+    color: theme.Text('cs-primary', .6);
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+    transition: .1s ease;
+    position: relative;
+    font-size: .9rem;
+    border: 1px solid transparent;
+    border-radius: .5rem;
+
+    &__name {
+        .closed & {
+            opacity: 0;
+            transition: opacity $transition;
+            white-space: nowrap;
+        }
+    }
+
+    &__icon {
+        font-size: 1.2rem;
+        margin-right: .75rem;
+        margin-left: 0.05rem;
+
+        .closed & {
+            color: theme.Text('cs-primary', .5);
+        }
+
+        .active & {
+            color: theme.Color('cs-primary', 1);
+        }
+    }
+
+    &__alerts {
+        position: absolute;
+        right: $nav-spacing;
+        font-size: .8rem;
+        color: theme.Text('cs-primary', 1);
+        font-weight: 400;
+        opacity: .75;
+        pointer-events: none;
+        transition: .1s ease, opacity $transition;
+
+        .active & {
+            color: theme.Color('cs-primary', 1);
+        }
+
+        .closed & {
+            opacity: 0;
+        }
+    }
+
+    &::before {
+        content: '•';
+        font-weight: 600;
+        display: block;
+        position: absolute;
+        left: $nav-spacing;
+        transition: .2s ease;
+        transform: translateX(-200%);
+        pointer-events: none;
+        opacity: 0;
+        color: theme.Color('cs-primary');
+    }
+
+    &:hover {
+        cursor: pointer;
+        color: theme.Text('cs-primary', 1);
+    }
+
+    .closed &:hover {
+        background: theme.Text('cs-primary', .1);
+    }
+
+    &.active {
+        font-weight: 500;
+        color: theme.Color('cs-primary', 1);
+        background: theme.Text('cs-primary');
+        box-shadow: 0 .1rem .5rem 0 theme.Text('cs-primary', .3);
+        border: 1px solid theme.Text('cs-primary', .5);
+
+        .closed & {
+            background: theme.Text('cs-primary');
+        }
+    }
+}
