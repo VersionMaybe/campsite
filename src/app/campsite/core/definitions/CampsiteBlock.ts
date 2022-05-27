@@ -28,7 +28,6 @@ export abstract class CampsiteBlock {
     abstract fields: { [key: string]: CampsiteField };
 
     constructor(name?: string) {
-        console.log(name);
         if (name) this.setName(name)
     }
 

@@ -19,9 +19,7 @@ export abstract class CampsiteTemplateComponent<T extends CampsiteTemplate> {
 
     constructor(
         private campsiteDataService: CampsiteDataService
-    ) {
-        this.campsiteDataService.getCurrentRouteData(this);
-    }
+    ) { this.campsiteDataService.getCurrentRouteData(this); }
 }
 
 export abstract class CampsiteTemplate {

@@ -3,6 +3,8 @@ import { CampsiteRouteType, ICampsiteRoute } from "./CampsiteRoute";
 import { ICampsiteEntry } from "./CampsiteEntry";
 
 export abstract class CampsiteDataProvider {
+
+    // Generators
     public generateID(): string {
         const CHARS = 'ABCDEFGHJKMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz'
         let autoId = ''
@@ -16,13 +18,15 @@ export abstract class CampsiteDataProvider {
 
     // Routes
     public abstract getAllRoutes(): Promise<ICampsiteRoute[]>;
+    public abstract getDataForRoute<T extends CampsiteTemplate>(routeID: string): Promise<ICampsiteEntry<T> | undefined>;
+
     public abstract setRoute(details: ICampsiteRoute): Promise<boolean>;
     public abstract removeRoute(details: ICampsiteRoute): Promise<boolean>;
-    public abstract getDataForRoute<T extends CampsiteTemplate>(routeID: string): Promise<ICampsiteEntry<T> | undefined>;
 
     // Entries
     public abstract getAllEntries(): Promise<ICampsiteEntry<any>[]>;
 
-    public abstract getDataForSingle<T extends CampsiteTemplate>(path: string): Promise<ICampsiteEntry<T> | undefined>;
-    public abstract setDataForSingle<T extends CampsiteTemplate>(path: string, data: ICampsiteEntry<T>): Promise<boolean>;
+    public abstract getEntryForSingle<T extends CampsiteTemplate>(path: string): Promise<ICampsiteEntry<T> | undefined>;
+    public abstract setEntryForSingle<T extends CampsiteTemplate>(path: string, data: ICampsiteEntry<T>): Promise<boolean>;
+    public abstract removeEntryForSingle(path: string): Promise<boolean>;
 }

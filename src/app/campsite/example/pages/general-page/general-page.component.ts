@@ -5,9 +5,7 @@ import { CampsiteTemplate } from 'src/app/campsite/core/definitions/CampsiteTemp
 export class GeneralPage extends CampsiteTemplate {
   name = 'General Page';
   id = 'generalPage';
-  blocks = {
-    heroQuote: new QuoteBlock()
-  }
+  blocks = {}
   component = GeneralPageComponent;
 }
 

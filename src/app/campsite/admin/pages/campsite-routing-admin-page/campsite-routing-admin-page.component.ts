@@ -62,20 +62,44 @@ export class CampsiteRoutingAdminPageComponent implements OnInit {
     if (this.routes.length === 0) this.addRoute();
   }
 
-  addRoute() {
+  async addRoute() {
     if (this.entryTypes.length === 0) {
       console.warn('No types of entry found!');
       return;
     }
 
+    const routeID = this.campsiteDataService.dataProvider.generateID();
+    const template = this.entryTypes.length > 0 ? this.entryTypes[0] : undefined;
+
+    if (!template) {
+      console.warn('Cant create route as there are no templates to assign.')
+      return;
+    }
+
     this.routes.push({
       path: '',
-      template: this.entryTypes.length > 0 ? this.entryTypes[0].id : '',
+      template: template.id,
       type: CampsiteRouteType.Single,
-      id: this.campsiteDataService.dataProvider.generateID(),
+      id: routeID,
       waitForData: true
     });
-    this.changeMade(this.routes[this.routes.length - 1].id);
+    await this.save();
+
+    const entryID = this.campsiteDataService.dataProvider.generateID();
+
+    await this.campsiteDataService.setEntryForSingle(entryID, {
+      template: template.id,
+      meta: {
+        date_created: Date.now(),
+        enabled: true,
+        id: entryID,
+        linked_route: routeID,
+        title: 'Untitled Entry',
+      },
+      data: template.export()
+    })
+
+    console.log('Route Created');
   }
 
   async save() {
@@ -98,7 +122,9 @@ export class CampsiteRoutingAdminPageComponent implements OnInit {
   async removeRoute(route: ICampsiteRoute) {
     const res = confirm('Are you sure you want to delete this route?')
     if (!res) return;
+    const single = await this.campsiteDataService.getRouteData(route);
     await this.campsiteDataService.removeRoute(route);
+    if (single) await this.campsiteDataService.removeEntryForSingle(single?.meta.id);
     delete this.changes[route.id];
     this.refresh();
   }

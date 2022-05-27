@@ -30,6 +30,7 @@ export class CampsiteEntriesAdminPageComponent implements OnInit {
   constructor(
     private campsiteAdminService: CampsiteAdminService,
     private campsiteDataService: CampsiteDataService,
+    private campsiteService: CampsiteService,
   ) { }
 
   ngOnInit(): void {
@@ -66,8 +67,25 @@ export class CampsiteEntriesAdminPageComponent implements OnInit {
   async test() {
     this.campsiteDataService.download(
       'export.campsite',
-      await this.campsiteDataService.exportAll()
+      await this.campsiteDataService.exportCampsite()
     );
+  }
+
+  addEntry() {
+    // const id = this.campsiteDataService.dataProvider.generateID();
+    // const template = this.campsiteService.templates.length > 0 ? this.campsiteService.templates[0] : undefined;
+    // console.log(template?.export())
+    // this.campsiteDataService.setEntryForSingle(id, {
+    //   template: template?.id || '',
+    //   meta: {
+    //     date_created: Date.now(),
+    //     enabled: true,
+    //     id: id,
+    //     linked_route: null as any,
+    //     title: 'New Entry ' + (this.entries.length + 1),
+    //   },
+    //   data: template?.export() || undefined
+    // })
   }
 
 }

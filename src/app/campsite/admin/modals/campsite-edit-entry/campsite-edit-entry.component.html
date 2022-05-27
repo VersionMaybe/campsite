@@ -14,7 +14,7 @@
         <app-campsite-table-col>
             <app-ci-text *ngIf="routeOptions.length === 0" prefix="/" [readonly]="true"
                 [value]="entry.meta.linked_route"></app-ci-text>
-            <app-ci-select *ngIf="routeOptions.length > 0" prefix="/" [options]="routeOptions"
+            <app-ci-select [disabled]="true" *ngIf="routeOptions.length > 0" prefix="/" [options]="routeOptions"
                 [(value)]="entry.meta.linked_route">
             </app-ci-select>
         </app-campsite-table-col>

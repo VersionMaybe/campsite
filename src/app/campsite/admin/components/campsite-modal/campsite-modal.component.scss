@@ -1,4 +1,4 @@
-@use "~easy-theme"as theme;
+@use "~easy-theme" as theme;
 
 .c-campsite-modal {
     display: flex;
@@ -11,15 +11,16 @@
     overflow: hidden;
     overflow-y: auto;
     z-index: 15;
-    backdrop-filter: blur(0.1rem);
-    transition: .2s ease;
+    background-color: theme.Color('cs-background-alt', .75);
+    transition: .1s ease;
 
     &:not(.show) {
         pointer-events: none;
         opacity: 0;
 
         .c-campsite-modal__wrapper {
-            transform: translateY(.5rem);
+            transform: scale(.9);
+            opacity: 0;
         }
     }
 

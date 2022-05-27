@@ -1,4 +1,4 @@
-@use "~easy-theme"as theme;
+@use "~easy-theme" as theme;
 @import '../campsite-input.scss';
 
 .ci-text {
@@ -14,6 +14,11 @@
     transition: .15s ease;
     position: relative;
 
+    &.multiline {
+        min-height: $size;
+        height: auto;
+    }
+
     &__prefix {
         padding: $spacing;
         opacity: .25;
@@ -24,6 +29,12 @@
         height: 100%;
         box-sizing: border-box;
         user-select: none;
+
+        .multiline & {
+            margin-bottom: auto;
+            border-bottom: 0.1rem solid theme.Text('cs-background', .3);
+            border-bottom-right-radius: .25rem;
+        }
     }
 
     &__suffix {
@@ -36,6 +47,13 @@
         height: 100%;
         box-sizing: border-box;
         user-select: none;
+
+        .multiline & {
+            margin-top: auto;
+            border-top: 0.1rem solid theme.Text('cs-background', .3);
+            border-top-left-radius: .25rem;
+        }
+
     }
 
 
@@ -54,6 +72,23 @@
         box-sizing: border-box;
     }
 
+    textarea {
+        padding: $spacing;
+        font-size: $font-size;
+        outline: none;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        border: none;
+        background: transparent;
+        color: inherit;
+        box-sizing: border-box;
+        min-height: 2.5rem;
+        resize: vertical;
+    }
+
     &:hover {
         border: 0.1rem solid theme.Color('cs-primary', .3);
     }
@@ -70,6 +105,8 @@
 
         input {
             cursor: not-allowed;
+            text-overflow: unset;
+            overflow: auto;
         }
     }
 

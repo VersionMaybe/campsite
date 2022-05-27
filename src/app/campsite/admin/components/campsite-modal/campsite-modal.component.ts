@@ -18,13 +18,16 @@ export class CampsiteModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.campsiteAdminService.listenForModals().subscribe((e) => {
-      this.show = !!e;
-      if (e) this.loadModal(e.component, e.data);
+      if (e) {
+        this.loadModal(e.component, e.data)
+      } else {
+        this.show = false;
+      }
 
       if (!e) {
         setTimeout(() => {
           this.vc.clear();
-        }, 500);
+        }, 300);
       }
     });
   }
@@ -36,6 +39,10 @@ export class CampsiteModalComponent implements OnInit {
     Object.keys(data).forEach((e) => {
       (comp.instance as any)[e] = data[e];
     });
+
+    setTimeout(() => {
+      this.show = true;
+    }, 50);
   }
 
 }

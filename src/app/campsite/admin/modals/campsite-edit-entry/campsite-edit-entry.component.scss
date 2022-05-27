@@ -6,4 +6,10 @@ app-ci-select {
 app-campsite-table {
     display: block;
     margin-bottom: .5rem;
+    z-index: 1;
+    position: relative;
+}
+
+app-block-render {
+    position: relative;
 }

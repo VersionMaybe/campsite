@@ -6,6 +6,7 @@ import { CampsiteTemplate, CampsiteEntryBlockTypes, CampsiteTemplateComponent } 
 import { CampsiteRouteType, ICampsiteRoute } from "../definitions/CampsiteRoute";
 import { ICampsiteEntry } from "../definitions/CampsiteEntry";
 import { ICampsiteExport } from "../definitions/CampsiteExport";
+import { Title } from "@angular/platform-browser";
 
 @Injectable({
     providedIn: 'root'
@@ -13,11 +14,11 @@ import { ICampsiteExport } from "../definitions/CampsiteExport";
 export class CampsiteDataService {
 
     dataProvider!: CampsiteDataProvider;
-
     preloadedData?: any;
 
     constructor(
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private title: Title
     ) { this.dataProvider = CampsiteModule.config.dataProvider; }
 
     public async getCurrentRouteData(component?: CampsiteTemplateComponent<any>) {
@@ -32,8 +33,14 @@ export class CampsiteDataService {
             data = await this.getRouteData(snapshot.data['campsiteData'], snapshot.params);
         }
 
-        if (component && data) this.hydrateRouteWithData(component, data);
+        this.setTitle(data?.meta.title);
+
+        if (component && data) this.hydrate(component, data);
         return data;
+    }
+
+    public setTitle(title: string | undefined) {
+        this.title.setTitle(title || 'Untitled');
     }
 
     public async getRouteData(route: ICampsiteRoute, params?: any) {
@@ -50,12 +57,12 @@ export class CampsiteDataService {
         this.preloadedData = data;
     }
 
-    public hydrateRouteWithData(component: CampsiteTemplateComponent<any>, data: ICampsiteEntry<any>) {
+    public hydrate(component: CampsiteTemplateComponent<any>, data: ICampsiteEntry<any>) {
         component.blocks = data.data;
         component.meta = data.meta;
     }
 
-    public satanisePath(path: string) {
+    public satanise(path: string) {
         return this.replaceAll(path, '/', '\\');
     }
 
@@ -63,24 +70,13 @@ export class CampsiteDataService {
         return string.replace(new RegExp(find, 'g'), replace);
     }
 
-    public getAllEntries(): Promise<ICampsiteEntry<any>[]> {
-        return this.dataProvider.getAllEntries();
+    // Routes
+    public getAllRoutes(): Promise<ICampsiteRoute[]> {
+        return this.dataProvider.getAllRoutes();
     }
 
     public async getDataForRoute<T extends CampsiteTemplate>(singleID: string): Promise<ICampsiteEntry<T> | undefined> {
         return await this.dataProvider.getDataForRoute(singleID);
-    }
-
-    public async getDataForSingle<T extends CampsiteTemplate>(singleID: string): Promise<ICampsiteEntry<T> | undefined> {
-        return await this.dataProvider.getDataForSingle(singleID);
-    }
-
-    public async setDataForSingle<T extends CampsiteTemplate>(singleID: string, data: ICampsiteEntry<T>) {
-        return await this.dataProvider.setDataForSingle(singleID, data);
-    }
-
-    public getAllRoutes(): Promise<ICampsiteRoute[]> {
-        return this.dataProvider.getAllRoutes();
     }
 
     public async setRoute(details: ICampsiteRoute) {
@@ -91,7 +87,26 @@ export class CampsiteDataService {
         return await this.dataProvider.removeRoute(details);
     }
 
-    public async exportAll() {
+    // Entries
+    public getAllEntries(): Promise<ICampsiteEntry<any>[]> {
+        return this.dataProvider.getAllEntries();
+    }
+
+    public async getEntryForSingle<T extends CampsiteTemplate>(singleID: string): Promise<ICampsiteEntry<T> | undefined> {
+        return await this.dataProvider.getEntryForSingle(singleID);
+    }
+
+    public async setEntryForSingle<T extends CampsiteTemplate>(singleID: string, data: ICampsiteEntry<T>) {
+        data.meta.date_last_updated = Date.now()
+        return await this.dataProvider.setEntryForSingle(singleID, data);
+    }
+
+    public async removeEntryForSingle(singleID: string) {
+        return await this.dataProvider.removeEntryForSingle(singleID);
+    }
+
+    // Config
+    public async exportCampsite() {
         const routes = await this.getAllRoutes();
         const entries = await this.getAllEntries();
         const campsiteObject: ICampsiteExport = {
@@ -103,12 +118,26 @@ export class CampsiteDataService {
             }
         };
 
+        return new Blob([JSON.stringify(campsiteObject, null, '\t')]);
+    }
+
+    public async importCampsite() {
+        const routes = await this.getAllRoutes();
+        const entries = await this.getAllEntries();
+        const campsiteObject: ICampsiteExport = {
+            meta: {
+                routes
+            },
+            data: {
+                entries
+            }
+        };
 
         return new Blob([JSON.stringify(campsiteObject, null, '\t')]);
     }
 
-    public async download(name: string, item: any) {
-        const blob = window.URL.createObjectURL(item);
+    public async download(name: string, object: Blob | MediaSource) {
+        const blob = window.URL.createObjectURL(object);
         const element = window.document.createElement('a');
         element.href = blob;
         element.download = name;

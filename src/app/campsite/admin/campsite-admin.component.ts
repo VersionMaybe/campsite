@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ComponentFactory, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { debounceTime, ReplaySubject, Subject, Subscription } from 'rxjs';
 import { IAdminItem } from './definitions/IAdminItem';
 import { CampsiteAdminService } from './services/campsite-admin.service';
@@ -23,10 +24,12 @@ export class CampsiteAdminComponent implements OnInit, OnDestroy, AfterViewInit 
   loadPageSub!: Subscription;
 
   constructor(
-    private campsiteAdminService: CampsiteAdminService
+    private campsiteAdminService: CampsiteAdminService,
+    private title: Title
   ) { }
 
   ngOnInit(): void {
+    this.title.setTitle('Campsite (Admin)')
     this.selectedItemSub = this.campsiteAdminService.getCurrentMenuItem().subscribe((e) => {
       if (this.selectedItem?.id !== e?.id || !this.selectedItem) this.onMenuChanged(e);
     });
@@ -43,6 +46,7 @@ export class CampsiteAdminComponent implements OnInit, OnDestroy, AfterViewInit 
 
   onMenuChanged(page: IAdminItem | undefined) {
     this.loadPage.next(page);
+    this.title.setTitle('Campsite (Admin)' + (page ? ` - ${page?.label}` : ''))
   }
 
   createMenuContent(page: IAdminItem | undefined) {

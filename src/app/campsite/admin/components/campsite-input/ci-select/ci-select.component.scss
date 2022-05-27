@@ -1,4 +1,4 @@
-@use "~easy-theme"as theme;
+@use "~easy-theme" as theme;
 @import '../campsite-input.scss';
 
 .ci-select {
@@ -65,7 +65,7 @@
         color: theme.Text('cs-background', 1);
         border-radius: $radius;
         transition: .15s ease;
-        z-index: 10;
+        z-index: 15;
         overflow: hidden;
         overflow-y: auto;
 
@@ -169,31 +169,9 @@
         .ci-select__list {
             pointer-events: none;
         }
+
+        .ci-select__icon {
+            opacity: .25;
+        }
     }
-
-    // &.style-transparent {
-    //     border: none;
-    //     background: transparent;
-    //     color: inherit;
-
-    //     input {
-    //         opacity: .8;
-    //     }
-
-    //     &:hover,
-    //     &:focus-within {
-    //         border: none;
-
-    //         input {
-    //             opacity: 1;
-    //         }
-    //     }
-
-    //     &.disabled {
-    //         border: none;
-    //         background-color: transparent;
-    //         opacity: .5;
-    //         cursor: not-allowed;
-    //     }
-    // }
 }

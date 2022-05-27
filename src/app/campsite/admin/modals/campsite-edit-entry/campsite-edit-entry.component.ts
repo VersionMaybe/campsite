@@ -53,18 +53,19 @@ export class CampsiteEditEntryComponent implements OnInit {
       const block: CampsiteBlock = new (Object.getPrototypeOf(template.blocks[e]).constructor);
       block.set(this.entry.data[e]);
       this.blocks.push(block);
-
     });
-
-    console.log(this.blocks);
   }
 
   save() {
-    Object.keys(this.entry.data).forEach((e, i) => {
-      this.entry.data[e] = this.blocks[i].export()
-    });
+    try {
+      Object.keys(this.entry.data).forEach((e, i) => {
+        this.entry.data[e] = this.blocks[i].export()
+      });
+    } catch {
+      console.log('Something went wrong saving details');
+    }
 
-    this.campsiteDataService.setDataForSingle(this.entry.meta.id, this.entry);
+    this.campsiteDataService.setEntryForSingle(this.entry.meta.id, this.entry);
     this.campsiteAdminService.closeModal();
   }
 

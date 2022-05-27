@@ -1,4 +1,4 @@
-@use "~easy-theme"as theme;
+@use "~easy-theme" as theme;
 
 $radius: .25rem;
 $transition: .25s cubic-bezier(0.4, 0.0, 0.2, 1);
@@ -23,8 +23,8 @@ $transition: .25s cubic-bezier(0.4, 0.0, 0.2, 1);
         border-bottom: 1px solid theme.Text('cs-background', .1);
     }
 
-    &:hover {
-        filter: drop-shadow(0 0rem .2rem rgba(0, 0, 0, 0.05));
-        z-index: 1;
-    }
+    // &:hover {
+    //     filter: drop-shadow(0 0rem .2rem rgba(0, 0, 0, 0.05));
+    //     z-index: 1;
+    // }
 }

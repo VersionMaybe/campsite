@@ -1,6 +1,12 @@
-<div class="c-block">
-    <span class="c-block__label">{{ block.name }}</span>
-    <div class="c-block__content">
-        <ng-template #vc></ng-template>
-    </div>
-</div>
+<app-campsite-table>
+    <app-campsite-table-row header>
+        <app-campsite-table-col>
+            # {{ block.name }}
+        </app-campsite-table-col>
+    </app-campsite-table-row>
+    <app-campsite-table-row>
+        <div class="c-block-content">
+            <ng-template #vc></ng-template>
+        </div>
+    </app-campsite-table-row>
+</app-campsite-table>

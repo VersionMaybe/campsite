@@ -5,7 +5,6 @@
         <app-campsite-table-col>Template</app-campsite-table-col>
         <app-campsite-table-col>Type</app-campsite-table-col>
         <app-campsite-table-col>Load Style</app-campsite-table-col>
-        <app-campsite-table-col></app-campsite-table-col>
     </app-campsite-table-row>
 
     <!-- Existing Routes -->
@@ -27,22 +26,16 @@
         <app-campsite-table-col>
             <app-ci-select [options]="loadOptions" [(value)]="route.waitForData" (valueChange)="changeMade(route.id)">
             </app-ci-select>
-        </app-campsite-table-col>
-        <app-campsite-table-col>
-            <button class="c-icon-button transparent" *ngIf="i !== 0" (click)="removeRoute(route)">
-                <span class="material-icons-round">delete</span>
-            </button>
+
+            <app-ci-icon-button value="delete" [disabled]="i === 0" (action)="removeRoute(route)"></app-ci-icon-button>
         </app-campsite-table-col>
     </app-campsite-table-row>
 
-    <ng-container #footer>
+    <ng-container footer>
         <span class="p-routing-actions">
-            <button class="c-icon-button" (click)="addRoute()">
-                <span class="material-icons-outlined">add</span>
-            </button>
-            <button class="c-icon-button primary" [disabled]="!hasChanges()" (click)="save()">
-                <span class="material-icons-outlined">save</span>
-            </button>
+            <app-ci-icon-button value="add" (action)="addRoute()"></app-ci-icon-button>
+
+            <app-ci-icon-button value="save" [disabled]="!hasChanges()" (action)="save()"></app-ci-icon-button>
         </span>
     </ng-container>
 </app-campsite-table>

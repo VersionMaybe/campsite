@@ -5,7 +5,6 @@
         <app-campsite-table-col>Route</app-campsite-table-col>
         <app-campsite-table-col>Status</app-campsite-table-col>
         <app-campsite-table-col>Last Update</app-campsite-table-col>
-        <app-campsite-table-col></app-campsite-table-col>
     </app-campsite-table-row>
 
     <!-- Existing Routes -->
@@ -26,17 +25,16 @@
             <app-ci-text [readonly]="true" look="transparent"
                 [value]="entry.meta.date_last_updated | date: 'dd/MM/yy h:mm a'">
             </app-ci-text>
-        </app-campsite-table-col>
-        <app-campsite-table-col>
-            <button class="c-icon-button transparent" (click)="editEntry(entry)">
-                <span class="material-icons-round">edit</span>
-            </button>
-            <button class="c-icon-button transparent" *ngIf="i !== 0" (click)="removeEntry(entry)">
-                <span class="material-icons-round">delete</span>
-            </button>
-            <button class="c-icon-button transparent" *ngIf="i === 0" (click)="test()">
-                <span class="material-icons-round">save</span>
-            </button>
+
+            <app-ci-icon-button value="edit" (action)="editEntry(entry)"></app-ci-icon-button>
+            <app-ci-icon-button value="delete" *ngIf="routeLinks[i].type !== 'Single'" (action)="removeEntry(entry)">
+            </app-ci-icon-button>
         </app-campsite-table-col>
     </app-campsite-table-row>
+
+    <ng-container footer>
+        <span class="p-routing-actions">
+            <app-ci-icon-button [disabled]="true" value="add" (action)="addEntry()"></app-ci-icon-button>
+        </span>
+    </ng-container>
 </app-campsite-table>

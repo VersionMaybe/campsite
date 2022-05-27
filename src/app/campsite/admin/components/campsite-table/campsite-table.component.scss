@@ -1,4 +1,4 @@
-@use "~easy-theme"as theme;
+@use "~easy-theme" as theme;
 
 $radius: .5rem;
 $transition: .25s cubic-bezier(0.4, 0.0, 0.2, 1);
@@ -13,6 +13,7 @@ $border-color: theme.Text('cs-background', .05);
     color: theme.Text('cs-background');
     filter: drop-shadow(0 .1rem .15rem rgba(0, 0, 0, 0.1));
     border-radius: .25rem;
+    border: 1px solid theme.Text('cs-background', .1);
 
     &__header {
         // color: theme.Text('cs-background-alt');
