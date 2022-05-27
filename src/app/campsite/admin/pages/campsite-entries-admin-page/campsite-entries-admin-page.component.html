@@ -34,6 +34,7 @@
 
     <ng-container footer>
         <span class="p-routing-actions">
+            <app-ci-icon-button value="add" (action)="importData()"></app-ci-icon-button>
             <app-ci-icon-button [disabled]="true" value="add" (action)="addEntry()"></app-ci-icon-button>
         </span>
     </ng-container>

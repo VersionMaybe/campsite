@@ -121,19 +121,15 @@ export class CampsiteDataService {
         return new Blob([JSON.stringify(campsiteObject, null, '\t')]);
     }
 
-    public async importCampsite() {
-        const routes = await this.getAllRoutes();
-        const entries = await this.getAllEntries();
-        const campsiteObject: ICampsiteExport = {
-            meta: {
-                routes
-            },
-            data: {
-                entries
-            }
-        };
-
-        return new Blob([JSON.stringify(campsiteObject, null, '\t')]);
+    public importCampsite(file: Blob) {
+        return new Promise<boolean>((res) => {
+            const reader = new FileReader();
+            reader.addEventListener("load", () => {
+                const data = JSON.parse(String(reader.result)) as ICampsiteExport;
+                console.log('Import this please', data);
+            }, false);
+            reader.readAsText(file);
+        })
     }
 
     public async download(name: string, object: Blob | MediaSource) {
@@ -144,5 +140,26 @@ export class CampsiteDataService {
         document.body.appendChild(element);
         element.click();
         document.body.removeChild(element);
+    }
+
+    public selectFile(type?: string): Promise<File[]> {
+        return new Promise((res) => {
+            console.log('Opening');
+            const element = window.document.createElement('input');
+            element.type = 'file';
+            element.multiple = false;
+            element.accept = type || '*';
+            document.body.appendChild(element);
+            element.click();
+            element.onchange = () => {
+                if (element.files && element.files.length > 0) {
+                    res(Array.from(element.files));
+                } else {
+                    res([]);
+                }
+
+                document.body.removeChild(element);
+            }
+        })
     }
 }

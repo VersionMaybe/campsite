@@ -36,6 +36,7 @@ export class AdminNavComponent implements OnInit, OnDestroy {
 
   select(item: IAdminItem) {
     this.campsiteAdminService.navigate(item);
+    this.campsiteAdminService.closeModal();
   }
 
 }

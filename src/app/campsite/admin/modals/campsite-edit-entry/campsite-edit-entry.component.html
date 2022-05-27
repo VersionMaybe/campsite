@@ -12,14 +12,13 @@
             <app-ci-text [(value)]="entry.meta.title"></app-ci-text>
         </app-campsite-table-col>
         <app-campsite-table-col>
-            <app-ci-text *ngIf="routeOptions.length === 0" prefix="/" [readonly]="true"
-                [value]="entry.meta.linked_route"></app-ci-text>
+            <app-ci-text [disabled]="true" *ngIf="routeOptions.length === 0" prefix="/"></app-ci-text>
             <app-ci-select [disabled]="true" *ngIf="routeOptions.length > 0" prefix="/" [options]="routeOptions"
-                [(value)]="entry.meta.linked_route">
+                [value]="entry.meta.linked_route">
             </app-ci-select>
         </app-campsite-table-col>
         <app-campsite-table-col>
-            <app-ci-select [disabled]="!route.path" [options]="statusOptions" [(value)]="entry.meta.enabled">
+            <app-ci-select [disabled]="true" [options]="statusOptions" [(value)]="entry.meta.enabled">
             </app-ci-select>
         </app-campsite-table-col>
         <app-campsite-table-col>

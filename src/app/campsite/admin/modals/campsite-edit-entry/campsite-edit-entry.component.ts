@@ -4,6 +4,7 @@ import { ICampsiteEntry } from 'src/app/campsite/core/definitions/CampsiteEntry'
 import { ICampsiteRoute } from 'src/app/campsite/core/definitions/CampsiteRoute';
 import { CampsiteDataService } from 'src/app/campsite/core/services/campsite-data.service';
 import { CampsiteService } from 'src/app/campsite/core/services/campsite.service';
+import { LandingPage } from 'src/app/campsite/example/pages/landing-page/landing-page.component';
 import { CampsiteSelectOption } from '../../components/campsite-input/ci-select/ci-select.component';
 import { CampsiteAdminService } from '../../services/campsite-admin.service';
 
@@ -50,7 +51,8 @@ export class CampsiteEditEntryComponent implements OnInit {
     const template = this.campsiteService.templates.find((x) => x.id === this.route.template);
     if (!template) return;
     Object.keys(template.blocks).forEach((e) => {
-      const block: CampsiteBlock = new (Object.getPrototypeOf(template.blocks[e]).constructor);
+      const construct = (Object.getPrototypeOf(template.blocks[e]).constructor);
+      const block: CampsiteBlock = (new construct).label(template.blocks[e].name);
       block.set(this.entry.data[e]);
       this.blocks.push(block);
     });

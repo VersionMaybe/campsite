@@ -7,7 +7,7 @@ export class LandingPage extends CampsiteTemplate {
   name = 'Landing Page';
   id = 'landingPage';
   blocks = {
-    heroQuote: new QuoteBlock('Hero Quote')
+    heroQuote: new QuoteBlock().label('Hero Text')
   }
   component = LandingPageComponent;
 }
@@ -18,5 +18,6 @@ export class LandingPage extends CampsiteTemplate {
   styleUrls: ['./landing-page.component.scss']
 })
 export class LandingPageComponent extends CampsiteTemplateComponent<LandingPage> implements OnInit {
-  ngOnInit(): void { }
+  ngOnInit(): void {
+  }
 }

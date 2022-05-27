@@ -88,4 +88,12 @@ export class CampsiteEntriesAdminPageComponent implements OnInit {
     // })
   }
 
+  async importData() {
+    const files = await this.campsiteDataService.selectFile('*.campsite');
+    console.log(files);
+    if (files.length > 0) {
+      this.campsiteDataService.importCampsite(files[0]);
+    }
+  }
+
 }

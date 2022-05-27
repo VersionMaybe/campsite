@@ -57,7 +57,6 @@ export class CampsiteService {
     ]);
 
     this.registerBlocks([
-      new QuoteBlock(),
       ...(CampsiteModule.config.register?.blocks || [])
     ]);
 

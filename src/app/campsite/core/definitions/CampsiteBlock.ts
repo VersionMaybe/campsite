@@ -27,12 +27,9 @@ export abstract class CampsiteBlock {
     abstract component: any;
     abstract fields: { [key: string]: CampsiteField };
 
-    constructor(name?: string) {
-        if (name) this.setName(name)
-    }
-
-    private setName(name: string) {
+    label(name: string) {
         this.name = name;
+        return this;
     }
 
     export() {
