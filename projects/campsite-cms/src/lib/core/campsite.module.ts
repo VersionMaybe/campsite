@@ -13,8 +13,6 @@ import { QuoteBlockModule } from './blocks/quote-block/quote-block.module';
   ]
 })
 export class CampsiteModule {
-  public static version = '0.0.2-a.2';
-
   static initialise(options: ICampsiteConfig): ModuleWithProviders<CampsiteModule> {
     options.adminExtensions?.unshift(
       {

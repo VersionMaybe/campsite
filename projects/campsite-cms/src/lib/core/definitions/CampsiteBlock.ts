@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { CampsiteField, CampsiteFieldType } from "./CampsiteFieldType";
+import { CampsiteField, CampsiteFieldType } from "./CampsiteField";
 import { CampsitePrimitive } from "./CampsitePrimitive";
 
 export type CampsiteBlockFieldsTypes<T extends CampsiteBlock['fields']> = { [P in keyof T]: CampsiteFieldType<T[P]> };

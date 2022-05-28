@@ -26,9 +26,16 @@
     "module": "es2020",
     "lib": [
       "es2020",
-      "dom"
+      "dom",
     ],
     "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "typeRoots": [
+      "../node_modules/@types"
+    ],
+    "types": [
+      "node"
+    ]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

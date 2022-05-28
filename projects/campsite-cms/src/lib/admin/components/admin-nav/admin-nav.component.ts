@@ -1,8 +1,8 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { CampsiteModule } from '../../../core/campsite.module';
 import { IAdminItem } from '../../definitions/IAdminItem';
 import { CampsiteAdminService } from '../../services/campsite-admin.service';
+const version = require('../../../../../package.json').version
 
 @Component({
   selector: 'app-admin-nav',
@@ -12,7 +12,7 @@ import { CampsiteAdminService } from '../../services/campsite-admin.service';
 export class AdminNavComponent implements OnInit, OnDestroy {
 
   @Input() closed = false;
-  version = CampsiteModule.version;
+  version = version;
 
   items: IAdminItem[] = [];
   selectedItem: IAdminItem | undefined;

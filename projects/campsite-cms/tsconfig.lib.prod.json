@@ -3,6 +3,12 @@
   "extends": "./tsconfig.lib.json",
   "compilerOptions": {
     "declarationMap": false,
+    "typeRoots": [
+      "../node_modules/@types"
+    ],
+    "types": [
+      "node"
+    ]
   },
   "angularCompilerOptions": {
     "compilationMode": "partial",

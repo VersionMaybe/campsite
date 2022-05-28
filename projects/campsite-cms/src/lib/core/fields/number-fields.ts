@@ -1,4 +1,4 @@
-import { CampsiteField } from "../definitions/CampsiteFieldType";
+import { CampsiteField } from "../definitions/CampsiteField";
 import { NumberPrimitive } from "../primitives/number-primitive";
 import { TextPrimitive } from "../primitives/text-primitive";
 

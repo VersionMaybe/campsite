@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { CampsiteBlock } from '../definitions/CampsiteBlock';
 import { CampsiteTemplate } from '../definitions/CampsiteTemplate';
-import { CampsiteField } from '../definitions/CampsiteFieldType';
+import { CampsiteField } from '../definitions/CampsiteField';
 import { ICampsiteRoute } from '../definitions/CampsiteRoute';
 import { ICampsiteLog } from '../definitions/CampsiteLog';
 import { NumberField } from '../fields/number-fields';

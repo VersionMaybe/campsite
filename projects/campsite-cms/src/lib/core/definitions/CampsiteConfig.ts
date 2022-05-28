@@ -2,7 +2,7 @@ import { IAdminItem } from "../../admin/definitions/IAdminItem";
 import { CampsiteBlock } from "./CampsiteBlock";
 import { CampsiteDataProvider } from "./CampsiteDataProvider";
 import { CampsiteTemplate } from "./CampsiteTemplate";
-import { CampsiteField } from "./CampsiteFieldType";
+import { CampsiteField } from "./CampsiteField";
 import { first, ReplaySubject } from "rxjs";
 
 export interface ICampsiteConfig {
