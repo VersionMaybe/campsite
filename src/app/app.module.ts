@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 // Imported
 import { CampsiteModule, FirebaseDataProvider } from 'campsite-cms';
 import { environment } from 'src/environments/environment';
+import { LandingPage } from './landing-page/landing-page.component';
+import { LandingPageModule } from './landing-page/landing-page.module';
 
 @NgModule({
   declarations: [
@@ -18,13 +20,13 @@ import { environment } from 'src/environments/environment';
       register: {
         templates: [
           // new GeneralPage(),
-          // new LandingPage(),
+          new LandingPage(),
         ]
       },
       adminExtensions: []
     }),
 
-    // LandingPageModule,
+    LandingPageModule,
     // GeneralPageModule,
   ],
   providers: [],
