@@ -29,18 +29,11 @@
       "dom",
     ],
     "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true,
-    "typeRoots": [
-      "../node_modules/@types"
-    ],
-    "types": [
-      "node"
-    ]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+  },
 }

@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 // Imported
-import { CampsiteModule, FirebaseDataProvider, GeneralPage, GeneralPageModule, LandingPage, LandingPageModule } from 'campsite-cms';
+import { CampsiteModule, FirebaseDataProvider } from 'campsite-cms';
 import { environment } from 'src/environments/environment';
 
 @NgModule({
@@ -17,15 +17,15 @@ import { environment } from 'src/environments/environment';
       dataProvider: new FirebaseDataProvider(environment.firebase),
       register: {
         templates: [
-          new GeneralPage(),
-          new LandingPage(),
+          // new GeneralPage(),
+          // new LandingPage(),
         ]
       },
       adminExtensions: []
     }),
 
-    LandingPageModule,
-    GeneralPageModule,
+    // LandingPageModule,
+    // GeneralPageModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

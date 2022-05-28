@@ -17,6 +17,7 @@ export interface ICampsiteConfig {
 }
 
 export class CampsiteConfig {
+    public static version = '0.0.2-a.5';
     public static pageModules?: any[]
     public static dataProvider?: CampsiteDataProvider;
     public static adminExtensions?: IAdminItem[];
