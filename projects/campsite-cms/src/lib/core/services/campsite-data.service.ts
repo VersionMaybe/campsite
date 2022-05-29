@@ -13,30 +13,36 @@ import { CampsiteConfig } from "../definitions/CampsiteConfig";
 })
 export class CampsiteDataService {
 
-    dataProvider!: CampsiteDataProvider;
+    get dataProvider(): CampsiteDataProvider {
+        return CampsiteConfig.dataProvider as any;
+    };
     preloadedData?: any;
 
     constructor(
         private route: ActivatedRoute,
         private title: Title
-    ) { this.dataProvider = CampsiteConfig.dataProvider as any; }
+    ) { }
 
     public async getCurrentRouteData(component?: CampsiteTemplateComponent<any>) {
         const snapshot = this.route.firstChild?.snapshot;
         if (!snapshot) return null;
-        let data: ICampsiteEntry<CampsiteTemplate> | undefined = undefined;
-
-        if (this.preloadedData) {
-            data = this.preloadedData;
-            this.preloadedData = undefined;
-        } else {
-            data = await this.getRouteData(snapshot.data['campsiteData'], snapshot.params);
-        }
-
-        this.setTitle(data?.meta.title);
-
-        if (component && data) this.hydrate(component, data);
+        const data = snapshot.data['campsiteEntryData'] as ICampsiteEntry<CampsiteTemplate> | undefined;
+        console.log('Resolved', data)
         return data;
+
+        // let data: ICampsiteEntry<CampsiteTemplate> | undefined = undefined;
+
+        // if (this.preloadedData) {
+        //     data = this.preloadedData;
+        //     this.preloadedData = undefined;
+        // } else {
+        //     data = await this.getRouteData(snapshot.data['campsiteData'], snapshot.params);
+        // }
+
+        // this.setTitle(data?.meta.title);
+
+        // if (component && data) this.hydrate(component, data);
+        // return data;
     }
 
     public setTitle(title: string | undefined) {

@@ -13,6 +13,7 @@ import { ReplaySubject } from 'rxjs';
 import { CampsiteGuard } from '../guards/campsite.guard';
 import { CampsiteSimpleGuard } from '../guards/campsite-simple.guard';
 import { CampsiteConfig } from '../definitions/CampsiteConfig';
+import { CampsiteDataResolver } from '../resolvers/campsite.resolver';
 
 @Injectable({
   providedIn: 'root'
@@ -101,7 +102,10 @@ export class CampsiteService {
       data: {
         campsiteData: route
       },
-      canActivate: [CampsiteSimpleGuard]
+      canActivate: [CampsiteSimpleGuard],
+      resolve: {
+        campsiteEntryData: CampsiteDataResolver
+      }
     });
   }
 }
