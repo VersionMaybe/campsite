@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Inject, Injectable, PLATFORM_ID, Renderer2 } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { CampsiteDataProvider } from "../definitions/CampsiteDataProvider";
 import { CampsiteTemplate, CampsiteEntryBlockTypes, CampsiteTemplateComponent } from "../definitions/CampsiteTemplate";
@@ -7,12 +7,15 @@ import { ICampsiteEntry, ICampsiteEntryMeta } from "../definitions/CampsiteEntry
 import { ICampsiteExport } from "../definitions/CampsiteExport";
 import { Title } from "@angular/platform-browser";
 import { CampsiteConfig } from "../definitions/CampsiteConfig";
+import { EventReplayer } from 'preboot';
+import { isPlatformBrowser } from "@angular/common";
 
 @Injectable({
     providedIn: 'root'
 })
 export class CampsiteDataService {
 
+    private replayed = false;
     get dataProvider(): CampsiteDataProvider {
         return CampsiteConfig.dataProvider as any;
     };
@@ -20,7 +23,9 @@ export class CampsiteDataService {
 
     constructor(
         private route: ActivatedRoute,
-        private title: Title
+        private title: Title,
+        private replayer: EventReplayer,
+        @Inject(PLATFORM_ID) private platformId: Object,
     ) { }
 
     public async getCurrentRouteData(component?: CampsiteTemplateComponent<any>) {
@@ -28,6 +33,12 @@ export class CampsiteDataService {
         if (!snapshot) return null;
         const data = snapshot.data['campsiteEntryData'] as ICampsiteEntry<CampsiteTemplate> | undefined;
         if (data) this.setMeta(data.meta);
+        if (!this.replayed && isPlatformBrowser(this.platformId)) {
+            this.replayer.replayAll();
+            setTimeout(() => {
+                document.querySelector('app-root')?.classList.toggle('isBrowser', true);
+            }, 1);
+        };
         return data;
     }
 

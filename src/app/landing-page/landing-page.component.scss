@@ -1,9 +1,26 @@
-@use "~/node_modules/campsite-cms/index.scss" as campsite;
+@use "~/node_modules/campsite-cms"as campsite;
+
+
+
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+        transform: scale(.5);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
 
 p {
     color: red;
+    font-size: 3rem;
+    transform-origin: 50% 50%;
 
-    @include campsite.IsBrowser() {
-        color: blue;
+    @include campsite.PlayOnce {
+        animation: 1s .5s ease fade;
     }
 }

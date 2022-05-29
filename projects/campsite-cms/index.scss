@@ -1,19 +1,23 @@
-@mixin IsServer {
-    :host-context(.isServer) & {
-        @content;
-    }
-}
-
 @mixin IsBrowser {
     :host-context(.isBrowser) & {
         @content;
     }
 }
 
-@mixin PlayOnce {
-    @content;
-
+@mixin IsReady {
     :host-context(.isBrowser) & {
-        animation: none;
+        @content;
+    }
+}
+
+@mixin PlayOnce {
+    & {
+        @content;
+        animation-play-state: paused;
+        animation-fill-mode: backwards;
+    }
+
+    @include IsReady {
+        animation-play-state: running;
     }
 }
