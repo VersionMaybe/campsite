@@ -1,6 +1,6 @@
 {
   "name": "campsite-cms",
-  "version": "0.0.2-a.5",
+  "version": "0.0.3-a.5",
   "peerDependencies": {
     "@angular/animations": "~13.3.0",
     "@angular/common": "~13.3.0",

@@ -1,6 +1,12 @@
 import { CampsiteTemplate, CampsiteEntryBlockTypes } from "./CampsiteTemplate";
 import { CampsiteRouteType, ICampsiteRoute } from "./CampsiteRoute";
 import { ICampsiteEntry } from "./CampsiteEntry";
+import { Route, Routes } from "@angular/router";
+import { CampsiteDataResolver } from "../resolvers/campsite.resolver";
+import { CampsiteSimpleGuard } from "../guards/campsite-simple.guard";
+import { InjectionToken } from "@angular/core";
+
+export const PRELOADED_ROUTES = new InjectionToken<Route[]>('CampsitePreloadedRoutes')
 
 export abstract class CampsiteDataProvider {
 
@@ -14,6 +20,34 @@ export abstract class CampsiteDataProvider {
             )
         }
         return autoId;
+    }
+
+    public async preloadRoutes(templates: CampsiteTemplate[]) {
+        const routes = await this.getAllRoutes();
+        const configRoutes: Routes = [];
+
+        routes.forEach((e) => {
+            const component = templates.find((x) => x.id === e.template);
+
+            configRoutes.push({
+                path: e.path,
+                component: component?.component,
+                data: {
+                    campsiteData: e
+                },
+                canActivate: [CampsiteSimpleGuard],
+                resolve: {
+                    campsiteEntryData: CampsiteDataResolver
+                }
+            })
+        })
+
+        return [
+            ...configRoutes,
+            { path: 'admin', loadChildren: () => import('../../admin/campsite-admin.module').then(m => m.CampsiteAdminModule) },
+            { path: '**', redirectTo: '404' },
+            { path: '**', redirectTo: '' }
+        ]
     }
 
     // Routes

@@ -1,0 +1,19 @@
+@mixin IsServer {
+    :host-context(.isServer) & {
+        @content;
+    }
+}
+
+@mixin IsBrowser {
+    :host-context(.isBrowser) & {
+        @content;
+    }
+}
+
+@mixin PlayOnce {
+    @content;
+
+    :host-context(.isBrowser) & {
+        animation: none;
+    }
+}

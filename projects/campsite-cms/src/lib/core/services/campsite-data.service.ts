@@ -3,7 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 import { CampsiteDataProvider } from "../definitions/CampsiteDataProvider";
 import { CampsiteTemplate, CampsiteEntryBlockTypes, CampsiteTemplateComponent } from "../definitions/CampsiteTemplate";
 import { CampsiteRouteType, ICampsiteRoute } from "../definitions/CampsiteRoute";
-import { ICampsiteEntry } from "../definitions/CampsiteEntry";
+import { ICampsiteEntry, ICampsiteEntryMeta } from "../definitions/CampsiteEntry";
 import { ICampsiteExport } from "../definitions/CampsiteExport";
 import { Title } from "@angular/platform-browser";
 import { CampsiteConfig } from "../definitions/CampsiteConfig";
@@ -27,26 +27,12 @@ export class CampsiteDataService {
         const snapshot = this.route.firstChild?.snapshot;
         if (!snapshot) return null;
         const data = snapshot.data['campsiteEntryData'] as ICampsiteEntry<CampsiteTemplate> | undefined;
-        console.log('Resolved', data)
+        if (data) this.setMeta(data.meta);
         return data;
-
-        // let data: ICampsiteEntry<CampsiteTemplate> | undefined = undefined;
-
-        // if (this.preloadedData) {
-        //     data = this.preloadedData;
-        //     this.preloadedData = undefined;
-        // } else {
-        //     data = await this.getRouteData(snapshot.data['campsiteData'], snapshot.params);
-        // }
-
-        // this.setTitle(data?.meta.title);
-
-        // if (component && data) this.hydrate(component, data);
-        // return data;
     }
 
-    public setTitle(title: string | undefined) {
-        this.title.setTitle(title || 'Untitled');
+    public setMeta(meta: ICampsiteEntryMeta) {
+        this.title.setTitle(meta.title);
     }
 
     public async getRouteData(route: ICampsiteRoute, params?: any) {

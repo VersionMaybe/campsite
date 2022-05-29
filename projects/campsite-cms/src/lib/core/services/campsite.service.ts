@@ -10,10 +10,8 @@ import { ParagraphField } from '../fields/paragraph-field';
 import { UrlField } from '../fields/url-field';
 import { CampsiteDataService } from './campsite-data.service';
 import { ReplaySubject } from 'rxjs';
-import { CampsiteGuard } from '../guards/campsite.guard';
 import { CampsiteSimpleGuard } from '../guards/campsite-simple.guard';
 import { CampsiteConfig } from '../definitions/CampsiteConfig';
-import { CampsiteDataResolver } from '../resolvers/campsite.resolver';
 
 @Injectable({
   providedIn: 'root'
@@ -43,11 +41,6 @@ export class CampsiteService {
   }
 
   public async initialise() {
-    console.log('Initialising...');
-    this.router.config.push({
-      path: '**', data: { campsiteHijacker: true }, canActivate: [CampsiteGuard], canActivateChild: [CampsiteGuard], children: []
-    });
-
     this.registerFields([
       new NumberField(),
       new ParagraphField(),
@@ -60,15 +53,7 @@ export class CampsiteService {
     ]);
 
     this.registerTemplates([...(CampsiteConfig.register?.templates || [])]);
-
-    await this.syncRoutes();
-    this.router.config.splice(this.router.config.findIndex((x) => x.data?.['campsiteHijacker']), 1);
-    this.router.config.push({ path: 'admin', loadChildren: () => import('../../admin/campsite-admin.module').then(m => m.CampsiteAdminModule) });
-    // If we don't have the page then try 404. and if no 4040 then back to the homepage.
-    this.router.config.push({ path: '**', redirectTo: '404' });
-    this.router.config.push({ path: '**', redirectTo: '' });
     CampsiteConfig.initialised.next(true);
-    console.log('Done!', this.router.config);
   }
 
   public async syncRoutes() {
@@ -102,10 +87,7 @@ export class CampsiteService {
       data: {
         campsiteData: route
       },
-      canActivate: [CampsiteSimpleGuard],
-      resolve: {
-        campsiteEntryData: CampsiteDataResolver
-      }
+      canActivate: [CampsiteSimpleGuard]
     });
   }
 }

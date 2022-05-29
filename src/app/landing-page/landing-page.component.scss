@@ -1,0 +1,9 @@
+@use "~/node_modules/campsite-cms/index.scss" as campsite;
+
+p {
+    color: red;
+
+    @include campsite.IsBrowser() {
+        color: blue;
+    }
+}

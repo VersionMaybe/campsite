@@ -17,7 +17,7 @@ export interface ICampsiteConfig {
 }
 
 export class CampsiteConfig {
-    public static version = '0.0.2-a.5';
+    public static version = '0.0.3-a.3';
     public static pageModules?: any[]
     public static dataProvider?: CampsiteDataProvider;
     public static adminExtensions?: IAdminItem[];
@@ -35,7 +35,6 @@ export class CampsiteConfig {
 
     public static initialise(options: ICampsiteConfig) {
         Object.keys(options).forEach((key) => {
-            console.log(key, options[key as keyof ICampsiteConfig] as any)
             CampsiteConfig[key as keyof typeof CampsiteConfig] = options[key as keyof ICampsiteConfig] as any;
         })
     }

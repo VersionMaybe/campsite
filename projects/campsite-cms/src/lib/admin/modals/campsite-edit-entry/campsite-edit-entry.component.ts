@@ -62,9 +62,7 @@ export class CampsiteEditEntryComponent implements OnInit {
       Object.keys(this.entry.data).forEach((e, i) => {
         this.entry.data[e] = this.blocks[i].export()
       });
-    } catch {
-      console.log('Something went wrong saving details');
-    }
+    } catch { }
 
     this.campsiteDataService.setEntryForSingle(this.entry.meta.id, this.entry);
     this.campsiteAdminService.closeModal();

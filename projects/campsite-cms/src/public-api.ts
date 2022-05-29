@@ -12,6 +12,7 @@ export * from './lib/core/definitions/CampsiteBlock';
 export * from './lib/core/definitions/CampsiteField';
 export * from './lib/core/definitions/CampsiteConfig';
 export * from './lib/core/definitions/CampsitePrimitive';
+export * from './lib/core/definitions/CampsiteRoute';
 export * from './lib/core/definitions/CampsiteTemplate';
 // Core - Providers
 export * from './lib/core/definitions/CampsiteDataProvider';

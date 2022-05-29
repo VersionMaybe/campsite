@@ -99,8 +99,6 @@ export class CampsiteRoutingAdminPageComponent implements OnInit {
       },
       data: template.export()
     })
-
-    console.log('Route Created');
   }
 
   async save() {
@@ -137,7 +135,6 @@ export class CampsiteRoutingAdminPageComponent implements OnInit {
     entry.data = this.entryTypes.find((x) => x.id === linkedEntry.template)?.export();
     await this.campsiteDataService.setEntryForSingle(entry.meta.id, entry);
     await this.campsiteDataService.setRoute(linkedEntry);
-    console.log('Done !');
   }
 
   hasChanges(route?: string) {

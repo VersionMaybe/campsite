@@ -1,6 +1,5 @@
 import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
 import { CampsiteService } from './services/campsite.service';
-import { CampsiteGuard } from './guards/campsite.guard';
 import { CampsiteConfig, ICampsiteConfig } from './definitions/CampsiteConfig';
 import { CampsiteSimpleGuard } from './guards/campsite-simple.guard';
 import { CampsiteRoutingAdminPageComponent } from '../admin/pages/campsite-routing-admin-page/campsite-routing-admin-page.component';
@@ -51,7 +50,6 @@ export class CampsiteModule {
       ngModule: CampsiteModule,
 
       providers: [
-        CampsiteGuard,
         CampsiteSimpleGuard,
         CampsiteService,
         {
