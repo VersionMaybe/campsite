@@ -7,7 +7,6 @@ import { ICampsiteEntry, ICampsiteEntryMeta } from "../definitions/CampsiteEntry
 import { ICampsiteExport } from "../definitions/CampsiteExport";
 import { Title } from "@angular/platform-browser";
 import { CampsiteConfig } from "../definitions/CampsiteConfig";
-import { EventReplayer } from 'preboot';
 import { isPlatformBrowser } from "@angular/common";
 
 @Injectable({
@@ -24,7 +23,6 @@ export class CampsiteDataService {
     constructor(
         private route: ActivatedRoute,
         private title: Title,
-        private replayer: EventReplayer,
         @Inject(PLATFORM_ID) private platformId: Object,
     ) { }
 
@@ -34,11 +32,12 @@ export class CampsiteDataService {
         const data = snapshot.data['campsiteEntryData'] as ICampsiteEntry<CampsiteTemplate> | undefined;
         if (data) this.setMeta(data.meta);
         if (!this.replayed && isPlatformBrowser(this.platformId)) {
-            this.replayer.replayAll();
             setTimeout(() => {
                 document.querySelector('app-root')?.classList.toggle('isBrowser', true);
-            }, 1);
+            });
+            this.replayed = true;
         };
+        if (component && data) this.hydrate(component, data);
         return data;
     }
 

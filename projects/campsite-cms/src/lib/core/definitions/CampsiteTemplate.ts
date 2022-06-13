@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { CampsiteDataService } from "../services/campsite-data.service";
 import { CampsiteBlock, CampsiteBlockFieldsTypes } from "./CampsiteBlock";
 import { ICampsiteEntryMeta } from "./CampsiteEntry";
@@ -13,13 +13,17 @@ export interface ICampsiteTemplate<T extends CampsiteTemplate> {
 }
 
 @Component({ template: '' })
-export abstract class CampsiteTemplateComponent<T extends CampsiteTemplate> {
+export abstract class CampsiteTemplateComponent<T extends CampsiteTemplate> implements OnInit {
     meta!: ICampsiteEntryMeta;
     blocks!: CampsiteEntryBlockTypes<T>;
 
     constructor(
         private campsiteDataService: CampsiteDataService
-    ) { this.campsiteDataService.getCurrentRouteData(this); }
+    ) { }
+
+    ngOnInit() {
+        this.campsiteDataService.getCurrentRouteData(this);
+    }
 }
 
 export abstract class CampsiteTemplate {

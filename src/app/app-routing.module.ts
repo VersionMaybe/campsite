@@ -1,7 +1,5 @@
-import { Inject, NgModule } from '@angular/core';
-import { Router, RouterModule, Routes } from '@angular/router';
-import { ICampsiteRoute, CampsiteConfig, PRELOADED_ROUTES } from 'campsite-cms';
-import { LandingPageComponent } from './landing-page/landing-page.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [];
 
@@ -12,7 +10,5 @@ const routes: Routes = [];
   exports: [RouterModule]
 })
 export class AppRoutingModule {
-  constructor(@Inject(PRELOADED_ROUTES) private dynamicRoutes: Routes, private router: Router) {
-    this.router.resetConfig(dynamicRoutes);
-  }
+  constructor() { }
 }

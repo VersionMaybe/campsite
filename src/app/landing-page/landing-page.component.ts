@@ -15,7 +15,5 @@ export class LandingPage extends CampsiteTemplate {
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.scss']
 })
-export class LandingPageComponent extends CampsiteTemplateComponent<LandingPage> implements OnInit {
-  ngOnInit(): void {
-  }
+export class LandingPageComponent extends CampsiteTemplateComponent<LandingPage> {
 }

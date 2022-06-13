@@ -1,6 +1,6 @@
 {
   "name": "campsite-cms",
-  "version": "0.0.4-a.2",
+  "version": "0.0.4-a.8",
   "peerDependencies": {
     "@angular/animations": "~13.3.0",
     "@angular/common": "~13.3.0",
@@ -14,7 +14,6 @@
     "@angular/router": "~13.3.0",
     "@nguniversal/express-engine": "^13.1.0",
     "easy-theme": "^1.0.1",
-    "preboot": "^8.0.0",
     "express": "^4.15.2",
     "firebase": "^9.8.1",
     "material-icons": "^1.10.11",
