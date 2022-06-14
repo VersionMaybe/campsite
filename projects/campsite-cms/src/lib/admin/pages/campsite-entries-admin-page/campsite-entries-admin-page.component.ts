@@ -39,7 +39,9 @@ export class CampsiteEntriesAdminPageComponent implements OnInit {
   async refresh() {
     this.routeLinks = {};
     const routes = await this.campsiteDataService.getAllRoutes();
-    this.entries = await this.campsiteDataService.getAllEntries();
+    this.entries = await (await this.campsiteDataService.getAllEntries()).sort((a, b) => {
+      return (b.meta.date_last_updated || b.meta.date_created) - (a.meta.date_last_updated || a.meta.date_created);
+    });
 
     this.entries.forEach((entry, i) => {
       const route = routes.find((x) => x.id === entry.meta.linked_route);

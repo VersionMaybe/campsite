@@ -31,6 +31,7 @@ export class CampsiteEditEntryComponent implements OnInit {
     }
   ];
   blocks: CampsiteBlock[] = [];
+  template: any;
 
   constructor(
     private campsiteDataService: CampsiteDataService,
@@ -49,6 +50,7 @@ export class CampsiteEditEntryComponent implements OnInit {
 
     const template = this.campsiteService.templates.find((x) => x.id === this.route.template);
     if (!template) return;
+    this.template = template;
     Object.keys(template.blocks).forEach((e) => {
       const construct = (Object.getPrototypeOf(template.blocks[e]).constructor);
       const block: CampsiteBlock = (new construct).label(template.blocks[e].name);
@@ -58,11 +60,15 @@ export class CampsiteEditEntryComponent implements OnInit {
   }
 
   save() {
+    console.log(this.entry.data)
     try {
-      Object.keys(this.entry.data).forEach((e, i) => {
-        this.entry.data[e] = this.blocks[i].export()
+      Object.keys(this.template.blocks).forEach((e, i) => {
+        console.log(e, i, this.blocks[i].export());
+        this.entry.data[e] = this.blocks[i].export();
       });
     } catch { }
+
+    console.log(this.blocks, this.entry);
 
     this.campsiteDataService.setEntryForSingle(this.entry.meta.id, this.entry);
     this.campsiteAdminService.closeModal();

@@ -34,3 +34,10 @@ export * from './lib/core/primitives/text-primitive';
 // export * from './lib/core/fields/paragraph-field'
 // export * from './lib/core/fields/url-field'
 // In-Built - Blocks
+
+// Components
+export * from './lib/admin/components/campsite-table/campsite-table.module';
+export * from './lib/admin/components/campsite-table/campsite-table.component';
+export * from './lib/admin/components/campsite-table-col/campsite-table-col.component';
+export * from './lib/admin/components/campsite-table-row/campsite-table-row.component';
+export * from './lib/admin/components/campsite-table-row/campsite-table-row.component';
