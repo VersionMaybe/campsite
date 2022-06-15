@@ -12,15 +12,15 @@ export abstract class CampsitePrimitive<T, Settings extends { [key: string]: Cam
         if (settings) this.settings = settings;
     }
 
-    transform(value: T): T {
+    async transform(value: T): Promise<T> {
         return value;
     }
 
-    set(value: T): string | null {
+    async set(value: T): Promise<string | null> {
         try {
             const error = this.validate(value);
             if (!!error) return error;
-            this.value = JSON.parse(JSON.stringify(this.transform(value)));
+            this.value = JSON.parse(JSON.stringify(await this.transform(value)));
             return null;
         } catch (e) {
             return null;

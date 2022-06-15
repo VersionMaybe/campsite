@@ -27,6 +27,6 @@
     </app-campsite-table-row>
 </app-campsite-table>
 
-<app-block-render *ngFor="let block of blocks" [block]="block"></app-block-render>
+<app-block-render *ngFor="let block of blocks; trackBy: trackBlock" [block]="block"></app-block-render>
 
 <button (click)="save()">Save</button>

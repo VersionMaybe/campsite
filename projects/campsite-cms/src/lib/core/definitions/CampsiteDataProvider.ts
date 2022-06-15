@@ -63,4 +63,6 @@ export abstract class CampsiteDataProvider {
     public abstract getEntryForSingle<T extends CampsiteTemplate>(path: string): Promise<ICampsiteEntry<T> | undefined>;
     public abstract setEntryForSingle<T extends CampsiteTemplate>(path: string, data: ICampsiteEntry<T>): Promise<boolean>;
     public abstract removeEntryForSingle(path: string): Promise<boolean>;
+
+    public abstract uploadFile(file: File): Promise<string>;
 }

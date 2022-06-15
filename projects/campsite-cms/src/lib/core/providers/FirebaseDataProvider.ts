@@ -2,6 +2,7 @@ import { CampsiteDataProvider } from "../definitions/CampsiteDataProvider";
 import { ICampsiteRoute } from "../definitions/CampsiteRoute";
 import { initializeApp, FirebaseOptions, FirebaseApp } from "firebase/app";
 import { getFirestore, Firestore, getDoc, doc, setDoc, collection, getDocs, deleteDoc, query, where } from "firebase/firestore";
+import { getStorage, FirebaseStorage, ref, uploadBytes, getDownloadURL, getMetadata } from "firebase/storage";
 import { ICampsiteEntry } from "../definitions/CampsiteEntry";
 
 
@@ -9,11 +10,13 @@ export class FirebaseDataProvider extends CampsiteDataProvider {
 
     private app: FirebaseApp;
     private firestore: Firestore;
+    private storage: FirebaseStorage;
 
     constructor(options: FirebaseOptions) {
         super();
         this.app = initializeApp(options);
         this.firestore = getFirestore();
+        this.storage = getStorage();
     }
 
     private satanisePath(path: string) {
@@ -92,5 +95,17 @@ export class FirebaseDataProvider extends CampsiteDataProvider {
     public async getAllEntries() {
         const singles = await this.getAllSingles();
         return [...singles];
+    }
+
+    public async uploadFile(file: File) {
+        const storageRef = ref(this.storage, `campsite/file_${file.name}`);
+        try {
+            const exists = await getDownloadURL(storageRef);
+            if (exists) return exists;
+        } catch { }
+
+        const task = await uploadBytes(storageRef, file);
+
+        return await getDownloadURL(storageRef);
     }
 }

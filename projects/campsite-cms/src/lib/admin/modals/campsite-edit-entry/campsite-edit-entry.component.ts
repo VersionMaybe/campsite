@@ -74,4 +74,8 @@ export class CampsiteEditEntryComponent implements OnInit {
     this.campsiteAdminService.closeModal();
   }
 
+  trackBlock(index: number, item: CampsiteBlock) {
+    return item.id;
+  }
+
 }

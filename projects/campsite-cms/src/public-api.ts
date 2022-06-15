@@ -36,6 +36,8 @@ export * from './lib/core/primitives/text-primitive';
 // In-Built - Blocks
 
 // Components
+export * from './lib/admin/components/block-render/block-render.module';
+export * from './lib/admin/components/block-render/block-render.component';
 export * from './lib/admin/components/campsite-table/campsite-table.module';
 export * from './lib/admin/components/campsite-table/campsite-table.component';
 export * from './lib/admin/components/campsite-table-col/campsite-table-col.component';
