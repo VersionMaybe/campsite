@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { first, lastValueFrom } from 'rxjs';
+import { CampsiteAdminService } from '../../services/campsite-admin.service';
 
 @Component({
   selector: 'app-campsite-page-header',
@@ -8,11 +10,16 @@ import { Component, Input, OnInit } from '@angular/core';
 export class CampsitePageHeaderComponent implements OnInit {
 
   @Input() title: any = '';
+  @Input() loading = false;
   @Input() showCloseModal = false;
 
-  constructor() { }
+  constructor(
+    private campsiteAdminService: CampsiteAdminService
+  ) { }
 
   ngOnInit(): void { }
 
-  // this.campsiteAdminService.getCurrentMenuItem().pipe(first()).toPromise().then((e) => this.title = e?.label)
+  closeModal() {
+    this.campsiteAdminService.closeModal();
+  }
 }

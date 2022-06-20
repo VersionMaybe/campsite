@@ -7,9 +7,8 @@
     left: 0;
     top: 0;
     width: 100%;
-    height: 100%;
+    bottom: 1rem;
     overflow: hidden;
-    overflow-y: auto;
     z-index: 15;
     background-color: theme.Color('cs-background-alt', .75);
     transition: .1s ease;
@@ -19,19 +18,20 @@
         opacity: 0;
 
         .c-campsite-modal__wrapper {
-            transform: scale(.9);
+            transform: translateY(.75rem);
             opacity: 0;
         }
     }
 
     &__wrapper {
-        margin: 1.5rem 1rem;
         padding: 1rem;
+        padding-top: 0.5rem;
         background-color: theme.Color('cs-background');
         color: theme.Text('cs-background');
         border-radius: .25rem;
         filter: drop-shadow(0 0.1rem 0.15rem rgba(0, 0, 0, 0.1));
         height: 100%;
-        transition: .2s ease;
+        transition: .25s ease;
+        overflow-y: auto;
     }
 }

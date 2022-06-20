@@ -15,8 +15,17 @@
     transition: .2s ease;
     margin: .25rem;
 
+    &.hasLabel {
+        width: auto;
+    }
+
     span {
         font-size: 1.2rem;
+    }
+
+    &__label {
+        font-size: 1.1em !important;
+        margin-right: .3rem;
     }
 
     &:hover {

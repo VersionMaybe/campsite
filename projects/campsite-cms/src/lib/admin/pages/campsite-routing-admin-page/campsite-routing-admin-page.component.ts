@@ -13,6 +13,7 @@ import { CampsiteConfig } from '../../../core/definitions/CampsiteConfig';
 })
 export class CampsiteRoutingAdminPageComponent implements OnInit {
 
+  loading = true;
   routes: ICampsiteRoute[] = [];
   entryTypes: CampsiteTemplate[] = [];
   routeTypes: CampsiteRouteType[] = Array.from(Object.values(CampsiteRouteType));
@@ -33,8 +34,13 @@ export class CampsiteRoutingAdminPageComponent implements OnInit {
   }
 
   async refresh() {
+    this.loading = true;
     await CampsiteConfig.waitForInitialisation();
-    this.routes = await this.campsiteDataService.getAllRoutes();
+    this.routes = await (await this.campsiteDataService.getAllRoutes()).sort((a, b) => {
+      if (a.date_created < b.date_created) return -1;
+      if (a.date_created > b.date_created) return 1;
+      return 0
+    });
     this.entryTypes = await this.campsiteService.templates;
 
     this.typeOptions = this.routeTypes.map((x) => {
@@ -59,7 +65,7 @@ export class CampsiteRoutingAdminPageComponent implements OnInit {
         value: x.id,
       }
     });
-
+    this.loading = false;
   }
 
   async addRoute() {
@@ -78,6 +84,8 @@ export class CampsiteRoutingAdminPageComponent implements OnInit {
 
     this.routes.push({
       path: '',
+      title: '',
+      date_created: Date.now(),
       template: template.id,
       type: CampsiteRouteType.Single,
       id: routeID,
@@ -95,7 +103,7 @@ export class CampsiteRoutingAdminPageComponent implements OnInit {
         enabled: true,
         id: entryID,
         linked_route: routeID,
-        title: 'Untitled Entry',
+        title: '',
       },
       data: template.export()
     })

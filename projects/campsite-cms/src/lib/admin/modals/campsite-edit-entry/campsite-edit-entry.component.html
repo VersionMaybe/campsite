@@ -1,4 +1,5 @@
-<app-campsite-page-header title="Edit Entry" [showCloseModal]="true"></app-campsite-page-header>
+<app-campsite-page-header title="Edit Entry" [showCloseModal]="true" [loading]="loading">
+</app-campsite-page-header>
 <app-campsite-table>
     <app-campsite-table-row header>
         <app-campsite-table-col>Title</app-campsite-table-col>
@@ -13,6 +14,7 @@
         </app-campsite-table-col>
         <app-campsite-table-col>
             <app-ci-text [disabled]="true" *ngIf="routeOptions.length === 0" prefix="/"></app-ci-text>
+            <app-ci-text [disabled]="true" *ngIf="routeOptions.length === 0" prefix="/"></app-ci-text>
             <app-ci-select [disabled]="true" *ngIf="routeOptions.length > 0" prefix="/" [options]="routeOptions"
                 [value]="entry.meta.linked_route">
             </app-ci-select>
@@ -22,11 +24,13 @@
             </app-ci-select>
         </app-campsite-table-col>
         <app-campsite-table-col>
-            {{ entry.meta.date_last_updated | date: 'dd/MM/yy h:mm a' }}
+            <app-ci-text [readonly]="true" [monospace]="true" look="transparent"
+                [value]="entry.meta.date_last_updated | date: 'dd/MM/yyyy - HH:mm'">
+            </app-ci-text>
         </app-campsite-table-col>
     </app-campsite-table-row>
 </app-campsite-table>
 
 <app-block-render *ngFor="let block of blocks; trackBy: trackBlock" [block]="block"></app-block-render>
 
-<button (click)="save()">Save</button>
+<app-ci-icon-button class="c-edit-save" (click)="save(true)" value="save" label="Save"></app-ci-icon-button>

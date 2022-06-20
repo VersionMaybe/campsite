@@ -5,7 +5,7 @@ import { CampsiteTemplate } from '../definitions/CampsiteTemplate';
 import { CampsiteField } from '../definitions/CampsiteField';
 import { ICampsiteRoute } from '../definitions/CampsiteRoute';
 import { ICampsiteLog } from '../definitions/CampsiteLog';
-import { NumberField } from '../fields/number-fields';
+import { NumberField } from '../fields/number-field';
 import { ParagraphField } from '../fields/paragraph-field';
 import { UrlField } from '../fields/url-field';
 import { CampsiteDataService } from './campsite-data.service';

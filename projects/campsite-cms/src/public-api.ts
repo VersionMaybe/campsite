@@ -29,6 +29,7 @@ export * from './lib/admin/components/campsite-input/ci-select/ci-select.compone
 export * from './lib/core/primitives/number-primitive';
 export * from './lib/core/primitives/string-primitive';
 export * from './lib/core/primitives/text-primitive';
+export * from './lib/core/primitives/array-primitive';
 // In-Built - Fields
 // export * from './lib/core/fields/number-fields'
 // export * from './lib/core/fields/paragraph-field'
@@ -43,3 +44,6 @@ export * from './lib/admin/components/campsite-table/campsite-table.component';
 export * from './lib/admin/components/campsite-table-col/campsite-table-col.component';
 export * from './lib/admin/components/campsite-table-row/campsite-table-row.component';
 export * from './lib/admin/components/campsite-table-row/campsite-table-row.component';
+
+export * from './lib/core/blocks/quote-block/quote-block.module';
+export * from './lib/core/blocks/quote-block/quote-block.component';

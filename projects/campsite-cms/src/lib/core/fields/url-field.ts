@@ -8,6 +8,6 @@ export class UrlField extends CampsiteField {
     id = 'url';
     data = new TextPrimitive('', {
         min_length: new NumberPrimitive(0),
-        max_length: new NumberPrimitive(50),
+        max_length: new NumberPrimitive(255),
     });
 }

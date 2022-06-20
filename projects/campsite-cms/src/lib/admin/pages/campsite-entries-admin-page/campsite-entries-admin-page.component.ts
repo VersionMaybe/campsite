@@ -14,6 +14,7 @@ import { CampsiteAdminService } from '../../services/campsite-admin.service';
 })
 export class CampsiteEntriesAdminPageComponent implements OnInit {
 
+  loading = true;
   entries: ICampsiteEntry<any>[] = [];
   entryStatus: CampsiteSelectOption[] = [
     {
@@ -37,6 +38,7 @@ export class CampsiteEntriesAdminPageComponent implements OnInit {
   }
 
   async refresh() {
+    this.loading = true;
     this.routeLinks = {};
     const routes = await this.campsiteDataService.getAllRoutes();
     this.entries = await (await this.campsiteDataService.getAllEntries()).sort((a, b) => {
@@ -47,11 +49,14 @@ export class CampsiteEntriesAdminPageComponent implements OnInit {
       const route = routes.find((x) => x.id === entry.meta.linked_route);
       this.routeLinks[i] = route || {
         id: '',
-        path: 'Unset',
+        path: '',
         template: '',
-        type: CampsiteRouteType.Single
+        type: CampsiteRouteType.Single,
+        date_created: Date.now(),
+        title: '',
       };
     });
+    this.loading = false;
   }
 
   removeEntry(entry: ICampsiteEntry<any>) {

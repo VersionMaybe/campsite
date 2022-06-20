@@ -1,4 +1,5 @@
 @use "~easy-theme" as theme;
+@use '../../../../../../index.scss' as campsite;
 @import '../campsite-input.scss';
 
 .ci-text {
@@ -17,6 +18,10 @@
     &.multiline {
         min-height: $size;
         height: auto;
+    }
+
+    &.monospace {
+        @include campsite.Monospace();
     }
 
     &__prefix {

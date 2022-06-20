@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CampsiteBlock, CampsiteBlockComponent } from '../../definitions/CampsiteBlock';
-import { NumberField } from '../../fields/number-fields';
+import { NumberField } from '../../fields/number-field';
 import { ParagraphField } from '../../fields/paragraph-field';
 
 export class QuoteBlock extends CampsiteBlock {

@@ -1,26 +1,30 @@
-<app-campsite-page-header title="Routing"></app-campsite-page-header>
+<app-campsite-page-header title="Routing" [loading]="loading"></app-campsite-page-header>
 <app-campsite-table>
     <app-campsite-table-row header>
         <app-campsite-table-col>Path</app-campsite-table-col>
+        <app-campsite-table-col>Title</app-campsite-table-col>
         <app-campsite-table-col>Template</app-campsite-table-col>
-        <app-campsite-table-col>Type</app-campsite-table-col>
-        <app-campsite-table-col>Load Style</app-campsite-table-col>
+        <app-campsite-table-col>Streaming</app-campsite-table-col>
     </app-campsite-table-row>
 
     <!-- Existing Routes -->
     <app-campsite-table-row *ngFor="let route of routes; let i = index">
         <app-campsite-table-col>
-            <app-ci-text prefix="/" type="text" [(value)]="route.path" (valueChange)="changeMade(route.id)">
+            <app-ci-text prefix="/" type="text" [monospace]="true" [(value)]="route.path"
+                (valueChange)="changeMade(route.id)">
             </app-ci-text>
+        </app-campsite-table-col>
+        <app-campsite-table-col class="c-route-item">
+            <app-ci-text type="text" placeholder="Undefined Page" [monospace]="true" [(value)]="route.title"
+                (valueChange)="changeMade(route.id)">
+            </app-ci-text>
+            <!-- <app-ci-select [disabled]="true" [options]="typeOptions" [(value)]="route.type"
+                (valueChange)="changeMade(route.id)">
+            </app-ci-select> -->
         </app-campsite-table-col>
         <app-campsite-table-col>
             <app-ci-select [options]="templateOptions" [(value)]="route.template"
                 (valueChange)="changeMadeToTemplate(route.id)">
-            </app-ci-select>
-        </app-campsite-table-col>
-        <app-campsite-table-col class="c-route-item">
-            <app-ci-select [disabled]="true" [options]="typeOptions" [(value)]="route.type"
-                (valueChange)="changeMade(route.id)">
             </app-ci-select>
         </app-campsite-table-col>
         <app-campsite-table-col>

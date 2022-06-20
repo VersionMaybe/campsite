@@ -29,22 +29,22 @@ export class CampsiteModule {
         icon: 'route',
         component: CampsiteRoutingAdminPageComponent
       },
-      {
-        id: 'globals',
-        icon: 'code',
-        label: 'Globals'
-      },
-      {
-        id: 'utilities',
-        label: 'Utilities',
-        icon: 'app_settings_alt',
-        alerts: 5
-      },
-      {
-        id: 'settings',
-        icon: 'settings',
-        label: 'Settings'
-      }
+      // {
+      //   id: 'globals',
+      //   icon: 'code',
+      //   label: 'Globals'
+      // },
+      // {
+      //   id: 'utilities',
+      //   label: 'Utilities',
+      //   icon: 'app_settings_alt',
+      //   alerts: 5
+      // },
+      // {
+      //   id: 'settings',
+      //   icon: 'settings',
+      //   label: 'Settings'
+      // }
     );
 
     CampsiteConfig.initialise(options);

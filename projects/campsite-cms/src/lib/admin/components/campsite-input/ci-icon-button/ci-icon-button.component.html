@@ -1,3 +1,4 @@
-<button class="c-icon-button transparent" [disabled]="disabled" (click)="doAction()">
+<button class="c-icon-button transparent" [ngClass]="{ 'hasLabel': label }" [disabled]="disabled" (click)="doAction()">
+    <span class="c-icon-button__label" *ngIf="label">{{ label }}</span>
     <span class="material-icons">{{value}}</span>
 </button>

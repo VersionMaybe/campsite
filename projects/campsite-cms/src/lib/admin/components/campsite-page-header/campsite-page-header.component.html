@@ -1,9 +1,11 @@
-<div class="c-admin-header">
+<div class="c-admin-header" [ngClass]="{ 'loading': loading }">
     <h3 class="c-admin-header__title">
         {{ title }}
     </h3>
 
-    <!-- <span class="c-admin-header__actions">
-        <span class="material-icons-round" *ngIf="showCloseModal" (click)="closeModal()">close</span>
-    </span> -->
+    <span class="c-admin-header__actions">
+        <span class="material-icons-round" *ngIf="showCloseModal && !loading" (click)="closeModal()">close</span>
+    </span>
+
+    <span *ngIf="loading" class="c-admin-header__loading"></span>
 </div>

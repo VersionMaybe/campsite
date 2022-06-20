@@ -8,6 +8,8 @@ export enum CampsiteRouteType {
 export interface ICampsiteRoute {
     id: string;
     path: string;
+    title: string;
+    date_created: number;
     template: string;
     type: CampsiteRouteType;
     waitForData?: boolean;

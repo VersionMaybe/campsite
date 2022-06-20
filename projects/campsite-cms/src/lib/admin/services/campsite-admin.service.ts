@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { BehaviorSubject, filter } from 'rxjs';
 import { CampsiteConfig } from '../../core/definitions/CampsiteConfig';
-import { CampsiteService } from '../../core/services/campsite.service';
 import { IAdminItem } from '../definitions/IAdminItem';
 
 @Injectable({
@@ -15,8 +14,7 @@ export class CampsiteAdminService {
   private currentNavItem = new BehaviorSubject<IAdminItem | undefined>(undefined);
 
   constructor(
-    private router: Router,
-    private campsiteService: CampsiteService
+    private router: Router
   ) { this.listenForNavigation(); }
 
   listenForNavigation() {

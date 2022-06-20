@@ -29,8 +29,9 @@ export class CampsiteDataService {
     public async getCurrentRouteData(component?: CampsiteTemplateComponent<any>) {
         const snapshot = this.route.firstChild?.snapshot;
         if (!snapshot) return null;
+        console.log(snapshot)
         const data = snapshot.data['campsiteEntryData'] as ICampsiteEntry<CampsiteTemplate> | undefined;
-        if (data) this.setMeta(data.meta);
+        if (data) this.setMeta(snapshot.data['campsiteData'], data.meta);
         if (!this.replayed && isPlatformBrowser(this.platformId)) {
             setTimeout(() => {
                 document.querySelector('app-root')?.classList.toggle('isBrowser', true);
@@ -41,8 +42,21 @@ export class CampsiteDataService {
         return data;
     }
 
-    public setMeta(meta: ICampsiteEntryMeta) {
-        this.title.setTitle(meta.title);
+    private transformTitleKey(key: string, route: ICampsiteRoute, meta: ICampsiteEntryMeta) {
+        // TODO: Add in globals such as site-name for branding.
+        switch (key.slice(1, -1)) {
+            default:
+                return key;
+            case 'title':
+                return meta.title
+        }
+    }
+
+    public setMeta(route: ICampsiteRoute, meta: ICampsiteEntryMeta) {
+        let title = route.title;
+        const keys = title.match(/{.+?}/gm) || [];
+        keys.forEach((key) => title = title.replace(key, this.transformTitleKey(key, route, meta)));
+        this.title.setTitle(title);
     }
 
     public async getRouteData(route: ICampsiteRoute, params?: any) {

@@ -1,20 +1,20 @@
-<app-campsite-page-header title="Entries"></app-campsite-page-header>
+<app-campsite-page-header title="Entries" [loading]="loading"></app-campsite-page-header>
 <app-campsite-table>
     <app-campsite-table-row header>
         <app-campsite-table-col>Title</app-campsite-table-col>
         <app-campsite-table-col>Route</app-campsite-table-col>
         <app-campsite-table-col>Status</app-campsite-table-col>
-        <app-campsite-table-col>Last Update</app-campsite-table-col>
+        <app-campsite-table-col>Date Updated</app-campsite-table-col>
     </app-campsite-table-row>
 
     <!-- Existing Routes -->
     <app-campsite-table-row *ngFor="let entry of entries; let i = index">
         <app-campsite-table-col>
-            <app-ci-text [readonly]="true" look="transparent" [value]="entry.meta.title">
+            <app-ci-text [readonly]="true" look="transparent" [value]="entry.meta.title" placeholder="Untitled Entry">
             </app-ci-text>
         </app-campsite-table-col>
         <app-campsite-table-col>
-            <app-ci-text [disabled]="true" prefix="/" [value]="routeLinks[i].path">
+            <app-ci-text [disabled]="true" prefix="/" [monospace]="true" [value]="routeLinks[i].path">
             </app-ci-text>
         </app-campsite-table-col>
         <app-campsite-table-col class="c-route-item">
@@ -22,8 +22,8 @@
             </app-ci-select>
         </app-campsite-table-col>
         <app-campsite-table-col>
-            <app-ci-text [readonly]="true" look="transparent"
-                [value]="entry.meta.date_last_updated | date: 'dd/MM/yy h:mm a'">
+            <app-ci-text [readonly]="true" [monospace]="true" look="transparent"
+                [value]="entry.meta.date_last_updated | date: 'dd/MM/yyyy - HH:mm'">
             </app-ci-text>
 
             <app-ci-icon-button value="edit" (action)="editEntry(entry)"></app-ci-icon-button>
@@ -32,10 +32,9 @@
         </app-campsite-table-col>
     </app-campsite-table-row>
 
-    <ng-container footer>
+    <!-- <ng-container footer>
         <span class="p-routing-actions">
-            <!-- <app-ci-icon-button value="add" (action)="importData()"></app-ci-icon-button> -->
             <app-ci-icon-button [disabled]="true" value="add" (action)="addEntry()"></app-ci-icon-button>
         </span>
-    </ng-container>
+    </ng-container> -->
 </app-campsite-table>

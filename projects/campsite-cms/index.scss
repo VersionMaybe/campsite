@@ -21,3 +21,7 @@
         animation-play-state: running;
     }
 }
+
+@mixin Monospace {
+    font-family: 'Courier Prime', monospace;
+}
