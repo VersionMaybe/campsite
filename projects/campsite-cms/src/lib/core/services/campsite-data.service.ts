@@ -29,7 +29,6 @@ export class CampsiteDataService {
     public async getCurrentRouteData(component?: CampsiteTemplateComponent<any>) {
         const snapshot = this.route.firstChild?.snapshot;
         if (!snapshot) return null;
-        console.log(snapshot)
         const data = snapshot.data['campsiteEntryData'] as ICampsiteEntry<CampsiteTemplate> | undefined;
         if (data) this.setMeta(snapshot.data['campsiteData'], data.meta);
         if (!this.replayed && isPlatformBrowser(this.platformId)) {
@@ -160,7 +159,6 @@ export class CampsiteDataService {
 
     public selectFile(type?: string): Promise<File[]> {
         return new Promise((res) => {
-            console.log('Opening');
             const element = window.document.createElement('input');
             element.type = 'file';
             element.multiple = false;

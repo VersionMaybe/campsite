@@ -31,6 +31,9 @@
     </app-campsite-table-row>
 </app-campsite-table>
 
-<app-block-render *ngFor="let block of blocks; trackBy: trackBlock" [block]="block"></app-block-render>
+<div class="c-edit-blocks">
+    <app-block-render *ngFor="let block of blocks" [block]="block"></app-block-render>
+</div>
 
-<app-ci-icon-button class="c-edit-save" (click)="save(true)" value="save" label="Save"></app-ci-icon-button>
+<app-ci-icon-button [disabled]="loading" class="c-edit-save" (click)="save(true)" value="save" label="Save">
+</app-ci-icon-button>

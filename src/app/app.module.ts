@@ -7,6 +7,8 @@ import { CampsiteModule, FirebaseDataProvider } from 'campsite-cms';
 import { environment } from 'src/environments/environment';
 import { LandingPage } from './landing-page/landing-page.component';
 import { LandingPageModule } from './landing-page/landing-page.module';
+import { QuoteModule } from './templates/sections/quote/quote.module';
+import { ListBlock, QuoteBlock } from 'campsite-cms';
 
 @NgModule({
   declarations: [
@@ -18,12 +20,18 @@ import { LandingPageModule } from './landing-page/landing-page.module';
     CampsiteModule.initialise({
       dataProvider: new FirebaseDataProvider(environment.firebase),
       register: {
+        blocks: [
+          new ListBlock(),
+          new QuoteBlock()
+        ],
         templates: [
-          // new GeneralPage(),
           new LandingPage(),
         ]
       },
-      adminExtensions: []
+      adminExtensions: [],
+      pageModules: [
+        QuoteModule
+      ]
     }),
 
     LandingPageModule,

@@ -45,5 +45,5 @@ export * from './lib/admin/components/campsite-table-col/campsite-table-col.comp
 export * from './lib/admin/components/campsite-table-row/campsite-table-row.component';
 export * from './lib/admin/components/campsite-table-row/campsite-table-row.component';
 
-export * from './lib/core/blocks/quote-block/quote-block.module';
-export * from './lib/core/blocks/quote-block/quote-block.component';
+export { ListBlock } from './lib/core/blocks/list-block/list-block.component';
+export { QuoteBlock } from './lib/core/blocks/quote-block/quote-block.component';

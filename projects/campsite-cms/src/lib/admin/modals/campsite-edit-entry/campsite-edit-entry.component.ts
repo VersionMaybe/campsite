@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CampsiteBlock } from '../../../core/definitions/CampsiteBlock';
 import { ICampsiteEntry } from '../../../core/definitions/CampsiteEntry';
 import { ICampsiteRoute } from '../../../core/definitions/CampsiteRoute';
@@ -38,12 +38,12 @@ export class CampsiteEditEntryComponent implements OnInit, OnDestroy {
   constructor(
     private campsiteDataService: CampsiteDataService,
     private campsiteAdminService: CampsiteAdminService,
-    private campsiteService: CampsiteService,
+    private campsiteService: CampsiteService
   ) { }
 
   ngOnInit() {
     this.refresh();
-    this.onSave = SaveUtil.onSave(() => this.save(false))
+    this.onSave = SaveUtil.onSave(() => this.save(false));
   }
 
   ngOnDestroy() {
@@ -73,28 +73,20 @@ export class CampsiteEditEntryComponent implements OnInit, OnDestroy {
     this.loading = false;
   }
 
-  save(close?: boolean) {
+  async save(close?: boolean) {
     this.loading = true;
     try {
       Object.keys(this.template.blocks).forEach((e, i) => {
-        console.log(e, i, this.blocks[i].export());
         this.entry.data[e] = this.blocks[i].export();
       });
     } catch { }
 
-    console.log(this.blocks, this.entry);
-
-    this.campsiteDataService.setEntryForSingle(this.entry.meta.id, this.entry);
+    await this.campsiteDataService.setEntryForSingle(this.entry.meta.id, this.entry);
     if (close) {
       this.campsiteAdminService.closeModal();
       this.loading = false;
     } else {
-      this.refresh();
+      await this.refresh();
     }
   }
-
-  trackBlock(index: number, item: CampsiteBlock) {
-    return item.id;
-  }
-
 }

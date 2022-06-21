@@ -15,6 +15,11 @@ $border-color: theme.Text('cs-background', .05);
     border-radius: .25rem;
     border: 1px solid theme.Text('cs-background', .1);
 
+    @include theme.Mobile {
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+
     &__header {
         // color: theme.Text('cs-background-alt');
     }

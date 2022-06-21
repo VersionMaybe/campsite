@@ -4,6 +4,8 @@ import { CampsitePrimitive } from "./CampsitePrimitive";
 
 export type CampsiteBlockFieldsTypes<T extends CampsiteBlock['fields']> = { [P in keyof T]: CampsiteFieldType<T[P]> };
 
+export type ICampsiteBlockData<T extends CampsiteBlock> = CampsiteBlockFieldsTypes<T['fields']>
+
 export interface ICampsiteBlock<T extends CampsiteBlock> {
     group: T['group'];
     name: T['name'];
@@ -40,7 +42,7 @@ export abstract class CampsiteBlock {
     export() {
         const data: any = {};
         Object.keys(this.fields).forEach(key => {
-            data[key] = this.fields[key].data.get();
+            data[key] = this.fields[key].data.value;
         });
 
         return data;

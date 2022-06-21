@@ -1,4 +1,4 @@
-@use "~easy-theme"as theme;
+@use "~easy-theme" as theme;
 
 @at-root.c-grid__header :host {
     padding: .5rem .6rem;
@@ -22,6 +22,11 @@
     flex: 1;
     display: flex;
     align-items: center;
+
+    @include theme.Mobile {
+        flex-shrink: 0;
+        flex-grow: 1;
+    }
 
     &[type="collapse"] {
         flex: 0;

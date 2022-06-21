@@ -6,6 +6,8 @@ import { CampsiteRoutingAdminPageComponent } from '../admin/pages/campsite-routi
 import { CampsiteEntriesAdminPageComponent } from '../admin/pages/campsite-entries-admin-page/campsite-entries-admin-page.component';
 import { PRELOADED_ROUTES } from './definitions/CampsiteDataProvider';
 import { Router, Routes } from '@angular/router';
+import { ListBlockModule } from './blocks/list-block/list-block.module';
+import { QuoteBlockModule } from './blocks/quote-block/quote-block.module';
 
 @NgModule({
   imports: []
@@ -16,6 +18,11 @@ export class CampsiteModule {
   }
 
   static initialise(options: ICampsiteConfig): ModuleWithProviders<CampsiteModule> {
+    if (!options.pageModules) options.pageModules = [];
+    options.pageModules.unshift(
+      ListBlockModule,
+      QuoteBlockModule,
+    );
     options.adminExtensions?.unshift(
       {
         id: 'entries',

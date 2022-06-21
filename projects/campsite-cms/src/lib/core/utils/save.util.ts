@@ -1,6 +1,6 @@
 export class SaveUtil {
     static holdingControl = false;
-    static listeners: { [key: string]: () => void } = {};
+    static listeners: { [key: string]: () => Promise<void> } = {};
     static listenerCount = 0;
 
     constructor() {
@@ -9,8 +9,7 @@ export class SaveUtil {
             if (e.key === 's' && SaveUtil.listenerCount > 0 && SaveUtil.holdingControl) {
                 e.preventDefault();
                 if (document.activeElement) (document.activeElement as HTMLElement).blur()
-                const listeners = Object.values(SaveUtil.listeners);
-                listeners[listeners.length - 1]();
+                SaveUtil.save();
             };
         });
 
@@ -19,7 +18,7 @@ export class SaveUtil {
         });
     }
 
-    public static onSave(callback: () => void) {
+    public static onSave(callback: () => Promise<void>) {
         const id = `id-${SaveUtil.listenerCount++}`
         SaveUtil.listeners[id] = callback;
         return id;
@@ -29,6 +28,11 @@ export class SaveUtil {
         delete SaveUtil.listeners[id];
         SaveUtil.listenerCount--;
 
+    }
+
+    public static async save() {
+        const listeners = Object.values(SaveUtil.listeners);
+        await listeners[listeners.length - 1]();
     }
 }
 

@@ -4,7 +4,7 @@ import { CampsiteBlock } from '../../../core/definitions/CampsiteBlock';
 @Component({
   selector: 'app-block-render',
   templateUrl: './block-render.component.html',
-  styleUrls: ['./block-render.component.scss']
+  styleUrls: ['./block-render.component.scss'],
 })
 export class BlockRenderComponent implements AfterViewInit {
 

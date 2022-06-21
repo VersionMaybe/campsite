@@ -1,7 +1,10 @@
 <app-campsite-table>
     <app-campsite-table-row header>
         <app-campsite-table-col>
-            # {{ block.name }}
+            {{ block.name }}
+        </app-campsite-table-col>
+        <app-campsite-table-col>
+            <ng-content select="[actions]"></ng-content>
         </app-campsite-table-col>
     </app-campsite-table-row>
     <app-campsite-table-row>

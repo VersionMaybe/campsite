@@ -1,0 +1,19 @@
+<div class="c-list-item" *ngFor="let item of editable; let i = index">
+    <app-block-render [block]="item">
+        <span class="c-list-block-actions" actions>
+            <app-ci-icon-button value="arrow_drop_up" [disabled]="i === 0" (click)="move(i, -1)"></app-ci-icon-button>
+            <app-ci-icon-button value="arrow_drop_down" [disabled]="i === editable.length - 1" (click)="move(i, 1)">
+            </app-ci-icon-button>
+            <app-ci-icon-button value="cancel" (click)="table(i)"></app-ci-icon-button>
+        </span>
+    </app-block-render>
+</div>
+
+<div class="c-list-add">
+    <ng-container *ngIf="block.fields.allowed">
+        <ng-container *ngFor="let addBlock of allowed">
+            <app-ci-icon-button (click)="table(undefined, addBlock.details.id)" value="add"
+                [label]="addBlock.details.name"></app-ci-icon-button>
+        </ng-container>
+    </ng-container>
+</div>
