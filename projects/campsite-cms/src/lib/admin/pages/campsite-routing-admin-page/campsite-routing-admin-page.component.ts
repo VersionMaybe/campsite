@@ -23,7 +23,6 @@ export class CampsiteRoutingAdminPageComponent implements OnInit {
   loadOptions: CampsiteSelectOption[] = [];
 
   changes: any = {};
-  hasChanges = false;
 
   constructor(
     private campsiteService: CampsiteService,
@@ -67,7 +66,6 @@ export class CampsiteRoutingAdminPageComponent implements OnInit {
       }
     });
     this.loading = false;
-    this.detectHasChanges();
   }
 
   async addRoute() {
@@ -109,7 +107,6 @@ export class CampsiteRoutingAdminPageComponent implements OnInit {
       },
       data: template.export()
     })
-    this.detectHasChanges();
   }
 
   async save() {
@@ -119,12 +116,10 @@ export class CampsiteRoutingAdminPageComponent implements OnInit {
       await this.campsiteDataService.setRoute(this.routes.find((x) => x.id === id) as any);
       delete this.changes[id];
     }
-    this.detectHasChanges();
   }
 
   changeMade(route: string) {
     this.changes[route] = true;
-    this.detectHasChanges();
   }
 
   async changeMadeToTemplate(route: string) {
@@ -150,7 +145,7 @@ export class CampsiteRoutingAdminPageComponent implements OnInit {
     await this.campsiteDataService.setRoute(linkedEntry);
   }
 
-  detectHasChanges(route?: string) {
+  hasChanges(route?: string) {
     return route ? this.changes[route] === true : Object.keys(this.changes).length !== 0;
   }
 
@@ -162,7 +157,6 @@ export class CampsiteRoutingAdminPageComponent implements OnInit {
     if (single) await this.campsiteDataService.removeEntryForSingle(single?.meta.id);
     delete this.changes[route.id];
     this.refresh();
-    this.detectHasChanges();
   }
 
   async test(route: ICampsiteRoute) {

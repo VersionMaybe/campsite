@@ -31,7 +31,7 @@ export * from './lib/core/primitives/string-primitive';
 export * from './lib/core/primitives/text-primitive';
 export * from './lib/core/primitives/array-primitive';
 // In-Built - Fields
-// export * from './lib/core/fields/number-fields'
+export * from './lib/core/fields/array-field'
 // export * from './lib/core/fields/paragraph-field'
 // export * from './lib/core/fields/url-field'
 // In-Built - Blocks
