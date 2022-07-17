@@ -18,6 +18,64 @@ $transition: .5s cubic-bezier(0.4, 0.0, 0.2, 1);
     background: theme.Color('cs-background-alt');
     color: theme.Text('cs-background-alt');
 
+    &__login {
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        padding: 1rem 1.5rem;
+        border-radius: .75rem;
+        box-shadow: 0 .2rem .4rem rgba(0,0,0,.2);
+        align-items: center;
+        color: theme.Text('cs-background');
+        border: 1px solid theme.Text('cs-background', .2);
+        min-width: 15rem;
+        user-select: none;
+
+        p {
+            margin: 0;
+            font-size: .8rem;
+            text-transform: uppercase;
+        }
+
+        h4 {
+            margin: 0.2rem 0rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: dashed theme.Text('cs-primary', .2) 0.1rem;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            width: 100%;
+            text-align: center;
+        }
+
+        button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            outline: none;
+            border: none;
+            border-radius: 0.5rem;
+            background: linear-gradient(to bottom right, theme.Color('cs-primary'), theme.Color('cs-primary', 'light'));
+            color: theme.Text('cs-primary');
+            transition: .15s ease;
+            box-shadow: 0 0 0 0 transparent;
+
+            span {
+                margin-left: 0.5rem;
+                color: theme.Text('cs-primary');
+                font-size: 1.25rem;
+            }
+
+            &:hover {
+                cursor: pointer;
+                transform: scale(1.05);
+                box-shadow: 0 0 .2rem 0 theme.Color('cs-primary');
+            }
+        }
+    }
+
     &__menu {
         padding: .5rem;
         position: relative;

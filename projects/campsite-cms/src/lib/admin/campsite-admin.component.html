@@ -1,4 +1,4 @@
-<div class="p-admin">
+<div class="p-admin" *ngIf="user">
     <div class="p-admin__menu">
         <app-admin-nav [closed]="closed"></app-admin-nav>
         <span class="p-admin__menu__blip material-icons-outlined" [ngClass]="{ 'closed': closed }"
@@ -12,4 +12,16 @@
 
         <app-campsite-modal></app-campsite-modal>
     </div>
+</div>
+
+<div class="p-admin" *ngIf="!user">
+    <div class="p-admin__login">
+        <p>Welcome to</p>
+        <h4>Campsite</h4>
+        <button (click)="login()">
+            Login
+            <span class="material-icons-outlined">login</span>
+        </button>
+        
+    </div>    
 </div>

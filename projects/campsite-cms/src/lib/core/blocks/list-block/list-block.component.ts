@@ -2,7 +2,6 @@ import { AfterContentChecked, Component, OnInit } from '@angular/core';
 import { CampsiteBlock, CampsiteBlockComponent } from '../../definitions/CampsiteBlock';
 import { ArrayField } from '../../fields/array-field';
 import { CampsiteService } from '../../services/campsite.service';
-import { SaveUtil } from '../../utils/save.util';
 
 export class ListBlock extends CampsiteBlock {
   group = 'Core';

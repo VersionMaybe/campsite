@@ -5,6 +5,7 @@ import { Route, Routes } from "@angular/router";
 import { CampsiteDataResolver } from "../resolvers/campsite.resolver";
 import { CampsiteSimpleGuard } from "../guards/campsite-simple.guard";
 import { InjectionToken } from "@angular/core";
+import { ICampsiteUser } from "./CampsiteUser";
 
 export const PRELOADED_ROUTES = new InjectionToken<Route[]>('CampsitePreloadedRoutes')
 
@@ -49,6 +50,13 @@ export abstract class CampsiteDataProvider {
             { path: '**', redirectTo: '' }
         ]
     }
+
+    // Users
+    public abstract getUserDetails(uid: string): Promise<ICampsiteUser>;
+    public abstract setUserDetails(uid: string, details: Partial<ICampsiteUser>): Promise<boolean>;
+    public abstract getCurrentUserDetails(): Promise<ICampsiteUser>;
+    public abstract login(): Promise<ICampsiteUser>;
+    public abstract logout(): Promise<void>;
 
     // Routes
     public abstract getAllRoutes(): Promise<ICampsiteRoute[]>;

@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { debounceTime, ReplaySubject, Subscription } from 'rxjs';
+import { ICampsiteUser } from '../core/definitions/CampsiteUser';
+import { CampsiteDataService } from '../core/services/campsite-data.service';
 import { IAdminItem } from './definitions/IAdminItem';
 import { CampsiteAdminService } from './services/campsite-admin.service';
 
@@ -15,6 +17,8 @@ export class CampsiteAdminComponent implements OnInit, OnDestroy, AfterViewInit 
 
   @ViewChild('vc', { read: ViewContainerRef }) vc!: ViewContainerRef;
 
+  user: ICampsiteUser | undefined;
+
   closed = false;
 
   selectedItem: IAdminItem | undefined;
@@ -25,6 +29,7 @@ export class CampsiteAdminComponent implements OnInit, OnDestroy, AfterViewInit 
 
   constructor(
     private campsiteAdminService: CampsiteAdminService,
+    private campsiteDataService: CampsiteDataService,
     private title: Title
   ) { }
 
@@ -48,11 +53,16 @@ export class CampsiteAdminComponent implements OnInit, OnDestroy, AfterViewInit 
     this.loadPage.next(page);
     this.title.setTitle('Campsite (Admin)' + (page ? ` - ${page?.label}` : ''))
   }
-
+  
   createMenuContent(page: IAdminItem | undefined) {
+    if (!this.user) return;
     this.vc.clear();
     this.selectedItem = page;
     if (!page || !page.component) return;
     this.vc.createComponent(page.component);
+  }
+
+  async login() {
+    this.user = await this.campsiteDataService.dataProvider.login();
   }
 }

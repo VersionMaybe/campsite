@@ -3,8 +3,8 @@ import { CampsiteBlock } from '../../../core/definitions/CampsiteBlock';
 import { ICampsiteEntry } from '../../../core/definitions/CampsiteEntry';
 import { ICampsiteRoute } from '../../../core/definitions/CampsiteRoute';
 import { CampsiteDataService } from '../../../core/services/campsite-data.service';
+import { CampsiteSaveService } from '../../../core/services/campsite-save.service';
 import { CampsiteService } from '../../../core/services/campsite.service';
-import { SaveUtil } from '../../../core/utils/save.util';
 import { CampsiteSelectOption } from '../../components/campsite-input/ci-select/ci-select.component';
 import { CampsiteAdminService } from '../../services/campsite-admin.service';
 
@@ -38,16 +38,17 @@ export class CampsiteEditEntryComponent implements OnInit, OnDestroy {
   constructor(
     private campsiteDataService: CampsiteDataService,
     private campsiteAdminService: CampsiteAdminService,
-    private campsiteService: CampsiteService
+    private campsiteService: CampsiteService,
+    private saveService: CampsiteSaveService
   ) { }
 
   ngOnInit() {
     this.refresh();
-    this.onSave = SaveUtil.onSave(() => this.save(false));
+    this.onSave = this.saveService.onSave(() => this.save(false));
   }
 
   ngOnDestroy() {
-    SaveUtil.removeListener(this.onSave);
+    this.saveService.removeListener(this.onSave);
   }
 
   async refresh() {

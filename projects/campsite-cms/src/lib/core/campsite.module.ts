@@ -25,6 +25,11 @@ export class CampsiteModule {
     );
     options.adminExtensions?.unshift(
       {
+        id: 'dashboard',
+        label: 'Home',
+        icon: 'home'
+      },
+      {
         id: 'entries',
         label: 'Entries',
         icon: 'apps',
@@ -35,6 +40,11 @@ export class CampsiteModule {
         label: 'Routing',
         icon: 'route',
         component: CampsiteRoutingAdminPageComponent
+      },
+      {
+        id: 'users',
+        label: 'Users',
+        icon: 'people'
       },
       // {
       //   id: 'globals',

@@ -27,7 +27,6 @@
     "@angular/router": "~13.3.0",
     "@nguniversal/express-engine": "^13.1.0",
     "campsite-cms": "file:dist/campsite-cms",
-    "cmapsite-cms": "file:dist/campsite-cms",
     "easy-theme": "^1.0.1",
     "express": "^4.15.2",
     "firebase": "^9.8.1",
